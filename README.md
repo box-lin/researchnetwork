@@ -140,7 +140,7 @@ Boxiang Scope ------------------------------------------------------------------
 | Acceptance tests    | Make sure all the information about the current research position is on the page. |
 | Iteration           | 1                                                            |
 
-
+### Iteration 2
 
 | Use case Student 1# |                                                              |
 | ------------------- | ------------------------------------------------------------ |
@@ -170,7 +170,50 @@ Boxiang Scope ------------------------------------------------------------------
 | Acceptance tests    | Make sure that student users have an established login session with validated student user capabilities. |
 | Iteration           | 1                                                            |
 
+Yi Chou-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+| Use case Student 5# |                                                              |
+| ------------------- | ------------------------------------------------------------ |
+| Name                | Apply research position                                      |
+| Users               | Student members                                              |
+| Rationale           | students can apply for more than one research position. But colleges need to know why this student wants to apply for this research position. So students need to write a brief statement describing why they are interested in this research topic and what they want to gain after participating in this project. They also need to provide the name and the email of one faculty who can provide them a reference for the position. |
+| Triggers            | when students select “Apply research position” option        |
+| Preconditions       | need to login in to the student account                      |
+| Actions             | 1. A student user should be able to supply the information (email and password) that is associated with their account.<br/>2. The system will validate that the information given by the user is correct.<br/>3. The user will now have a validated login session created. <br/>4. The user will be directed to the home page. |
+| Alternative paths   | 1. If faculty name and email is not from wsu.edu then ask the user to enter a different email and name. <br/>2. The statement cannot be empty and the number of words cannot be less than 200 or 300. |
+| Postconditions      | The statement, name and email of a faculty member are stored into the database. |
+| Acceptance tests    | Make sure the data students enter is stored into the database and faculty members can also see the data that students enter. |
+| Iteration           | 2                                                            |
+
+
+
+| Use case Student 6# |                                                              |
+| ------------------- | ------------------------------------------------------------ |
+| Name                | View the research positions statuses                         |
+| Users               | Students, faculty members                                    |
+| Rationale           | When the student submits their application, the statuses should show “pending”. After a faculty accepts this application, the status should be updated as “Approved for Interview”. And when the statuses are changed students can contact faculty for the Interview. Depending on the Interview result the statuses should change to the “Hired” or “Not hired”. |
+| Triggers            | When the students submit their application and select “View the research position statuses” option |
+| Preconditions       | Need to login to the student account and need to submit the application. |
+| Actions             | 1. After students submit the application the statuses should be “”Pending”. <br/>2. If faculty accepts this application, the status should be updated as “Approved for Interview” <br/>3. After the interview depending on the result faculty can change statuses to “Hired” or “Not hired”. |
+| Alternative paths   | 1. Students and faculty both can see the statuses, but only faculty can change the statuses and students can see the change immediately.<br/>2. For step1, If a student did not submit the application, this page should show “You did not submit the application yet!” or do not show this button before students submit the application. |
+| Postconditions      | When the faculty members change the statuses.                |
+| Acceptance tests    | Make sure that the students and faculty statuses data are synchronous. |
+| Iteration           | 2                                                            |
+
+
+
+| Use case Student 7# |                                                              |
+| ------------------- | ------------------------------------------------------------ |
+| Name                | Withdraw pending applications                                |
+| Users               | Students                                                     |
+| Rationale           | Students can withdraw their pending application. But if the statuses change to the “Approved for Interview”, “Hired” or “Not hired”. Students cannot withdraw anymore. |
+| Triggers            | select “Withdraw pending application” option and this option will only show for the applications that are still pending. |
+| Preconditions       | Need to login to the student account and need to submit the application. And the application should still be in the pending statuses. |
+| Actions             | 1. If students press this button it will delete their application data(only for the application they choose) from the database.<br>2.faculty shouldn’t see the data after students withdraw their application. |
+| Alternative paths   | For step1, this button will show after you submit the application but when the statuses of your application change to the “Approved for Interview”, “Hired” or “Not hired”, this button will disappear. |
+| Postconditions      | When students click the “withdraw” button.                   |
+| Acceptance tests    | Make sure after students press this button the data should be deleted from the database. |
+| Iteration           | 2                                                            |
 
 **Include a swim-lane diagram that illustrates the message flow and activities for following scenario:**
 “A student applies to a research position; initially its status will appear as “Pending”. The faculty who created that position reviews the application and updates the application status to either “Approved for Interview”, or “Hired”, or “Not hired”. The updated status of the application is displayed on the student view.
