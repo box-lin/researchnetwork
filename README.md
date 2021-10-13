@@ -68,7 +68,7 @@ This section specifies the software product's requirements. Specify all of the s
 
 ## 2.1 Customer, Users, and Stakeholders
 
-People that will use this platform are  `Faculty Members (Research Assistant, Professors, etc)` and `Students` from Washington State University. 
+The customer is specifically the faculty members for the eecs department at WSU(Research Assistant, Professors, etc). They are looking for a online platform that will allow the faculty advertise their research position and connect them with the qualified undergraduate students. So the user will be the students and the faculty members, after students enter their contact information, completed coursework, research interests, and prior research experience. They can apply for the research position. For faculty members, they can advertise research opportunities for undergraduate students and select the candidates that they would like to interview with for the position. The stakeholders are those that benefit from our platform witch is every faculty members in the eecs department and also the students who use this platform. For faculty members, they have more opportunities advertise their research positions and faster way to connect them with the qualified undergraduate students. For studtents, they have more chance the get into the research they are interested and participating the research earlier.
 
 
 ----
@@ -296,11 +296,17 @@ The student may delete the pending applications (i.e., whose status is still “
 ----
 ## 2.3 Non-Functional Requirements
 
-List the non-functional requirements in this section.
+1. Security : This platform should not allow breaches of data to the outside user.
 
-You may use the following template for non-functional requirements.
+2. Efficiency : the performance time should be efficient and without unnecessary long respone time.
 
-1. [Enter a Concise Requirement Name]:  [provide a concise description, in clear and easily understandable language to specify the requirement]
+3. Reusablilty : students can update their information by logging adn edit it.  Faculty members can also do that by login their account.
+
+4. Portabliity: This platform should functionon all major web browsers.
+
+5. Stablilty : This platform should work all times and should not jump out any bug or crashing.
+
+6. Usability : The interface of the platform is easy to learn and the platform is efficient for the frequent user. No matter students or faculty members the platform will satisfied with the platform.
 
 ----
 # 3. User Interface
