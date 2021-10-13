@@ -74,8 +74,6 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 ----
 ## 2.2 Use Cases
 
-### Iteration 1
-
 | Use case # 1      |                                                              |
 | ----------------- | ------------------------------------------------------------ |
 | Name              | **Create a Faculty Account and Enter Profile Information**   |
@@ -130,7 +128,7 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 
 | Use case # 5 |   |
 | ------------------ |--|
-| Name              | View Open Research Positions |
+| Name              | **View Open Research Positions** |
 | Users             | Student, Faculty |
 | Rationale        | The open research positions are what users of this platform are looking for. So when students or faculty log in or click their home page, they should see a list of open research positions. |
 | Triggers        | The user click the Home Page (index page) or redirect to the Home Page route. |
