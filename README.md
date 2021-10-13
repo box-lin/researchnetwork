@@ -215,6 +215,60 @@ Yi Chou-------------------------------------------------------------------------
 | Acceptance tests    | Make sure after students press this button the data should be deleted from the database. |
 | Iteration           | 2                                                            |
 
+Wanting Wu-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+| Use case # 1      |                                                              |
+| ----------------- | ------------------------------------------------------------ |
+| Name              | Create a Faculty Account and Enter Profile Information       |
+| Users             | Faculty User                                                 |
+| Rationale         | The Users have the access to create account in faculty page by filling the required profile information. The Create a Faculty Account and Enter Profile Information should allows User the Users to create a login and become a Registerd User. |
+| Triggers          | The faculty user select the "Create Account" option          |
+| Preconditions     | The form and the model of the database have been successfully created |
+| Actions           | 1. The Users enter the required Faculty Account information values and requests that the system saves the entered values.<br />2. The system validates the entered Faculty Account information and Profile Information<br />3. The entered data for the Users information are stored in the User's account.<br />4. The system notifies the User that the account has been created<br /> |
+| Alternative paths | 1. The User can choose to cancel create the account at any time.<br />2. In step 2, the system describes which entered data was invalid and presents the User with suggestions for entering valid data.<br />3. In step 2, the User re-enters the information and the system re-validates it.<br />4. In step 2, if the invalid values is entered, the entered information is invalid alternative flow is executed again. This continues until the users chhose to cancel create the account. |
+| Postconditions    | The User entered data is stored in the user account.         |
+| Acceptance tests  | Make sure that all the User entered data is valid and sccessfully stored in the system. |
+| Iteration         | #1                                                           |
+
+| Use case # 2      |                                                              |
+| ----------------- | ------------------------------------------------------------ |
+| Name              | Faculty Login with Username and Password                     |
+| Users             | Faculty User                                                 |
+| Rationale         | The Users have the access to login account in faculty page. The Login with Username and Password allows the Users login to his/her account page and have the access to the features. |
+| Triggers          | The faculty user select the "Login" option                   |
+| Preconditions     | A faculty account has been created and stored in system      |
+| Actions           | 1. The system prompts the User for his/her username abd password.<br />2. The User enters his/her username and password.<br />3. The system validates the entered information. |
+| Alternative paths | 1. In step 3, inform the Users if the entered information is incorrect.<br />2. In step 3, if the Users does not have an account, the system will inform the User to register an account.<br /> |
+| Postconditions    | 1. The User is successfully log in and the system display all features avilable for the role the user is associated with.<br />2. The User fails to log in and was informed the invalid sign in information. |
+| Acceptance tests  | Make sure that all the valid User Accounts can log in sucessfully. |
+| Iteration         | #1                                                           |
+
+| Use case # 3      |                                                              |
+| ----------------- | ------------------------------------------------------------ |
+| Name              | Create Undergraduate Research Positions                      |
+| Users             | Faculty User                                                 |
+| Rationale         | The Users will be able to create the undergraduate research positions. The Create Undergradaute Research Positions allows the Users to enter and post the details of the position and qualifications needed. |
+| Triggers          | The User select the "Create Research Positions" option in the faculty page |
+| Preconditions     | The User is signed in and user's profile exits               |
+| Actions           | 1. The Users enter the details of the position and qualifications for the research position and requests that the system saves entered values.<br />2. The edited post from the User is display in student page and under the User's account.<br /> |
+| Alternative paths | 1. The User can choose to cancel create the post at any time.<br />2. In step 1, the system informs the User if any field is missing and presents the User with suggestions.<br /> |
+| Postconditions    | The User sucessfully created a new post including the details of the position and the system displays a new post. |
+| Acceptance tests  | Make sure that a new post is added to the database           |
+| Iteration         | #1                                                           |
+
+| Use case # 4      |                                                              |
+| ----------------- | ------------------------------------------------------------ |
+| Name              | Delete the Existing Research Positions                       |
+| Users             | Faculty User                                                 |
+| Rationale         | The Users will be able to delete the posted position under his/her account in any time. The Delete the Existing Research Positions allows the Users to remove the existing post. |
+| Triggers          | The faculty user select "Delete Research Positions" option   |
+| Preconditions     | A research position has been created and posted              |
+| Actions           | 1. The Users delete the posted research positions.<br />2. The deleted post from the User is removed from the student page.<br />3. Once deleted, all applications to the position receive updates as "Position is not available" |
+| Alternative paths | In step 1, the Users can only delete his/her own post.<br /> |
+| Postconditions    | The User sucessfully delete the post and the post is removed from the page. All applications to the deleted position should update as "Position is not available" |
+| Acceptance tests  | Make sure that the post is deleted from the database         |
+| Iteration         | #1                                                           |
+
 **Include a swim-lane diagram that illustrates the message flow and activities for following scenario:**
 “A student applies to a research position; initially its status will appear as “Pending”. The faculty who created that position reviews the application and updates the application status to either “Approved for Interview”, or “Hired”, or “Not hired”. The updated status of the application is displayed on the student view.
 The student may delete the pending applications (i.e., whose status is still “Pending”. )”
