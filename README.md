@@ -238,7 +238,7 @@ The student may delete the pending applications (i.e., whose status is still “
 
 **Swim-lane Diagram for application status**
 
-![swim](https://raw.githubusercontent.com/WSU-CptS322-Fall2021/TermProject-TeamNONE/main/Documents/ApplicationActivity.drawio.png?token=ANZSGKWQR7HNEGZQ4EC34P3BM5DSM)
+![swim](https://raw.githubusercontent.com/WSU-CptS322-Fall2021/TermProject-TeamNONE/main/Documents/ApplicationActivity.drawio.png?token=ANZSGKTCHUB3GXFWHISPNULBM5LOA)
 
 
 ----
