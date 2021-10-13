@@ -51,7 +51,7 @@ Prepared by:
 
 ## 1.1 Document Purpose
 
-The purpose of this document is to presents a concise description of the Web System. It will explain the features and the interface of the sytem. This document intends to build an online system to manage the undergraduate research opportunities between the facultys and students to expouse the opportunities to all users. 
+The purpose of this document is to presents a concise description of the Web System. It will explain the features and the interface of the system. This document intends to build an online system to manage the undergraduate research opportunities between the faculty's and students to expose the opportunities to all users.
 
 ## 1.2 Product Scope
 
@@ -59,7 +59,7 @@ Identify the product whose software requirements are specified in this document.
 
 ## 1.3 Document Overview
 
-The remaining sections of this document provide a general description, including characteristics of the users and the functional requirements of the system. The specific software requirements of the project is discussed in section 2 of this document, including the Cutomer, Users and Stakeholders, Use cases, and non-functional requirements. Section 3 provides the sketches or mockups for the main parts of the interface. Section 4 is the References page for supporting information. 
+The remaining sections of this document provide a general description, including characteristics of the users and the functional requirements of the system. The specific software requirements of the project is discussed in section 2 of this document, including the Customer, Users and Stakeholders, Use cases, and non-functional requirements. Section 3 provides the sketches or mock-ups for the main parts of the interface. Section 4 is the References page for supporting information.
 
 ----
 # 2. Requirements Specification
@@ -235,6 +235,10 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 **Include a swim-lane diagram that illustrates the message flow and activities for following scenario:**
 “A student applies to a research position; initially its status will appear as “Pending”. The faculty who created that position reviews the application and updates the application status to either “Approved for Interview”, or “Hired”, or “Not hired”. The updated status of the application is displayed on the student view.
 The student may delete the pending applications (i.e., whose status is still “Pending”. )”
+
+
+
+
 
 
 ----
