@@ -236,9 +236,9 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 “A student applies to a research position; initially its status will appear as “Pending”. The faculty who created that position reviews the application and updates the application status to either “Approved for Interview”, or “Hired”, or “Not hired”. The updated status of the application is displayed on the student view.
 The student may delete the pending applications (i.e., whose status is still “Pending”. )”
 
-Swim-lane 
+**Swim-lane Diagram for application status**
 
-![swim](https://raw.githubusercontent.com/WSU-CptS322-Fall2021/TermProject-TeamNONE/main/Documents/SwimLaneDiagram-ApplicationStatus.png?token=ANZSGKXA4FH2H4636PGUSLTBM5CXO)
+![swim](https://raw.githubusercontent.com/WSU-CptS322-Fall2021/TermProject-TeamNONE/main/Documents/ApplicationActivity.drawio.png?token=ANZSGKWQR7HNEGZQ4EC34P3BM5DSM)
 
 
 ----
