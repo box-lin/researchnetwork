@@ -55,7 +55,7 @@ The purpose of this document is to presents a concise description of the Web Sys
 
 ## 1.2 Product Scope
 
-Identify the product whose software requirements are specified in this document. Explain what the product that is covered by this SRS will do. Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals.
+Research Network is a platform that provides services for WSU students and faculty. Our purpose is to link students with faculty. On this platform, students can easily find research positions with their interests. WSU EECS faculty can advertise their research opportunities, review student qualifications and select candidates that they would like to interview with the position. 
 
 ## 1.3 Document Overview
 
