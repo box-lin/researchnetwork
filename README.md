@@ -18,8 +18,8 @@ Prepared by:
 ---
 
 ## Table of Contents
-- [<< Software Requirements Specification >>](#-software-requirements-specification-)
-  - [## ResearchNetwork - Web App](#-researchnetwork---web-app)
+- [Software Requirements Specification](#software-requirements-specification)
+  - [ResearchNetwork](#ResearchNetwork)
   - [Table of Contents](#table-of-contents)
   - [Document Revision History](#document-revision-history)
 - [1. Introduction](#1-introduction)
@@ -64,11 +64,11 @@ The remaining sections of this document provide a general description, including
 ----
 # 2. Requirements Specification
 
-This section specifies the software product's requirements. Specify all of the software requirements to a level of detail sufficient to enable designers to design a software system to satisfy those requirements, and to enable testers to test that the software system satisfies those requirements.
+The customer is specifically the faculty members for the EECS department at WSU(Research Assistant, Professors, etc). They are looking for a online platform that will allow the faculty advertise their research position and connect them with the qualified undergraduate students. So the user will be the students and the faculty members, after students enter their contact information, completed coursework, research interests, and prior research experience. They can apply for the research position. For faculty members, they can advertise research opportunities for undergraduate students and select the candidates that they would like to interview with for the position. The stakeholders are those that benefit from our platform witch is every faculty members in the EECS department and also the students who use this platform. For faculty members, they have more opportunities advertise their research positions and faster way to connect them with the qualified undergraduate students. For students, they have more chance the get into the research they are interested and participating the research earlier.
 
 ## 2.1 Customer, Users, and Stakeholders
 
-The customer is specifically the faculty members for the eecs department at WSU(Research Assistant, Professors, etc). They are looking for a online platform that will allow the faculty advertise their research position and connect them with the qualified undergraduate students. So the user will be the students and the faculty members, after students enter their contact information, completed coursework, research interests, and prior research experience. They can apply for the research position. For faculty members, they can advertise research opportunities for undergraduate students and select the candidates that they would like to interview with for the position. The stakeholders are those that benefit from our platform witch is every faculty members in the eecs department and also the students who use this platform. For faculty members, they have more opportunities advertise their research positions and faster way to connect them with the qualified undergraduate students. For studtents, they have more chance the get into the research they are interested and participating the research earlier.
+People that will use this platform are  `Faculty Members (Research Assistant, Professors, etc)` and `Students` from Washington State University. 
 
 
 ----
@@ -133,7 +133,7 @@ The customer is specifically the faculty members for the eecs department at WSU(
 | Rationale        | The open research positions are what users of this platform are looking for. So when students or faculty log in or click their home page, they should see a list of open research positions. |
 | Triggers        | The user click the Home Page (index page) or redirect to the Home Page route. |
 | Preconditions     | Student or Faculty account login |
-| Actions           | 1. Home page (index page) clicked. <br/>2. Home page (index page) route directed  2. Database table query   <br/>3. HTML render the database information (Only render the Research Project Title, brief description of the required qualifications, research filed, and start and end date ) |
+| Actions           | 1. Home page (index page) clicked. <br/>2. Home page (index page) route directed <br/>3. Database table query   <br/>4. HTML render the database information (Only render the Research Project Title, brief description of the required qualifications, research filed, and start and end date ) |
 | Alternative paths | For step 1, when users login their account, the platform will automatically load the Home page (index page). |
 | Postconditions    | All open research opportunities are shown on the Homepage (index page). |
 | Acceptance tests  | Make sure total number of open research opportunities are shown on the home page. |
@@ -159,7 +159,7 @@ The customer is specifically the faculty members for the eecs department at WSU(
 | Rationale         | Since users can see all the open research positions on the Home Page, displaying all information of each available position on the home page will occupy a large pixels amount of space. So, we will need a unique route that to display the information of that open position. |
 | Triggers          | The user click a specific research position post.            |
 | Preconditions     | Home page is loaded.                                         |
-| Actions           | 1. Click on a specific research position post. <br/>2. information route directed  2. Database information query and pass to HTML <br/>3. HTML render all information for the research position post) |
+| Actions           | 1. Click on a specific research position post. <br/>2. information route directed  <br/>3. Database information query and pass to HTML <br/>4. HTML render all information for the research position post) |
 | Alternative paths | A faculty user can only display other research position posts posted by other faculty, for the post from themselves will be handled with additional functionality that provide for modifications. |
 | Postconditions    | A new page that shows all the details about the research position that user clicked. |
 | Acceptance tests  | Make sure all the information about the current research position is on the page. |
@@ -232,57 +232,55 @@ The customer is specifically the faculty members for the eecs department at WSU(
 
 | Use case # 13     |                                                              |
 | ----------------- | ------------------------------------------------------------ |
-| Name              | **Show student applied on designated position**                            |
-| Users             | Student, Faculty                                                     |
+| Name              | **Show student applied on designated position**              |
+| Users             | Student, Faculty                                             |
 | Rationale         | Faculties use this page to review undetermined students list, student who has been approved for interview or hired by another position should not be displayed. |
 | Triggers          | Faculties click the Review Application button on nav bar or redirect to the Review Application (this) page. |
-| Preconditions     | Faculty login; Position exist; |
-| Actions           | 1. Review Application button clicked, or this page has been redirected.<br>2.	Check if the position exists and faculty credentialed.<br>3.	Fetch student list in database. |
+| Preconditions     | Faculty login; Position exist;                               |
+| Actions           | 1. Review Application button clicked, or this page has been redirected. <br/>2. Check if the position exists and faculty credentialed.<br/> 3. Fetch student list in database. |
 | Alternative paths | In step 2, if position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
-| Postconditions    | All student applied this position and not be marked as approved for interview or hired by another position are shown on Review Application (this) page.                   |
-| Acceptance tests  | Make sure student shows on this page same as the student applied this position. Student approved for interview or hired by another position should not be on this list.  |
+| Postconditions    | All student applied this position and not be marked as approved for interview or hired by another position are shown on Review Application (this) page. |
+| Acceptance tests  | Make sure student shows on this page same as the student applied this position. Student approved for interview or hired by another position should not be on this list. |
 | Iteration         | **#3**                                                       |
 
 | Use case # 14     |                                                              |
 | ----------------- | ------------------------------------------------------------ |
-| Name              | **View student qualification**                            |
-| Users             | Student, Faculty                                                     |
+| Name              | **View student qualification**                               |
+| Users             | Student, Faculty                                             |
 | Rationale         | Faculties use this page to review student’s qualification (like GPA/Course taken/Interested topic/Programming language) who applied to the designated position. |
 | Triggers          | Faculties click Details button on Review Application page or redirect to the Applicant Details (this) page. |
-| Preconditions     | Faculty login; Position exist; |
-| Actions           | 1. Review Application button clicked, or this page has been redirected.<br>2.	Check if the position/student exist, is the student applied this position and faculty credentialed.<br>3.	Fetch student information. |
+| Preconditions     | Faculty login; Position exist;                               |
+| Actions           | 1. Review Application button clicked, or this page has been redirected.<br/> 2. Check if the position/student exist, is the student applied this position and faculty credentialed. <br/>3. Fetch student information. |
 | Alternative paths | In step 2, if the student does not exist or student did not apply this position, redirect to the Review Application page and notice the faculty. If the position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
-| Postconditions    | All student information details (like GPA/Course taken/Interested topic/Programming language) should be shown same Applicant Details (this) page.                   |
-| Acceptance tests  | Make sure this page can fetch correct student information and matched exactly.  |
+| Postconditions    | All student information details (like GPA/Course taken/Interested topic/Programming language) should be shown same Applicant Details (this) page. |
+| Acceptance tests  | Make sure this page can fetch correct student information and matched exactly. |
 | Iteration         | **#3**                                                       |
 
 | Use case # 15     |                                                              |
 | ----------------- | ------------------------------------------------------------ |
-| Name              | **Faculty approve application**                            |
-| Users             | Student, Faculty                                                     |
+| Name              | **Faculty approve application**                              |
+| Users             | Student, Faculty                                             |
 | Rationale         | Faculty approve student who applied this designated position. |
-| Triggers          | Faculty click approve button. |
+| Triggers          | Faculty click approve button.                                |
 | Preconditions     | Faculty login; Student applied; Student exist; Position exist |
-| Actions           | 1.	Faculty click the button Approve for interview.<br>2.	Check if the position and student exist, student applied this position, faculty credentialed.<br>3.	Change student status to approved for interview.<br>4. Notice faculty database changed successfully!|
-| Alternative paths |  In step 2, if student does not exist or student did not apply this position, redirect to the view Review Application page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
-| Postconditions    | Student status changed to approved for interview if faculty clicked the approve button.                   |
-| Acceptance tests  | Make sure the faculty press the Approve for interview button, the student status changed to approved for interview.  |
+| Actions           | 1. Faculty click the button Approve for interview.<br/> 2. Check if the position and student exist, student applied this position, faculty credentialed.<br/> 3. Change student status to approved for interview. <br/>4. Notice faculty database changed successfully! |
+| Alternative paths | In step 2, if student does not exist or student did not apply this position, redirect to the view Review Application page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
+| Postconditions    | Student status changed to approved for interview if faculty clicked the approve button. |
+| Acceptance tests  | Make sure the faculty press the Approve for interview button, the student status changed to approved for interview. |
 | Iteration         | **#3**                                                       |
 
 | Use case # 16     |                                                              |
 | ----------------- | ------------------------------------------------------------ |
-| Name              | **Hire or not hire**                            |
-| Users             | Student, Faculty                                                     |
-| Rationale         | Faculty decide hire or not hire student. |
-| Triggers          | Faculty click the hire/not hire button. |
+| Name              | **Hire or not hire**                                         |
+| Users             | Student, Faculty                                             |
+| Rationale         | Faculty decide hire or not hire student.                     |
+| Triggers          | Faculty click the hire/not hire button.                      |
 | Preconditions     | Faculty login; Student approved for interview; Student exist; Student applied; Position exist |
-| Actions           | 1.	Faculty click the button hire/not hire<br>2.	Check if the position and student exist, student applied this position, faculty credentialed.<br>3.	If hire, change the student status to Hired.<br>4.	If not hire, release the student status.<br>5.	Notice faculty database changed successfully!|
-| Alternative paths |  In step 2, if student does not exist or the student did not apply this position, redirect to the view Review Application page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
-| Postconditions    | Student status changed to hire/normal if faculty clicked the approve button.                   |
-| Acceptance tests  | Make sure the faculty press the hire/not hire button and the student status changed to hire/normal.  |
+| Actions           | 1. Faculty click the button hire/not hire<br/> 2. Check if the position and student exist, student applied this position, faculty credentialed.<br/> 3. If hire, change the student status to Hired. <br/>4. If not hire, release the student status. <br/> 5. Notice faculty database changed successfully! |
+| Alternative paths | In step 2, if student does not exist or the student did not apply this position, redirect to the view Review Application page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
+| Postconditions    | Student status changed to hire/normal if faculty clicked the approve button. |
+| Acceptance tests  | Make sure the faculty press the hire/not hire button and the student status changed to hire/normal. |
 | Iteration         | **#3**                                                       |
-
-
 
 **Include a swim-lane diagram that illustrates the message flow and activities for following scenario:**
 “A student applies to a research position; initially its status will appear as “Pending”. The faculty who created that position reviews the application and updates the application status to either “Approved for Interview”, or “Hired”, or “Not hired”. The updated status of the application is displayed on the student view.
@@ -290,28 +288,67 @@ The student may delete the pending applications (i.e., whose status is still “
 
 **Swim-lane Diagram for application status**
 
-![swim](https://raw.githubusercontent.com/WSU-CptS322-Fall2021/TermProject-TeamNONE/main/Documents/ApplicationActivity.drawio.png?token=ANZSGKTCHUB3GXFWHISPNULBM5LOA)
+![swim](https://github.com/boxianglin/Storage/blob/main/diagrams/ApplicationActivity.drawio.png?raw=true)
 
 
 ----
 ## 2.3 Non-Functional Requirements
 
 1. Security : This platform should not allow breaches of data to the outside user.
-
-2. Efficiency : the performance time should be efficient and without unnecessary long respone time.
-
-3. Reusablilty : students can update their information by logging adn edit it.  Faculty members can also do that by login their account.
-
-4. Portabliity: This platform should functionon all major web browsers.
-
-5. Stablilty : This platform should work all times and should not jump out any bug or crashing.
-
+2. Efficiency : the performance time should be efficient and without unnecessary long response time.
+3. Reusability : students can update their information by logging and edit it. Faculty members can also do that by login their account.
+4. Portability: This platform should function on all major web browsers.
+5. Stability : This platform should work all times and should not jump out any bug or crashing.
 6. Usability : The interface of the platform is easy to learn and the platform is efficient for the frequent user. No matter students or faculty members the platform will satisfied with the platform.
 
 ----
 # 3. User Interface
 
-Here you should include the sketches or mockups for the main parts of the interface.
+**Web Model Drawings**
+
+![webpage](https://github.com/boxianglin/Storage/blob/main/model%20drawings/WebPage.drawio.png?raw=true)
+
+
+
+
+
+![studentlogin](https://github.com/boxianglin/Storage/blob/main/model%20drawings/StudentLogin.png?raw=true)
+
+
+
+
+
+![facultylogin](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Login.drawio.png?raw=true)
+
+
+
+![studenregister](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Student%20Registration.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Registration.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Student%20Home%20Page.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20HomePage.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Post.drawio.png?raw=true)
+
+
 
 ----
 # 4. References
