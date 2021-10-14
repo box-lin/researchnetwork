@@ -18,8 +18,8 @@ Prepared by:
 ---
 
 ## Table of Contents
-- [Software Requirements Specification](#software-requirements-specification)
-  - [ResearchNetwork](#ResearchNetwork)
+- [<< Software Requirements Specification >>](#-software-requirements-specification-)
+  - [## ResearchNetwork - Web App](#-researchnetwork---web-app)
   - [Table of Contents](#table-of-contents)
   - [Document Revision History](#document-revision-history)
 - [1. Introduction](#1-introduction)
@@ -235,11 +235,11 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Name              | **Show student applied on designated position**              |
 | Users             | Student, Faculty                                             |
 | Rationale         | Faculties use this page to review undetermined students list, student who has been approved for interview or hired by another position should not be displayed. |
-| Triggers          | Faculties click the Review Application button on nav bar or redirect to the Review Application (this) page. |
+| Triggers          | Faculties click the Responsed Applicants button on nav bar or redirect to the Responsed Applicants (this) page. |
 | Preconditions     | Faculty login; Position exist;                               |
-| Actions           | 1. Review Application button clicked, or this page has been redirected. <br/>2. Check if the position exists and faculty credentialed.<br/> 3. Fetch student list in database. |
+| Actions           | 1. Responsed Applicants button clicked, or this page has been redirected. <br/>2. Check if the position exists and faculty credentialed.<br/> 3. Fetch student list in database. |
 | Alternative paths | In step 2, if position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
-| Postconditions    | All student applied this position and not be marked as approved for interview or hired by another position are shown on Review Application (this) page. |
+| Postconditions    | All student applied this position and not be marked as approved for interview or hired by another position are shown on Responsed Applicants (this) page. |
 | Acceptance tests  | Make sure student shows on this page same as the student applied this position. Student approved for interview or hired by another position should not be on this list. |
 | Iteration         | **#3**                                                       |
 
@@ -248,10 +248,10 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Name              | **View student qualification**                               |
 | Users             | Student, Faculty                                             |
 | Rationale         | Faculties use this page to review student’s qualification (like GPA/Course taken/Interested topic/Programming language) who applied to the designated position. |
-| Triggers          | Faculties click Details button on Review Application page or redirect to the Applicant Details (this) page. |
+| Triggers          | Faculties click Details button on Responsed Applicants page or redirect to the Applicant Details (this) page. |
 | Preconditions     | Faculty login; Position exist;                               |
-| Actions           | 1. Review Application button clicked, or this page has been redirected.<br/> 2. Check if the position/student exist, is the student applied this position and faculty credentialed. <br/>3. Fetch student information. |
-| Alternative paths | In step 2, if the student does not exist or student did not apply this position, redirect to the Review Application page and notice the faculty. If the position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
+| Actions           | 1. Responsed Applicants button clicked, or this page has been redirected.<br/> 2. Check if the position/student exist, is the student applied this position and faculty credentialed. <br/>3. Fetch student information. |
+| Alternative paths | In step 2, if the student does not exist or student did not apply this position, redirect to the Responsed Applicants page and notice the faculty. If the position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
 | Postconditions    | All student information details (like GPA/Course taken/Interested topic/Programming language) should be shown same Applicant Details (this) page. |
 | Acceptance tests  | Make sure this page can fetch correct student information and matched exactly. |
 | Iteration         | **#3**                                                       |
@@ -264,7 +264,7 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Triggers          | Faculty click approve button.                                |
 | Preconditions     | Faculty login; Student applied; Student exist; Position exist |
 | Actions           | 1. Faculty click the button Approve for interview.<br/> 2. Check if the position and student exist, student applied this position, faculty credentialed.<br/> 3. Change student status to approved for interview. <br/>4. Notice faculty database changed successfully! |
-| Alternative paths | In step 2, if student does not exist or student did not apply this position, redirect to the view Review Application page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
+| Alternative paths | In step 2, if student does not exist or student did not apply this position, redirect to the view Responsed Applicants page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If faculty not credentialed, redirect to the login page and notice the faculty. |
 | Postconditions    | Student status changed to approved for interview if faculty clicked the approve button. |
 | Acceptance tests  | Make sure the faculty press the Approve for interview button, the student status changed to approved for interview. |
 | Iteration         | **#3**                                                       |
@@ -277,7 +277,7 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Triggers          | Faculty click the hire/not hire button.                      |
 | Preconditions     | Faculty login; Student approved for interview; Student exist; Student applied; Position exist |
 | Actions           | 1. Faculty click the button hire/not hire<br/> 2. Check if the position and student exist, student applied this position, faculty credentialed.<br/> 3. If hire, change the student status to Hired. <br/>4. If not hire, release the student status. <br/> 5. Notice faculty database changed successfully! |
-| Alternative paths | In step 2, if student does not exist or the student did not apply this position, redirect to the view Review Application page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
+| Alternative paths | In step 2, if student does not exist or the student did not apply this position, redirect to the view Responsed Applicants page and notice the faculty. If position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
 | Postconditions    | Student status changed to hire/normal if faculty clicked the approve button. |
 | Acceptance tests  | Make sure the faculty press the hire/not hire button and the student status changed to hire/normal. |
 | Iteration         | **#3**                                                       |
