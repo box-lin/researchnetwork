@@ -359,34 +359,4 @@ The student may delete the pending applications (i.e., whose status is still “
 
 Cite your references here.
 
-For the papers you cite give the authors, the title of the article, the journal name, journal volume number, date of publication and inclusive page numbers. Giving only the URL for the journal is not appropriate.
-
-For the websites, give the title, author (if applicable) and the website URL.
-
-----
-----
-# Appendix: Grading Rubric
-(Please remove this part in your final submission)
-
-These is the grading rubric that we will use to evaluate your document. 
-
-| Max Points  | **Content** |
-| ----------- | ------- |
-| 10          | Do the requirements clearly state the customers’ needs? |
-| 5           | Do the requirements avoid specifying a design (note: customer-specified design elements are allowed; non-functional requirements may specify some major design requirements)? |
-| | |
-|    | **Completeness** |
-| 25 | Are use cases written in sufficient detail to allow for design and planning? |
-| 4 | Do use cases have acceptance tests? |
-| 20 | Is your use case model complete? Are all major use cases included in the document? |
-| 8 | Has the team provided an appropriate swim-lane diagram for the scenario where faculty reviews a student’s application? |
-| 10 |  Are the User Interface Requirements given with some detail? Are there some sketches, mockups?  |
-|   
-|   | **Clarity** |
-| 4 | Is the document carefully written, without typos and grammatical errors? |
-| 2 | Is each part of the document in agreement with all other parts? |
-| 2 | Are all items clear and not ambiguous? (Minor document readability issues should be handled off-line, not in the review, e.g. spelling, grammar, and organization). |
-|   |   |
-|    | **GitHub Issues** |
-| 10 | Has the team setup their GitHub Issues page? Have they  generated the list of user stories, use-cases, created milestones, assigned use-cases (issues) to milestones?   Example GitHub repo (check the issues): https://github.com/WSU-CptS322-Fall2021/TermProjectSampleRepo/issues |
-
+https://en.wikipedia.org/wiki/Swim_lane

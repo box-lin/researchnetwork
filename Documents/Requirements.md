@@ -51,15 +51,15 @@ Prepared by:
 
 ## 1.1 Document Purpose
 
-Describe the purpose of the Software Requirement Specification (SRS) document and its intended audience.
+The purpose of this document is to presents a concise description of the Web System. It will explain the features and the interface of the system. This document intends to build an online system to manage the undergraduate research opportunities between the faculty's and students to expose the opportunities to all users.
 
 ## 1.2 Product Scope
 
-Identify the product whose software requirements are specified in this document. Explain what the product that is covered by this SRS will do. Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals.
+Research Network is a platform that provides services for WSU students and faculty. Our purpose is to link students with faculty. On this platform, students can easily find research positions with their interests. WSU EECS faculty can advertise their research opportunities, review student qualifications and select candidates that they would like to interview with the position. 
 
 ## 1.3 Document Overview
 
-Describe what the rest of the document contains and how it is organized.
+The remaining sections of this document provide a general description, including characteristics of the users and the functional requirements of the system. The specific software requirements of the project is discussed in section 2 of this document, including the Customer, Users and Stakeholders, Use cases, and non-functional requirements. Section 3 provides the sketches or mock-ups for the main parts of the interface. Section 4 is the References page for supporting information.
 
 ----
 # 2. Requirements Specification
@@ -68,7 +68,7 @@ This section specifies the software product's requirements. Specify all of the s
 
 ## 2.1 Customer, Users, and Stakeholders
 
-People that will use this platform are  `Faculty Members (Research Assistant, Professors, etc)` and `Students` from Washington State University. 
+The customer is specifically the faculty members for the EECS department at WSU(Research Assistant, Professors, etc). They are looking for a online platform that will allow the faculty advertise their research position and connect them with the qualified undergraduate students. So the user will be the students and the faculty members, after students enter their contact information, completed coursework, research interests, and prior research experience. They can apply for the research position. For faculty members, they can advertise research opportunities for undergraduate students and select the candidates that they would like to interview with for the position. The stakeholders are those that benefit from our platform witch is every faculty members in the EECS department and also the students who use this platform. For faculty members, they have more opportunities advertise their research positions and faster way to connect them with the qualified undergraduate students. For students, they have more chance the get into the research they are interested and participating the research earlier.
 
 
 ----
@@ -133,7 +133,7 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Rationale        | The open research positions are what users of this platform are looking for. So when students or faculty log in or click their home page, they should see a list of open research positions. |
 | Triggers        | The user click the Home Page (index page) or redirect to the Home Page route. |
 | Preconditions     | Student or Faculty account login |
-| Actions           | 1. Home page (index page) clicked. <br/>2. Home page (index page) route directed  2. Database table query   <br/>3. HTML render the database information (Only render the Research Project Title, brief description of the required qualifications, research filed, and start and end date ) |
+| Actions           | 1. Home page (index page) clicked. <br/>2. Home page (index page) route directed <br/>3. Database table query   <br/>4. HTML render the database information (Only render the Research Project Title, brief description of the required qualifications, research filed, and start and end date ) |
 | Alternative paths | For step 1, when users login their account, the platform will automatically load the Home page (index page). |
 | Postconditions    | All open research opportunities are shown on the Homepage (index page). |
 | Acceptance tests  | Make sure total number of open research opportunities are shown on the home page. |
@@ -159,7 +159,7 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Rationale         | Since users can see all the open research positions on the Home Page, displaying all information of each available position on the home page will occupy a large pixels amount of space. So, we will need a unique route that to display the information of that open position. |
 | Triggers          | The user click a specific research position post.            |
 | Preconditions     | Home page is loaded.                                         |
-| Actions           | 1. Click on a specific research position post. <br/>2. information route directed  2. Database information query and pass to HTML <br/>3. HTML render all information for the research position post) |
+| Actions           | 1. Click on a specific research position post. <br/>2. information route directed  <br/>3. Database information query and pass to HTML <br/>4. HTML render all information for the research position post) |
 | Alternative paths | A faculty user can only display other research position posts posted by other faculty, for the post from themselves will be handled with additional functionality that provide for modifications. |
 | Postconditions    | A new page that shows all the details about the research position that user clicked. |
 | Acceptance tests  | Make sure all the information about the current research position is on the page. |
@@ -282,59 +282,81 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | Acceptance tests  | Make sure the faculty press the hire/not hire button and the student status changed to hire/normal. |
 | Iteration         | **#3**                                                       |
 
-
 **Include a swim-lane diagram that illustrates the message flow and activities for following scenario:**
 “A student applies to a research position; initially its status will appear as “Pending”. The faculty who created that position reviews the application and updates the application status to either “Approved for Interview”, or “Hired”, or “Not hired”. The updated status of the application is displayed on the student view.
 The student may delete the pending applications (i.e., whose status is still “Pending”. )”
+
+**Swim-lane Diagram for application status**
+
+![swim](https://github.com/boxianglin/Storage/blob/main/diagrams/ApplicationActivity.drawio.png?raw=true)
 
 
 ----
 ## 2.3 Non-Functional Requirements
 
-List the non-functional requirements in this section.
-
-You may use the following template for non-functional requirements.
-
-1. [Enter a Concise Requirement Name]:  [provide a concise description, in clear and easily understandable language to specify the requirement]
+1. Security : This platform should not allow breaches of data to the outside user.
+2. Efficiency : the performance time should be efficient and without unnecessary long response time.
+3. Reusability : students can update their information by logging and edit it. Faculty members can also do that by login their account.
+4. Portability: This platform should function on all major web browsers.
+5. Stability : This platform should work all times and should not jump out any bug or crashing.
+6. Usability : The interface of the platform is easy to learn and the platform is efficient for the frequent user. No matter students or faculty members the platform will satisfied with the platform.
 
 ----
 # 3. User Interface
 
-Here you should include the sketches or mockups for the main parts of the interface.
+**Web Model Drawings**
+
+![webpage](https://github.com/boxianglin/Storage/blob/main/model%20drawings/WebPage.drawio.png?raw=true)
+
+
+
+
+
+![studentlogin](https://github.com/boxianglin/Storage/blob/main/model%20drawings/StudentLogin.png?raw=true)
+
+
+
+
+
+![facultylogin](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Login.drawio.png?raw=true)
+
+
+
+![studenregister](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Student%20Registration.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Registration.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Student%20Home%20Page.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20HomePage.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Post.drawio.png?raw=true)
+
+
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty-Response-Applicant.drawio.png?raw=true)
 
 ----
 # 4. References
 
 Cite your references here.
 
-For the papers you cite give the authors, the title of the article, the journal name, journal volume number, date of publication and inclusive page numbers. Giving only the URL for the journal is not appropriate.
-
-For the websites, give the title, author (if applicable) and the website URL.
-
-----
-----
-# Appendix: Grading Rubric
-(Please remove this part in your final submission)
-
-These is the grading rubric that we will use to evaluate your document. 
-
-| Max Points  | **Content** |
-| ----------- | ------- |
-| 10          | Do the requirements clearly state the customers’ needs? |
-| 5           | Do the requirements avoid specifying a design (note: customer-specified design elements are allowed; non-functional requirements may specify some major design requirements)? |
-| | |
-|    | **Completeness** |
-| 25 | Are use cases written in sufficient detail to allow for design and planning? |
-| 4 | Do use cases have acceptance tests? |
-| 20 | Is your use case model complete? Are all major use cases included in the document? |
-| 8 | Has the team provided an appropriate swim-lane diagram for the scenario where faculty reviews a student’s application? |
-| 10 |  Are the User Interface Requirements given with some detail? Are there some sketches, mockups?  |
-|   
-|   | **Clarity** |
-| 4 | Is the document carefully written, without typos and grammatical errors? |
-| 2 | Is each part of the document in agreement with all other parts? |
-| 2 | Are all items clear and not ambiguous? (Minor document readability issues should be handled off-line, not in the review, e.g. spelling, grammar, and organization). |
-|   |   |
-|    | **GitHub Issues** |
-| 10 | Has the team setup their GitHub Issues page? Have they  generated the list of user stories, use-cases, created milestones, assigned use-cases (issues) to milestones?   Example GitHub repo (check the issues): https://github.com/WSU-CptS322-Fall2021/TermProjectSampleRepo/issues |
-
+https://en.wikipedia.org/wiki/Swim_lane
