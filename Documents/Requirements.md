@@ -232,7 +232,7 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 
 | Use case # 13     |                                                              |
 | ----------------- | ------------------------------------------------------------ |
-| Name              | **Show student applied on designated position**              |
+| Name              | **Show student applied on all position**              |
 | Users             | Student, Faculty                                             |
 | Rationale         | Faculties use this page to review undetermined students list. Student who has been approved for interview or hired by another position should not be displayed. |
 | Triggers          | Faculties click the Responsed Applicants button on nav bar or redirect to the Responsed Applicants (this) page. |
