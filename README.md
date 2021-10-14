@@ -350,6 +350,10 @@ The student may delete the pending applications (i.e., whose status is still “
 
 
 
+
+
+![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty-Response-Applicant.drawio.png?raw=true)
+
 ----
 # 4. References
 
