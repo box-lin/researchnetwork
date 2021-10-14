@@ -234,13 +234,13 @@ People that will use this platform are  `Faculty Members (Research Assistant, Pr
 | ----------------- | ------------------------------------------------------------ |
 | Name              | **Show student applied on designated position**              |
 | Users             | Student, Faculty                                             |
-| Rationale         | Faculties use this page to review undetermined students list, student who has been approved for interview or hired by another position should not be displayed. |
+| Rationale         | Faculties use this page to review undetermined students list. Student who has been approved for interview or hired by another position should not be displayed. |
 | Triggers          | Faculties click the Responsed Applicants button on nav bar or redirect to the Responsed Applicants (this) page. |
 | Preconditions     | Faculty login; Position exist;                               |
-| Actions           | 1. Responsed Applicants button clicked, or this page has been redirected. <br/>2. Check if the position exists and faculty credentialed.<br/> 3. Fetch student list in database. |
-| Alternative paths | In step 2, if position does not exist, redirect to the index page and notice the faculty. If the faculty not credentialed, redirect to the login page and notice the faculty. |
-| Postconditions    | All student applied this position and not be marked as approved for interview or hired by another position are shown on Responsed Applicants (this) page. |
-| Acceptance tests  | Make sure student shows on this page same as the student applied this position. Student approved for interview or hired by another position should not be on this list. |
+| Actions           | 1. Responsed Applicants button clicked, or this page has been redirected. <br/>2. Check if the faculty credentialed.<br/> 3. Fetch student list in database. |
+| Alternative paths | In step 2, If the faculty not credentialed, redirect to the login page and notice the faculty. |
+| Postconditions    | All student applied this position who not be marked as approved for interview or hired by another position are shown on Responsed Applicants (this) page. |
+| Acceptance tests  | Make sure student shows on this page same as the student applied. Student approved for interview or hired by another position should not be on this list. |
 | Iteration         | **#3**                                                       |
 
 | Use case # 14     |                                                              |
