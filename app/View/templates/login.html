@@ -1,9 +1,27 @@
-{% extends "base.html" %}
+{% extends "f_base.html" %}
 
 {% block content %}
     <h1>Sign In</h1>
-    <!-- TODO (iteration 1) :Include the template for "login form" here...  -->
+    {% if form %}
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
 
-    <!-- TODO (iteration 1) :Add the URL for user register route. --> 
+                <p>{{form.username.label}}</p>  
+                <p>{{form.username}}</p>
+
+                <p>{{form.password.label}}</p>
+                <p>{{form.password}}</p>
+
+                {{form.remember_me.label}}
+                {{form.remember_me}}
+
+                <br>
+                <br>
+                {{form.role.label}}
+                {{form.role}}
+
+            <p>{{ form.submit}}</p>
+        </form>
+    {% endif %}
     <p>New User? <a href="">Click to Register!</a></p>
 {% endblock %}
