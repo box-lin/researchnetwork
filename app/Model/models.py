@@ -1,7 +1,6 @@
 from app import db 
-from app.Controller.auth_routes import login
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+
 
 
 '''
@@ -28,20 +27,33 @@ faculty:
 #     return role_mapping[role].query.get(int(id))
 
 
-class User(db.Model, UserMixin):
-    __abstract__ = True
+'''
+User model consists of <Student> and <Faculty> 
+'''
+class User(db.Model):
+
+    ## common info ## 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    lastname = db.Column(db.String(20))
+    firstname = db.Column(db.String(30))
     wsuid = db.Column(db.Integer, unique = True)
-    email = db.Column(db.String(128))
-    firstname = db.Column(db.String(128))
-    lastname = db.Column(db.String(128))
-    level = db.Column(db.Integer, default = 1)  #Use this column determine this account belong to student or faculty, 1 - student; 2 - faculty, default on 1
-    
-    # student = db.relationship('Student', backref ='student_user',lazy = 'dynamic')
-    # faculty = db.relationship('Faculty', backref ='faculty_user',lazy = 'dynamic')
+    phone = db.Column(db.String(20))
+    email = db.Column(db.String(120), unique=True, index=True)
 
+    ## additional student ##
+    major = db.Column(db.String(20))
+    GPA = db.Column(db.String(5))
+    gradulation = db.Column(db.String(10))
+    elective = db.Column(db.String(300))
+    researchtopic = db.Column(db.String(30))
+    programming = db.Column(db.String(30))
+    experience = db.Column(db.String(200))
+
+    # role = 1 = student, role = 2 = faculty
+    role = db.Column(db.Integer) 
+    
     def __repr__(self):
         return '<User {}, {}>'.format(self.id,self.username)
 
@@ -51,16 +63,8 @@ class User(db.Model, UserMixin):
     def get_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-# class Student(User):
-#     role = db.Column(db.Integer, default=0)
-
-# class Faculty(User):
-#     role = db.Column(db.Integer, default=1)
-
-# role_mapping = {
-#     'student': Student,
-#     'teacher': Faculty
-# }
+    def get_role(self, role):
+        return role
 
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key = True)

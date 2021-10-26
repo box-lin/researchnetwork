@@ -1,8 +1,5 @@
-{% extends "f_base.html" %}
-
-{% block content %}
-    <h1>Sign In</h1>
-    {% if form %}
+<h1>Sign In</h1>
+{% if form %}
         <form action="" method="POST">
             {{ form.hidden_tag() }}
 
@@ -22,6 +19,5 @@
 
             <p>{{ form.submit}}</p>
         </form>
-    {% endif %}
-    <p>New User? <a href="">Click to Register!</a></p>
-{% endblock %}
+{% endif %}
+<p>New User? Click here to register as a <a href="student_register"> student </a> or <a href="faculty_register"> faculty </a></p>
