@@ -33,27 +33,47 @@ a:hover {
 }
 
 .flash-container {
-    background: #E6E6FA;
-    font-family: Times;
-    font-size: 14px;
-    height: 26px;
-    margin: 15px 5px 15px 5px;
-    padding: 10px;
+	background: #99c5ee;
+	font-family: Tahoma;
+	font-size: 16px;
+	padding: 25px;
+	margin: 10px 0px 10px 0px;
 }
 
-.formtitle {
-    width: 20%;
-    font-family: Times;
-    margin: 15px 5px;
-    padding: 10px;
+.formtitle{
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.formbody {
-    width: 20%;
+.formbody{
+    width: 25%;
     height: 40%;
-    font-family: Times;
-    margin: 15px 5px;
-    padding: 10px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.postButton{
+    width: 25%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.postButton:hover{
+    background-color: #45a049;
 }
 
 .formselect {

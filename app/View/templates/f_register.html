@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Faculty Register</h1>
+
+    <!-- TODO (iteration1):  Include the template for "user registration" form here..  -->
+    
+     {% if form %}
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            <p>{{ form.username.label }}</p>
+            <p>{{ form.username(class ='formtitle') }}</p>
+   
+
+            <p>{{ form.lastname.label }}</p>
+            <p>{{ form.lastname(class ='formtitle') }}</p>
+
+            <p>{{ form.firstname.label }}</p>
+            <p>{{ form.firstname(class ='formtitle') }}</p>
+
+            <p>{{ form.wsuid.label }}</p>
+            <p>{{ form.wsuid(class ='formtitle') }}</p>
+
+            <p>{{ form.phone.label }}</p>
+            <p>{{ form.phone(class ='formtitle') }}</p>
+
+            <p>{{ form.email.label }}</p> 
+            <p>{{ form.email(class ='formtitle')}} </p>
+
+            <p>{{ form.password.label }} </p>
+            <p>{{ form.password(class ='formtitle') }}</p>  
+
+
+            <p>{{ form.password2.label }}</p>  
+            <p>{{ form.password2(class ='formtitle') }} </p>
+
+
+            <p>{{ form.submit(class = 'postButton')  }}</p>
+        </form>
+    {% endif %}
+
+
+{% endblock %}

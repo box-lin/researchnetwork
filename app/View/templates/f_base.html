@@ -18,7 +18,7 @@
                 <td><a href="" class="button"> Post New Position </a></td>
                 <td><a href="" class="button"> Applicant List </a></td>
                 <td><a href="" class="button"> Profile </a></td>
-                <td><a href="" class="button"> Log Out </a></td>
+                <td><a href="{{ url_for('auth.logout') }}" class="button"> Log Out </a></td>
                 <!-- TODO (iteration 1) : Replace "_______" below with the username of the current user.-->
                 <td> Current user is: <span class="useritem">________ </span> </td>
             </tr>
@@ -26,7 +26,7 @@
     </div>
     <div>
         {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-        <div> {{ message }}</div>
+        <div class = "flash-container"> {{ message }}</div>
         {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
     </div>
 

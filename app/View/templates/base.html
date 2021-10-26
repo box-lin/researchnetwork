@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    {% if title %}
+    <title>{{ title }} - Research Network </title>
+    {% else %}
+    <title> PERMISSION ONLY GRANTED WITH ACCOUNTS </title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+    <div class="nav-container">
+        <table>
+            <tr>
+                <td><a href="" class="button">ABOUT US</a></td>
+                <td><a href="" class="button"> REPORT ISSUES </a></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class = "flash-container"> {{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+    </div>
+
+</body>
+
+</html>
