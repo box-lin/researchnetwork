@@ -33,6 +33,12 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    wsuid = db.Column(db.Integer, unique = True)
+    email = db.Column(db.String(128))
+    firstname = db.Column(db.String(128))
+    lastname = db.Column(db.String(128))
+    level = db.Column(db.Integer, default = 1)  #Use this column determine this account belong to student or faculty, 1 - student; 2 - faculty, default on 1
+    
     # student = db.relationship('Student', backref ='student_user',lazy = 'dynamic')
     # faculty = db.relationship('Faculty', backref ='faculty_user',lazy = 'dynamic')
 
@@ -45,13 +51,23 @@ class User(db.Model, UserMixin):
     def get_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-class Student(User):
-    role = db.Column(db.Integer, default=0)
+# class Student(User):
+#     role = db.Column(db.Integer, default=0)
 
-class Faculty(User):
-    role = db.Column(db.Integer, default=1)
+# class Faculty(User):
+#     role = db.Column(db.Integer, default=1)
 
-role_mapping = {
-    'student': Student,
-    'teacher': Faculty
-}
+# role_mapping = {
+#     'student': Student,
+#     'teacher': Faculty
+# }
+
+class Position(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(2048))
+    desc = db.Column(db.String(2048))
+    start_date = db.Column(db.String(128))
+    end_date = db.Column(db.String(128))
+    time_commitment = db.Column(db.String(128))
+    research_field = db.Column(db.String(128))
+    applicant_qualification = db.Column(db.String(1024))
