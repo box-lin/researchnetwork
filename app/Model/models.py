@@ -1,36 +1,18 @@
-from app import db 
+from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 
 
-'''
-User: 
-    username, password,
-
-Student:
-    contact information (name, last name, WSU ID, email, phone) 
-    Enter additional information (major, cumulative GPA, expected graduation date, 
-    etc. ) 
-    Enter the technical elective courses they completed and the grades they 
-    received. 
-    Select the research topics they are interested in.  
-    Select the programming languages they have experience with.  
-    Describe their prior research experience if there is any.  
-
-faculty: 
-    Enter contact information (name, last name, WSU ID, email, phone) 
-'''
-
-# @login.user_loader
-# def load_user(id):
-#     role = db.session.get('role')
-#     return role_mapping[role].query.get(int(id))
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 '''
 User model consists of <Student> and <Faculty> 
 '''
-class User(db.Model):
+class User(db.Model, UserMixin):
 
     ## common info ## 
     id = db.Column(db.Integer, primary_key=True)
@@ -51,8 +33,8 @@ class User(db.Model):
     programming = db.Column(db.String(30))
     experience = db.Column(db.String(200))
 
-    # role = 1 = student, role = 2 = faculty
-    role = db.Column(db.Integer) 
+    # role =student or faculty
+    role = db.Column(db.String(20))
     
     def __repr__(self):
         return '<User {}, {}>'.format(self.id,self.username)

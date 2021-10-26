@@ -1,23 +1,27 @@
-<h1>Sign In</h1>
-{% if form %}
-        <form action="" method="POST">
-            {{ form.hidden_tag() }}
+{% extends "base.html" %}
 
-                <p>{{form.username.label}}</p>  
-                <p>{{form.username}}</p>
+{% block content %}
+    <h1>Sign In</h1>
+    {% if form %}
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
 
-                <p>{{form.password.label}}</p>
-                <p>{{form.password}}</p>
+                    <p>{{form.username.label}}</p>  
+                    <p>{{form.username(class ='formtitle')}}</p>
 
-                {{form.remember_me.label}}
-                {{form.remember_me}}
+                    <p>{{form.password.label}}</p>
+                    <p>{{form.password(class ='formtitle')}}</p>
 
-                <br>
-                <br>
-                {{form.role.label}}
-                {{form.role}}
+                    {{form.remember_me.label}}
+                    {{form.remember_me}}
 
-            <p>{{ form.submit}}</p>
-        </form>
-{% endif %}
-<p>New User? Click here to register as a <a href="student_register"> student </a> or <a href="faculty_register"> faculty </a></p>
+                    <br>
+                    <br>
+                    {{form.role.label}}
+                    {{form.role}}
+
+                <p>{{ form.submit(class = 'postButton')}}</p>
+            </form>
+    {% endif %}
+    <p>New User? Click here to register as a <a href="student_register"> student </a> or <a href="faculty_register"> faculty </a></p>
+{% endblock %}

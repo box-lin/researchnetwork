@@ -1,7 +1,7 @@
-{% extends "f_base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
-    <h1> Faculty Register</h1>
+    <h1> Student Register</h1>
 
     <!-- TODO (iteration1):  Include the template for "user registration" form here..  -->
     
@@ -9,57 +9,54 @@
         <form action="" method="POST">
             {{ form.hidden_tag() }}
 
-            <p> {{form.role.label }} </p>
-            <p> {{form.role }} </p>
-
             <p>{{ form.username.label }}</p>
-            <p>{{ form.username }}</p>
+            <p>{{ form.username(class ='formtitle') }}</p>
    
 
             <p>{{ form.lastname.label }}</p>
-            <p>{{ form.lastname }}</p>
+            <p>{{ form.lastname(class ='formtitle') }}</p>
 
             <p>{{ form.firstname.label }}</p>
-            <p>{{ form.firstname }}</p>
+            <p>{{ form.firstname(class ='formtitle') }}</p>
 
             <p>{{ form.wsuid.label }}</p>
-            <p>{{ form.wsuid }}</p>
+            <p>{{ form.wsuid(class ='formtitle') }}</p>
 
             <p>{{ form.phone.label }}</p>
-            <p>{{ form.phone }}</p>
+            <p>{{ form.phone(class ='formtitle') }}</p>
 
             <p>{{ form.email.label }}</p> 
-            <p>{{ form.email}} </p>
+            <p>{{ form.email(class ='formtitle')}} </p>
 
             <p>{{ form.password.label }} </p>
-            <p>{{ form.password }}</p>  
+            <p>{{ form.password(class ='formtitle') }}</p>  
 
 
             <p>{{ form.password2.label }}</p>  
-            <p>{{ form.password2 }} </p>
+            <p>{{ form.password2(class ='formtitle') }} </p>
 
             <p>{{ form.major.label }}</p>  
-            <p>{{ form.major }} </p>
+            <p>{{ form.major(class ='formtitle') }} </p>
 
             <p>{{ form.GPA.label }}</p>  
-            <p>{{ form.GPA }} </p>
+            <p>{{ form.GPA(class ='formtitle') }} </p>
 
             <p>{{ form.gradulation.label }}</p>  
-            <p>{{ form.gradulation }} </p>
+            <p>{{ form.gradulation(class ='formtitle') }} </p>
 
             <p>{{ form.elective.label }}</p>  
-            <p>{{ form.elective }} </p>
+            <p>{{ form.elective(class ='formbody') }} </p>
 
             <p>{{ form.researchtopic.label }}</p>  
-            <p>{{ form.researchtopic }} </p>
+            <p>{{ form.researchtopic(class ='formbody') }} </p>
 
             <p>{{ form.programming.label }}</p>  
-            <p>{{ form.programming }} </p>
+            <p>{{ form.programming(class ='formtitle') }} </p>
 
             <p>{{ form.experience.label }}</p>  
-            <p>{{ form.experience }} </p>
+            <p>{{ form.experience(class ='formbody') }} </p>
 
-            <p>{{ form.submit  }}</p>
+            <p>{{ form.submit(class = 'postButton')  }}</p>
         </form>
     {% endif %}
 

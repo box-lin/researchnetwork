@@ -11,7 +11,7 @@ User login form component
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    role = RadioField('Role: ', choices=[(1,'Student'),(2,'Faculty')], validators=[DataRequired()])
+    role = RadioField('Role: ', choices=['Student','Faculty'], validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
@@ -28,8 +28,7 @@ class FacultyRegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(),Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
-    role = RadioField('Role: ', choices=[(1,'Student'),(2,'Faculty')], validators=[DataRequired()])
-    submit = SubmitField('Register')
+    submit = SubmitField('Register As Faculty')
 
     def validate_username(self, username):
         faculty = User.query.filter_by(username = username.data).first()
@@ -55,7 +54,6 @@ class StudentRegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(),Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
-    role = RadioField('Role: ', choices=[(1,'Student'),(2,'Faculty')], validators=[DataRequired()])
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
     gradulation = StringField('Gradulation Date', validators=[DataRequired()])
@@ -63,7 +61,7 @@ class StudentRegistrationForm(FlaskForm):
     researchtopic = StringField('Research Topics', validators=[DataRequired()])
     programming = StringField('Programming Languages', validators=[DataRequired()])
     experience = TextAreaField('Eletive Courses: ',validators=[DataRequired()])
-    submit = SubmitField('Register')
+    submit = SubmitField('Register As Student')
 
     def validate_username(self, username):
         student = User.query.filter_by(username = username.data).first()
