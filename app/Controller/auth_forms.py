@@ -73,3 +73,41 @@ class StudentRegistrationForm(FlaskForm):
         student = User.query.filter_by(email = email.data).first()
         if student is not None:
             raise ValidationError('The email already existed! Please use a different email address.')
+
+'''
+Registration form component
+'''
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    wsuid = StringField('WSU ID', validators=[DataRequired()])
+    phone = StringField('Phone Number', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(),Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
+    major = StringField('Major', validators=[DataRequired()])
+    GPA = StringField('GPA', validators=[DataRequired()])
+    gradulation = StringField('Gradulation Date', validators=[DataRequired()])
+    elective = TextAreaField('Eletive Courses: ',validators=[DataRequired()])
+    researchtopic = StringField('Research Topics', validators=[DataRequired()])
+    programming = StringField('Programming Languages', validators=[DataRequired()])
+    experience = TextAreaField('Eletive Courses: ',validators=[DataRequired()])
+    submit = SubmitField('Register As Student')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username = username.data).first()
+        if user is not None:
+            raise ValidationError('The username already existed! Please use a different username.')
+
+    # Check for the uniqueness for email
+    def validate_email(self, email):
+        user = User.query.filter_by(email = email.data).first()
+        if user is not None:
+            raise ValidationError('The email already existed! Please use a different email address.')
+
+    def validate_WSUID(self, wsuid):
+        user = User.query.filter_by(wsuid = wsuid.data).first()
+        if user is not None:
+            raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
+
