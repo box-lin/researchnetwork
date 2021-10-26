@@ -22,7 +22,10 @@ Generic Login Route
 def login():
     lform = LoginForm()
     if current_user.is_authenticated:
-        return redirect(url_for('routes.faculty_index')) 
+        if current_user.role == "Faculty":
+            return redirect(url_for('routes.faculty_index'))
+        else:
+            return redirect(url_for('routes.student_index'))
     lform = LoginForm()
     if lform.validate_on_submit():
         user = User.query.filter_by(username = lform.username.data).first()
@@ -30,7 +33,10 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('auth.login'))
         login_user(user, remember = lform.remember_me.data)
-        return redirect(url_for('routes.faculty_index'))
+        if user.role == "Faculty":
+            return redirect(url_for('routes.faculty_index'))
+        else:
+            return redirect(url_for('routes.student_index'))
     return render_template('login.html', title = 'Sign In', form=lform)
 
 

@@ -9,3 +9,8 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 @bp_routes.route('/faculty_index', methods=['GET'])
 def faculty_index():
     return render_template('f_index.html', title="WSU Research Network")
+
+
+@bp_routes.route('/student_index', methods=['GET'])
+def student_index():
+    return render_template('s_index.html', title="WSU Research Network")
