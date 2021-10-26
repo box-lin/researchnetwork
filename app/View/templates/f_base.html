@@ -1,39 +1,35 @@
 <html>
-    <head>
-       {% if title %}
-          <title>{{ title }} - Research Network </title>
-       {% else %}
-          <title> Welcome to Washington State University Research Network </title>
-       {% endif %}
-       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    </head>
 
-    <body>
-        <div class ="nav-container">
+<head>
+    {% if title %}
+    <title>{{ title }} - Research Network </title>
+    {% else %}
+    <title> Welcome to Washington State University Research Network </title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+    <div class="nav-container">
         <table>
             <tr>
-                <td><a href="{{ url_for('routes.faculty_index') }}" class = "button">Home Page</a></td>
-                <!-- TODO (iteration 1) : add the "Login" or "Logout" link. If the user is logged in, Login link should be displayed, otherwise Logout link should be displayed. --> 
-                <td><a href="" class = "button"> Post New Position </a></td>
-                <td><a href="" class = "button"> Applicant List </a></td>
-                <td><a href="" class = "button"> Profile </a></td>
-                <td><a href="" class = "button"> Log Out </a></td>
+                <td><a href="{{ url_for('routes.faculty_index') }}" class="button">Home Page</a></td>
+                <!-- TODO (iteration 1) : add the "Login" or "Logout" link. If the user is logged in, Login link should be displayed, otherwise Logout link should be displayed. -->
+                <td><a href="" class="button"> Post New Position </a></td>
+                <td><a href="" class="button"> Applicant List </a></td>
+                <td><a href="" class="button"> Profile </a></td>
+                <td><a href="" class="button"> Log Out </a></td>
                 <!-- TODO (iteration 1) : Replace "_______" below with the username of the current user.-->
-                <td> Current user is: <span class="useritem">________ </span> </td>  
+                <td> Current user is: <span class="useritem">________ </span> </td>
             </tr>
         </table>
-        </div>
-        <div>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                <div> {{ message }}</div>
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
+    </div>
+    <div>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div> {{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+    </div>
 
-            {% block content %} {% endblock %}
-        </div>
+</body>
 
-    </body>
 </html>

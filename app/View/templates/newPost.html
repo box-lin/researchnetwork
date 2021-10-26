@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<div class="newpost">
+    <form action="" method="POST">
+        {{form.hidden_tag()}}
+        <div class="row">
+            <div class="col-md-6">
+                <p>{{ form.research_title.label }}</p>
+                <p>{{ form.research_title }}</p>
+
+                {% for error in form.research_title.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.desc.label }}</p>
+                <p>{{ form.desc(class="formdesc")}}</p>
+
+                {% for error in form.desc.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.start_end_date.label }}</p>
+                <p>{{ form.start_end_date}}</p>
+
+                {% for error in form.start_end_date.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.submit}}</p>
+            </div>
+            <div class="col-md-6">
+                <p>{{ form.time_commitment.label }}</p>
+                <p>{{ form.time_commitment}}</p>
+
+                {% for error in form.time_commitment.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.research_field.label }}</p>
+                <p>{{ form.research_field}}</p>
+
+                {% for error in form.research_field.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.applicant_qualification.label }}</p>
+                <p>{{ form.applicant_qualification(class="formdesc")}}</p>
+
+                {% for error in form.applicant_qualification.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
