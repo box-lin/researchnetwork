@@ -31,8 +31,9 @@ body {
     background-color: #111;
 }
 
-.active {
+.nav-container li a.active {
     background-color: #4CAF50;
+    color: white;
 }
 
 
@@ -152,6 +153,10 @@ a:hover {
     word-break: break-all;
 }
 
+.postlist{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .post-box{
     display: flex;
@@ -204,4 +209,9 @@ a:hover {
 
 .link{
     color: rgb(250, 243, 243);
+}
+
+.posttable { 
+    width : 100%;
+    margin: 0px;
 }

@@ -11,19 +11,16 @@
 
 <body>
     <div class="nav-container">
-        <table>
-            <tr>
-                <td><a href="{{ url_for('routes.faculty_index') }}" class="button">Home Page</a></td>
-                <!-- TODO (iteration 1) : add the "Login" or "Logout" link. If the user is logged in, Login link should be displayed, otherwise Logout link should be displayed. -->
-                <td><a href="{{ url_for('routes.postReasearch')}}" class="button"> Post New Position </a></td>
-                <td><a href="" class="button"> Applicant List </a></td>
-                <td><a href="" class="button"> Profile </a></td>
-                <td><a href="{{ url_for('auth.logout') }}" class="button"> Log Out </a></td>
-                <!-- TODO (iteration 1) : Replace "_______" below with the username of the current user.-->
-                <td> Current user is: <span class="useritem">________ </span> </td>
-            </tr>
-        </table>
+        <ul>
+            <li><a href="{{ url_for('routes.faculty_index') }}" class="active">Home Page</a></li>
+            <li><a href="{{ url_for('routes.postReasearch')}}"> Post New Position </a></li>
+            <li><a href="" > Applicant List </a></li>
+            <li><a href="" > Profile </a></li>
+            <li><a href="{{ url_for('auth.logout') }}" > Log Out </a></li>
+        </ul>
+        
     </div>
+
     <div>
         {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
         <div class = "flash-container"> {{ message }}</div>
