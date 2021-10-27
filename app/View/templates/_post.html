@@ -1,0 +1,28 @@
+<!--class Position(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(2048)) + 
+    desc = db.Column(db.String(2048)) + 
+    start_date = db.Column(db.String(128)) +
+    end_date = db.Column(db.String(128)) +
+    time_commitment = db.Column(db.String(128))
+    research_field = db.Column(db.String(128)) +
+    applicant_qualification = db.Column(db.String(1024))-->
+<table class = "posttable" sytle = "width:100%" valign="top">
+        <tr>
+            <td colspan = "3"><div class="posttitle">{{position.title}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="80%">
+                <div class = "postmassage">
+                {{position.desc}}
+                </div>
+                <div class = "positionSAED">
+                {{position.start_date}} - {{position.end_date}}
+                </div>
+                <div class = "positionfield">
+                {{position.research_field}}
+                </div>
+            </td>
+        </tr>
+</table>
