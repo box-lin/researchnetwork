@@ -24,5 +24,15 @@
                 {{position.research_field}}
                 </div>
             </td>
+
+                <br> 
+                <td width = "5%"> 
+                    
+                {% if position.writer == current_user %}
+                   <form action = "{{ url_for('routes.delete', position_id = position.id)}}" method ="post">
+                        <input type= "submit" value = "delete" class="button">
+                   </form>
+                {% endif %}
+            </td>
         </tr>
 </table>

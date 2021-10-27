@@ -1,19 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms.fields.core import StringField
+from wtforms import StringField, SubmitField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, regexp
 
 class ResearchPositionForm(FlaskForm):
-    research_title = StringField('Research Project Title', [Length(min=0, max=2048)], validators=[DataRequired()])
-    desc = StringField('Project Brif Description', [Length(min=0, max=2048)], validators=[DataRequired()])
-    start_end_date = StringField('Start date and end date(use / to seprate)', [Length(min=0, max=128)], validators=[DataRequired()])
-    time_commitment = StringField('Required Time Commitment',[Length(min=0, max=128)], validators=[DataRequired()] )
-    research_field = StringField('Research Field', [Length(min=0, max=128)], validators=[DataRequired()])
-    applicant_qualification = StringField('Applicant Qualification', [Length(min=0, max=128)], validators=[DataRequired()])
+    research_title = StringField('Research Project Title', validators=[DataRequired(),Length(min=0, max=2048)])
+    desc = StringField('Project Brif Description', validators=[DataRequired(),Length(min=0, max=2048)])
+    start_date = StringField('Start date ', validators=[DataRequired(), Length(min=0, max=128)])
+    end_date = StringField('End date ', validators=[DataRequired(), Length(min=0, max=128)])
+    time_commitment = StringField('Required Time Commitment',validators=[DataRequired(),Length(min=0, max=128)] )
+    research_field = StringField('Research Field', validators=[DataRequired(), Length(min=0, max=128)])
+    applicant_qualification = StringField('Applicant Qualification', validators=[DataRequired(),Length(min=0, max=128)])
+    submit = SubmitField('Post')
 
-    def validate_start_end_date(form, start_end_date):
-        if start_end_date.find('/'):
-            pass
-        else:
-            raise ValidationError('This field must contain / as a spliter to sperate the start date and end date.')
 
 

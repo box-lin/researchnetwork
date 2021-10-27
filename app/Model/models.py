@@ -35,6 +35,8 @@ class User(db.Model, UserMixin):
 
     # role =student or faculty
     role = db.Column(db.String(20))
+
+    position = db.relationship('Position', backref='writer', lazy='dynamic')
     
     def __repr__(self):
         return '<User {}, {}>'.format(self.id,self.username)
@@ -57,3 +59,5 @@ class Position(db.Model):
     time_commitment = db.Column(db.String(128))
     research_field = db.Column(db.String(128))
     applicant_qualification = db.Column(db.String(1024))
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
