@@ -4,7 +4,7 @@ from werkzeug.wrappers import request
 from wtforms import validators
 from wtforms.validators import Email
 from config import Config
-from app.Controller.auth_forms import LoginForm, FacultyRegistrationForm, RegistrationForm, StudentRegistrationForm
+from app.Controller.auth_forms import LoginForm, FacultyRegistrationForm, StudentRegistrationForm
 from app import db
 from app.Model.models import User
 from flask_login import current_user, login_user, logout_user, login_required
