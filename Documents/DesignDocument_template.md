@@ -4,7 +4,7 @@
 --------
 Prepared by:
 
-* `<author1>`,`<organization>`
+* `<Yi Chou>`
 * `<author1>`,`<organization>`
 * `<author1>`,`<organization>`
 * `<author1>`,`<organization>`
@@ -44,14 +44,13 @@ Prepared by:
 |      |      |         |         |
 |      |      |         |         |
 
-
 # 1. Introduction
 
-Explain the purpose for providing this design document. If this is a revision of an earlier document, please make sure to summarize what changes have been made during the revision (keep this discussion brief). 
+The purpose of the Software Design Document is to provide a description of the design of a system fully enough to allow for software development to proceed with an understanding of what is to be built and how it is expected to built. The Software Design Document provides information necessary to provide description of the details for the software and system to be built.
 
-Then provide a brief description of your project and state your project goal.
+The project is to built a platform for the students and the faculty mumbers in WSU. The Goal of this project is to provides smooth connections to research opportunities for students. professors or faculties can present their research opportunities on this platform. Students will be able to apply see all currently available research opportunities and be able to apply for them.
 
-At the end of the introduction, provide an overview of the document outline.
+Overview of the document outlie: First, System Structure will talk about the major subsystem and how they fit together. Second, Subsystem design will talk about how are we going to design Model, Controller and View subsystems. Third, we will have a programm progress section, when we finish one iteration we will update the what did we finish in the iteration. This will help us keep in track of our project. Last, we will have a testing part for the document. We will planning how to test each iteration on this part.
 
 Section II includes …
 
@@ -65,8 +64,14 @@ If you adopted the application structure we used in the Smile App, your applicat
 
 In this section:
  * Provide a UML component diagram that illustrates the architecture of your software.
- * Briefly explain the role of each subsystem in your architectural design and explain the dependencies between them. 
- * Discuss the rationale for the proposed decomposition in terms of cohesion and coupling.
+
+ * Model: the model objects will contain the data and logic of the application .It have it own data but it should have no connection to the user. 
+
+   View: the view objects display things on the screen and respond to user actions. 
+
+   Controller: the controller objects connect the model objects and view objects. They supply the view objects with what they need to display and also provide the model with user input from the view.
+
+ * cohesion represents the functional strength of modules and coupling represents the independence among modules. So our goal is to make the system have a strong functional strength and also make sure between each strong functional strength modules they have enough independence.
 
 ## 2.2 Subsystem Design 
 
@@ -82,13 +87,13 @@ Briefly explain the role of the model.
 
 ### 2.2.2 Controller
 
-Briefly explain the role of the controller. If your controller is decomposed into smaller subsystems (similar to the Smile App design we discussed in class), list each of those subsystems as subsections. 
+Briefly explain the role of the controller. If your controller is decomposed into smaller subsystems (similar to the Smile App design we discussed in class), ist each of those subsystems as subsections. 
 
 For each subsystem:
  * Explain the role of the subsystem (component) and its responsibilities.
  * 	Provide a detailed description of the subsystem interface, i.e., 
     * which other subsystems does it interact with?  
-    * what are the interdependencies between them? 
+    * what are the interdependencies between them?
 
 **Note:** Some of your subsystems will interact with the Web clients (browsers). Make sure to include a detailed description of the  Web API interface (i.e. the set of routes) your application will implement. For each route specify its “methods”, “URL path”, and “a description of the operation it implements”.  
 You can use the following table template to list your route specifications. 
@@ -97,14 +102,14 @@ You can use the following table template to list your route specifications.
 
 (***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
 
-|   | Methods           | URL Path   | Description  |
-|:--|:------------------|:-----------|:-------------|
-|1. |                   |            |              |
-|2. |                   |            |              |
-|3. |                   |            |              |
-|4. |                   |            |              |
-|5. |                   |            |              |
-|6. |                   |            |              |
+|      | Methods | URL Path | Description |
+| :--- | :------ | :------- | :---------- |
+| 1.   |         |          |             |
+| 2.   |         |          |             |
+| 3.   |         |          |             |
+| 4.   |         |          |             |
+| 5.   |         |          |             |
+| 6.   |         |          |             |
 
 
 ### 2.2.3 View and User Interface Design 
