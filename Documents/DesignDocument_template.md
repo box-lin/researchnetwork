@@ -64,8 +64,14 @@ If you adopted the application structure we used in the Smile App, your applicat
 
 In this section:
  * Provide a UML component diagram that illustrates the architecture of your software.
- * Briefly explain the role of each subsystem in your architectural design and explain the dependencies between them. 
- * Discuss the rationale for the proposed decomposition in terms of cohesion and coupling.
+
+ * Model: the model objects will contain the data and logic of the application .It have it own data but it should have no connection to the user. 
+
+   View: the view objects display things on the screen and respond to user actions. 
+
+   Controller: the controller objects connect the model objects and view objects. They supply the view objects with what they need to display and also provide the model with user input from the view.
+
+ * cohesion represents the functional strength of modules and coupling represents the independence among modules. So our goal is to make the system have a strong functional strength and also make sure between each strong functional strength modules they have enough independence.
 
 ## 2.2 Subsystem Design 
 
