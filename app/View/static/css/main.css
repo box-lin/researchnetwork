@@ -5,13 +5,36 @@ body {
     text-align: left;
 }
 
-.nav-container {
-    background: #f6f6f6;
-    font-family: Tahoma;
-    font-size: 12px;
-    height: 32px;
-    text-transform: uppercase;
+
+.nav-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    margin-left: 0%;
 }
+
+.nav-container li {
+    float: left;
+}
+
+.nav-container li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav-container li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
 
 a:hover {
     color: #2387D9;
@@ -50,6 +73,16 @@ a:hover {
     box-sizing: border-box;
 }
 
+.logintext{
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 .formbody{
     width: 25%;
     height: 40%;
@@ -73,6 +106,21 @@ a:hover {
 }
 
 .postButton:hover{
+    background-color: #45a049;
+}
+
+.loginButton{
+    width: 75%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.loginButton:hover{
     background-color: #45a049;
 }
 
@@ -132,4 +180,28 @@ a:hover {
     .post-box{
         width: 32%;
     }
+}
+
+.login{
+    width: 750px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+    color: rgb(250, 243, 243);
+    font-family: 'Century Gothic',sans-serif;
+}
+
+.login p{
+    margin-left: 22%;
+    text-align: justify;
+}
+.radio{
+    margin-left: 22%;
+    text-align: left;
+}
+
+.link{
+    color: rgb(250, 243, 243);
 }

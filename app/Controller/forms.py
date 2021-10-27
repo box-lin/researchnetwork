@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, regexp
 
+'''
+Flaskform for faculty use - Research position post
+'''
 class ResearchPositionForm(FlaskForm):
     research_title = StringField('Research Project Title', validators=[DataRequired(),Length(min=0, max=2048)])
     desc = StringField('Project Brif Description', validators=[DataRequired(),Length(min=0, max=2048)])

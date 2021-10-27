@@ -58,8 +58,13 @@ Faculty Register Route
 def faculty_register():
     fform = FacultyRegistrationForm()
     if fform.validate_on_submit():
-        faculty = User(username=fform.username.data, lastname=fform.lastname.data, firstname=fform.firstname.data, wsuid=fform.wsuid.data,
-                        email=fform.email.data, phone=fform.phone.data, role="Faculty")
+        faculty = User(username=fform.username.data, 
+                       lastname=fform.lastname.data, 
+                       firstname=fform.firstname.data, 
+                       wsuid=fform.wsuid.data,
+                       email=fform.email.data, 
+                       phone=fform.phone.data, 
+                       role="Faculty")
         faculty.set_password(fform.password.data)
         db.session.add(faculty)
         db.session.commit()
@@ -75,11 +80,19 @@ Student Register Route
 def student_register():
     sform = StudentRegistrationForm()
     if sform.validate_on_submit():
-        student = User(username=sform.username.data, lastname=sform.lastname.data, firstname=sform.firstname.data, wsuid=sform.wsuid.data,
-                        email=sform.email.data, phone=sform.phone.data, major=sform.major.data, GPA=sform.GPA.data, gradulation=sform.gradulation.data,
-                        elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
-                        experience=sform.experience.data, role="Student"
-                        )
+        student = User(username=sform.username.data, 
+                       lastname=sform.lastname.data, 
+                       firstname=sform.firstname.data, 
+                       wsuid=sform.wsuid.data,
+                       email=sform.email.data, 
+                       phone=sform.phone.data, 
+                       major=sform.major.data, 
+                       GPA=sform.GPA.data, 
+                       gradulation=sform.gradulation.data,
+                       elective=sform.elective.data, 
+                       researchtopic=sform.researchtopic.data, 
+                       programming=sform.programming.data, 
+                       experience=sform.experience.data, role="Student")
         student.set_password(sform.password.data)
         db.session.add(student)
         db.session.commit()
@@ -98,20 +111,37 @@ def register():
     print(sform.data)
     if fform.validate_on_submit() or sform.validate_on_submit():
         if fform.validate_on_submit() and sform.GPA.data == "":
-            faculty = User(username=fform.username.data, lastname=fform.lastname.data, firstname=fform.firstname.data, wsuid=fform.wsuid.data,
-                        email=fform.email.data, phone=fform.phone.data, major="", GPA="", gradulation="", elective="", 
-                        researchtopic="", programming = "", experience="", role="Faculty")
+            faculty = User(username=fform.username.data, 
+                           lastname=fform.lastname.data, 
+                           firstname=fform.firstname.data, 
+                           wsuid=fform.wsuid.data,
+                           email=fform.email.data, 
+                           phone=fform.phone.data, 
+                           major="", 
+                           GPA="", 
+                           gradulation="", 
+                           elective="", 
+                           researchtopic="", 
+                           programming = "", 
+                           experience="", 
+                           role="Faculty")
             faculty.set_password(fform.password.data)
             db.session.add(faculty)
             db.session.commit()
             flash('Congratulations, ' + fform.username.data + ' you have successfully registered!')
             return redirect(url_for('auth.login'))
         if sform.validate_on_submit() and sform.GPA.data != "":
-            student = User(username=sform.username.data, lastname=sform.lastname.data, firstname=sform.firstname.data, wsuid=sform.wsuid.data,
-                        email=sform.email.data, phone=sform.phone.data, major=sform.major.data, GPA=sform.GPA.data, gradulation=sform.gradulation.data,
-                        elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
-                        experience=sform.experience.data, role="Student"
-                        )
+            student = User(username=sform.username.data, 
+                           lastname=sform.lastname.data, 
+                           firstname=sform.firstname.data, 
+                           wsuid=sform.wsuid.data,
+                           email=sform.email.data, 
+                           phone=sform.phone.data, 
+                           major=sform.major.data, 
+                           GPA=sform.GPA.data, 
+                           gradulation=sform.gradulation.data,
+                           elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
+                           experience=sform.experience.data, role="Student")
             student.set_password(sform.password.data)
             db.session.add(student)
             db.session.commit()
