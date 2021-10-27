@@ -1,38 +1,32 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="login">
+    <h1>Research Network Platform @ Washington State University</h1>
+    <h1>Sign In</h1>
+    {% if form %}
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
 
-{% block content %}
-    <div class="login">
-        <h1>Research Network Platform @ Washington State University</h1>
-        <h1>Sign In</h1>
-        {% if form %}
-                <form action="" method="POST">
-                    {{ form.hidden_tag() }}
+        <p>{{form.username.label}}</p>
+        <p>{{form.username(class ='logintext')}}</p>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-                        <p>{{form.username.label}}</p>  
-                        <p>{{form.username(class ='logintext')}}</p>
-                        {% for error in form.username.errors %}
-                        <span style = "color: red;">[{{error}}]</span>
-                        {% endfor %}
+        <p>{{form.password.label}}</p>
+        <p>{{form.password(class ='logintext')}}</p>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-                        <p>{{form.password.label}}</p>
-                        <p>{{form.password(class ='logintext')}}</p>
-                        {% for error in form.password.errors %}
-                        <span style = "color: red;">[{{error}}]</span>
-                        {% endfor %}
+        <p>{{form.remember_me.label}} {{form.remember_me}} </p>
 
-                        <p>{{form.remember_me.label}} {{form.remember_me}} </p> 
+        <div class="radio">{{form.role.label}} {{form.role}}
+        </div>
 
-                        <div class = "radio">{{form.role.label}}
-                        {{form.role}}</div>
+        {% for error in form.role.errors %}
+        <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-                        {% for error in form.role.errors %}
-                        <span style = "color: red;">[{{error}}]</span>
-                        {% endfor %}
-
-                    <p>{{ form.submit(class = 'loginButton')}}</p>
-                </form>
-        {% endif %}
-        <p>New User? Click here to register as a <a href="student_register" class = "link"> student </a> or <a href="faculty_register" class = "link"> faculty </a></p>
-        <p>Your second option! Click <a href="register" class = "link"> here </a>  to register.
-    </div>
+        <p>{{ form.submit(class = 'loginButton')}}</p>
+    </form>
+    {% endif %}
+    <p>New User? Click <a href="register" class="link"> here </a> to register.
+</div>
 {% endblock %}

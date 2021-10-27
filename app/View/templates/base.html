@@ -2,34 +2,34 @@
 
 <head>
     <style>
-        body
-        {
-            background-image: url({{ url_for('static', filename = 'image//wsu.jpeg' )}})
+        body {
+            background-color: antiquewhite !important;
         }
     </style>
     <title>Research Network Platform @ Washington State University</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
 </head>
 
 <body>
-    <div class="nav-container">
+    <div class="nav-container topbar">
         <ul>
             <li><a class="active" href="login">Login</a></li>
             <li><a href="#news">Contact Us</a></li>
             <li><a href="#contact">About Us</a></li>
             <li><a href="#about">News </a></li>
         </ul>
-        
+
     </div>
     <div>
         {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
         <div class="flash-container"> {{ message }}</div>
-        {% endfor %} {% endif %} {% endwith %} 
-        {% block content %} {% endblock %}
+        {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
     </div>
 
 </body>
 
 </html>
-

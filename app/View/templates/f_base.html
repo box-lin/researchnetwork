@@ -7,23 +7,27 @@
     <title> Welcome to Washington State University Research Network </title>
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
 </head>
 
 <body>
-    <div class="nav-container">
+    <div class="nav-container topbar">
         <ul>
             <li><a href="{{ url_for('routes.faculty_index') }}" class="active">Home Page</a></li>
             <li><a href="{{ url_for('routes.postReasearch')}}"> Post New Position </a></li>
-            <li><a href="" > Applicant List </a></li>
-            <li><a href="" > Profile </a></li>
-            <li><a href="{{ url_for('auth.logout') }}" > Log Out </a></li>
+            <li><a href=""> Applicant List </a></li>
+            <li><a href=""> Profile </a></li>
+            <li><a href="{{ url_for('auth.logout') }}"> Log Out </a></li>
         </ul>
-        
+
     </div>
 
     <div>
         {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-        <div class = "flash-container"> {{ message }}</div>
+        <div class="flash-container"> {{ message }}</div>
         {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
     </div>
 
