@@ -135,7 +135,7 @@ Provide a detailed description of user interface you have built so far. The info
 
 # 3. Progress Report
 
-Write a short paragraph summarizing your progress in iteration1.
+In iteration 1, we implement the basic features of the platform: create an account, log in, log out, post the research position, and delete the position post. The Users can create an account and assign it as Faculty or Student. The Student User can log into the student page and view all the posted research positions. The Faculty Users can log into the faculty page and post the research position by entering detailed descriptions. The research position posts can be deleted by the poster faculty user. 
 
 # 4. Testing Plan
 
