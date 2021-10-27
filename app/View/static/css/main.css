@@ -88,3 +88,48 @@ a:hover {
     width: 100%;
     height: 400px;
 }
+
+.posttitle {
+    text-align: center;
+    font-weight: bold;
+    padding: 1em;
+    font-family: "Cursive";
+    font-size : 22px;
+}
+
+.postmessage {
+    padding: 8px;
+    font-family: Verdana;
+    font-size : 16px;
+    word-break: break-all;
+}
+
+
+.post-box{
+    display: flex;
+    vertical-align: middle;
+    background-color:rgb(238, 238, 228);
+    padding: 2px 2px; 
+    margin: 8px 8px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 800px) and (max-width:1200px){
+    .post-box{
+        width: 48%;
+    }
+}
+
+/* smaller than 800px */
+@media screen and (max-width:800px){
+    .post-box{
+        width: 99%;
+    }
+}
+
+/* larger than 1200 px */
+@media screen and (min-width: 1200px){
+    .post-box{
+        width: 32%;
+    }
+}

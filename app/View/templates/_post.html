@@ -1,38 +1,54 @@
-<!--class Position(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(2048)) + 
-    desc = db.Column(db.String(2048)) + 
-    start_date = db.Column(db.String(128)) +
-    end_date = db.Column(db.String(128)) +
-    time_commitment = db.Column(db.String(128))
-    research_field = db.Column(db.String(128)) +
-    applicant_qualification = db.Column(db.String(1024))-->
-<table class = "posttable" sytle = "width:100%" valign="top">
-        <tr>
-            <td colspan = "3"><div class="posttitle">{{position.title}}</div>
+<table class = "posttable" style = "width:100%" valign="top">
+        <tr> 
+            <td colspan="3">
+                <div class="posttitle"> {{position.title}} </div>
             </td>
         </tr>
         <tr>
-            <td width="80%">
-                <div class = "postmassage">
-                {{position.desc}}
-                </div>
-                <div class = "positionSAED">
-                {{position.start_date}} - {{position.end_date}}
-                </div>
-                <div class = "positionfield">
-                {{position.research_field}}
-                </div>
+            <td width="10%" >
             </td>
 
+            <td width="80%" >
+
+                <div class = "postmassage">
+                    {{position.desc}}
+                </div>
+                <div class = "postmessage">
+                    {{position.start_date}} - {{position.end_date}}
+                </div>
+                <div class = "postmessage">
+                    {{position.research_field}}
+                </div>
+            </td> 
+
+            <td width = "5%"> 
+                <div>
+                    {% if position.writer == current_user %}
+                    <form action = "{{ url_for('routes.delete', position_id = position.id)}}" method ="post">
+                            <input type="submit" value="Delete" class="button" >
+                    </form>
+                    {% endif %}
+                    <br>
+                </div>
                 <br> 
-                <td width = "5%"> 
-                    
-                {% if position.writer == current_user %}
-                   <form action = "{{ url_for('routes.delete', position_id = position.id)}}" method ="post">
-                        <input type= "submit" value = "delete" class="button">
-                   </form>
-                {% endif %}
+
             </td>
         </tr>
+        
+        <tr> 
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                  <!-- (milestone3) TODO: include username who posted the post-->
+                Post By: <span class = "useritem"> {{ position.writer.username }} </span> 
+              </td>
+            </tr>
+        </tr>
+
 </table>
