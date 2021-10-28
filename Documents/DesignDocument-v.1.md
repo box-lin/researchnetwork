@@ -19,7 +19,7 @@ Prepared by:
 
 ## Table of Contents
 - [Design Document](#design-document)
-  - [Research Network Platform](#Research Network Platform)
+  - [Research Network Platform](#research-network-platform)
   - [Table of Contents](#table-of-contents)
   - [Document Revision History](#document-revision-history)
 - [1. Introduction](#1-introduction)
