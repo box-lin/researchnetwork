@@ -1,0 +1,12 @@
+{% extends "s_base.html" %} {% block content %}
+
+    <h1>Welcome to Research Network!</h1>
+<div class = "position-list">
+    {% for position in positions %}
+    <div class = "position-box">
+        {% include '_post.html' %}
+    </div>
+    {% endfor %}
+
+
+{% endblock %}

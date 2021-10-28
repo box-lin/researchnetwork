@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Faculty Register</h1>
+
+    <!-- TODO (iteration1):  Include the template for "user registration" form here..  -->
+    
+     {% if form %}
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            <p>{{ form.username.label }}</p>
+            <p>{{ form.username(class ='formtitle') }}</p>
+            {% for error in form.username.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+   
+
+            <p>{{ form.lastname.label }}</p>
+            <p>{{ form.lastname(class ='formtitle') }}</p>
+            {% for error in form.lastname.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+
+            <p>{{ form.firstname.label }}</p>
+            <p>{{ form.firstname(class ='formtitle') }}</p>
+            {% for error in form.firstname.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+
+            <p>{{ form.wsuid.label }}</p>
+            <p>{{ form.wsuid(class ='formtitle') }}</p>
+            {% for error in form.wsuid.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+
+            <p>{{ form.phone.label }}</p>
+            <p>{{ form.phone(class ='formtitle') }}</p>
+            {% for error in form.phone.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+
+            <p>{{ form.email.label }}</p> 
+            <p>{{ form.email(class ='formtitle')}} </p>
+            {% for error in form.email.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+
+
+            <p>{{ form.password.label }} </p>
+            <p>{{ form.password(class ='formtitle') }}</p> 
+            {% for error in form.password.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %} 
+
+
+            <p>{{ form.password2.label }}</p>  
+            <p>{{ form.password2(class ='formtitle') }} </p>
+            {% for error in form.password2.errors %}
+            <span style = "color: red;">[{{error}}]</span>
+            {% endfor %}
+
+
+            <p>{{ form.submit(class = 'postButton')  }}</p>
+        </form>
+    {% endif %}
+
+
+{% endblock %}

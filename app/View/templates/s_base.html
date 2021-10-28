@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    {% if title %}
+    <title>{{ title }} - Research Network </title>
+    {% else %}
+    <title> Welcome to Washington State University Research Network </title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+</head>
+
+<body>
+    <div class="nav-container topbar">
+        <table>
+            <tr>
+                <td><a href="{{ url_for('routes.faculty_index') }}" class="button">Home Page</a></td>
+                <!-- TODO (iteration 1) : add the "Login" or "Logout" link. If the user is logged in, Login link should be displayed, otherwise Logout link should be displayed. -->
+                <td><a href="" class="button"> My Applications </a></td>
+                <td><a href="" class="button"> Profile </a></td>
+                <td><a href="{{ url_for('auth.logout') }}" class="button"> Log Out </a></td>
+                <!-- TODO (iteration 1) : Replace "_______" below with the username of the current user.-->
+                <td> Current user is: <span class="useritem">________ </span> </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="flash-container"> {{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+    </div>
+
+</body>
+
+</html>

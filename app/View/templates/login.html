@@ -1,9 +1,32 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
+<div class="login">
+    <h1>Research Network Platform @ Washington State University</h1>
     <h1>Sign In</h1>
-    <!-- TODO (iteration 1) :Include the template for "login form" here...  -->
+    {% if form %}
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
 
-    <!-- TODO (iteration 1) :Add the URL for user register route. --> 
-    <p>New User? <a href="">Click to Register!</a></p>
+        <p>{{form.username.label}}</p>
+        <p>{{form.username(class ='logintext')}}</p>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+        <p>{{form.password.label}}</p>
+        <p>{{form.password(class ='logintext')}}</p>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+        <p>{{form.remember_me.label}} {{form.remember_me}} </p>
+
+        <div class="radio">{{form.role.label}} {{form.role}}
+        </div>
+
+        {% for error in form.role.errors %}
+        <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+        <p>{{ form.submit(class = 'loginButton')}}</p>
+    </form>
+    {% endif %}
+    <p>New User? Click <a href="register" class="link"> here </a> to register.
+</div>
 {% endblock %}

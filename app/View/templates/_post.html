@@ -1,0 +1,55 @@
+<table class = "posttable" style = "width:100%" valign="top">
+       
+        <tr> 
+            <td colspan="3">
+                <div class="posttitle"> {{position.title}} </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td width="10%" >
+            </td>
+
+            <td width="85%" >
+
+                <div class = "postmassage">
+                    {{position.desc}}
+                    <p> {{position.start_date}} - {{position.end_date}} </p>
+                    <p> {{position.research_field}} </p>
+                </div>
+
+
+            </td> 
+
+            <td width = "5%"> 
+                <div>
+                    {% if position.writer == current_user %}
+                    <form action = "{{ url_for('routes.delete', position_id = position.id)}}" method ="post">
+                            <input type="submit" value="Delete" class="button" >
+                    </form>
+                    {% endif %}
+                    <br>
+                </div>
+                <br> 
+
+            </td>
+        </tr>
+        
+        <tr> 
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                  <!-- (milestone3) TODO: include username who posted the post-->
+                Post By: <span class = "useritem"> {{ position.writer.username }} </span> 
+              </td>
+            </tr>
+        </tr>
+
+</table>

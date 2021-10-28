@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Student Register</h1>
+
+    <!-- TODO (iteration1):  Include the template for "user registration" form here..  -->
+    
+     {% if form %}
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            <p>{{ form.username.label }}</p>
+            <p>{{ form.username(class ='formtitle') }}</p>
+   
+
+            <p>{{ form.lastname.label }}</p>
+            <p>{{ form.lastname(class ='formtitle') }}</p>
+
+            <p>{{ form.firstname.label }}</p>
+            <p>{{ form.firstname(class ='formtitle') }}</p>
+
+            <p>{{ form.wsuid.label }}</p>
+            <p>{{ form.wsuid(class ='formtitle') }}</p>
+
+            <p>{{ form.phone.label }}</p>
+            <p>{{ form.phone(class ='formtitle') }}</p>
+
+            <p>{{ form.email.label }}</p> 
+            <p>{{ form.email(class ='formtitle')}} </p>
+
+            <p>{{ form.password.label }} </p>
+            <p>{{ form.password(class ='formtitle') }}</p>  
+
+
+            <p>{{ form.password2.label }}</p>  
+            <p>{{ form.password2(class ='formtitle') }} </p>
+
+            <p>{{ form.major.label }}</p>  
+            <p>{{ form.major(class ='formtitle') }} </p>
+
+            <p>{{ form.GPA.label }}</p>  
+            <p>{{ form.GPA(class ='formtitle') }} </p>
+
+            <p>{{ form.gradulation.label }}</p>  
+            <p>{{ form.gradulation(class ='formtitle') }} </p>
+
+            <p>{{ form.elective.label }}</p>  
+            <p>{{ form.elective(class ='formbody') }} </p>
+
+            <p>{{ form.researchtopic.label }}</p>  
+            <p>{{ form.researchtopic(class ='formtitle') }} </p>
+
+            <p>{{ form.programming.label }}</p>  
+            <p>{{ form.programming(class ='formtitle') }} </p>
+
+            <p>{{ form.experience.label }}</p>  
+            <p>{{ form.experience(class ='formbody') }} </p>
+
+            <p>{{ form.submit(class = 'postButton')  }}</p>
+        </form>
+    {% endif %}
+
+
+{% endblock %}

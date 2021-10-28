@@ -3,69 +3,286 @@ body {
     padding: 1px;
     font-family: Tahoma;
     text-align: left;
-  
 }
-.nav-container {
-    background:#f6f6f6;
-    font-family: Tahoma;
-    font-size: 12px;
-    height: 32px;
-    text-transform: uppercase;
+
+.nav-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    margin-left: 0%;
+}
+
+.nav-container li {
+    float: left;
+}
+
+.nav-container li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav-container li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.nav-container li a.active {
+    background-color: #4CAF50;
+    color: white;
 }
 
 a:hover {
-	color:#2387D9;
+    color: #2387D9;
 }
 
 .button {
-    width : 65px;
-    padding : 3px;    
+    width: 65px;
+    padding: 3px;
     font-size: 16px;
-    margin : 5px;
-    padding : 5px;
+    margin: 5px;
+    padding: 5px;
     border: 1px solid lightgray;
 }
+
 .button:hover {
     background-color: 157dd3;
     color: white;
-    cursor:pointer;
+    cursor: pointer;
 }
-
-
 
 .flash-container {
-    background:#E6E6FA;
-    font-family: Times;
-    font-size: 14px;
-    height: 26px;
-    margin : 15px 5px 15px 5px;
-    padding : 10px;
+    background: #99c5ee;
+    font-family: Tahoma;
+    font-size: 16px;
+    padding: 25px;
+    margin: 10px 0px 10px 0px;
 }
 
-.formtitle{
-    width: 20%;
-    font-family: Times;
-    margin: 15px 5px;
-    padding: 10px;
-
+.formtitle {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.formbody{
+.logintext {
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.formbody {
+    width: 25%;
+    height: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.postButton {
+    width: 25%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.postButton:hover {
+    background-color: #45a049;
+}
+
+.loginButton {
+    width: 75%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.loginButton:hover {
+    background-color: #45a049;
+}
+
+.formselect {
     width: 20%;
     height: 40%;
     font-family: Times;
     margin: 15px 5px;
     padding: 10px;
-
-
 }
 
-.formselect{
-    width: 20%;
-    height: 40%;
-    font-family: Times;
-    margin: 15px 5px;
-    padding: 10px;
+.formdesc {
+    width: 100%;
+    height: 400px;
+}
+
+.posttitle {
+    text-align: center;
+    font-weight: bold;
+    padding: 1em;
+    font-family: "Cursive";
+    font-size: 22px;
+}
+
+.postmessage {
+    padding: 8px;
+    font-family: Verdana;
+    font-size: 16px;
+    word-break: break-all;
+}
+
+.postlist {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-box {
+    display: flex;
+    vertical-align: middle;
+    background-color: rgb(238, 238, 228);
+    padding: 2px 2px;
+    margin: 8px 8px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 800px) and (max-width:1200px) {
+    .post-box {
+        width: 48%;
+    }
 }
 
 
+/* smaller than 800px */
+
+@media screen and (max-width:800px) {
+    .post-box {
+        width: 99%;
+    }
+}
+
+
+/* larger than 1200 px */
+
+@media screen and (min-width: 1200px) {
+    .post-box {
+        width: 32%;
+    }
+}
+
+.login {
+    width: 750px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+    color: rgb(250, 243, 243);
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.login p {
+    margin-left: 22%;
+    font-weight: 600;
+    text-align: justify;
+}
+
+.radio {
+    margin-left: 22%;
+    text-align: left;
+}
+
+.link {
+    color: rgb(250, 243, 243);
+}
+
+.posttable {
+    width: 100%;
+    margin: 0px;
+}
+
+.topbar {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+}
+
+.register {
+    width: 750px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+    color: rgb(250, 243, 243);
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.register p {
+    margin-left: 0;
+    font-weight: 600;
+    text-align: justify;
+    width: 100%;
+}
+
+.register input {
+    margin-left: 0;
+    width: 100%;
+}
+
+.register textarea {
+    margin-left: 0;
+    width: 100%;
+    max-height: 10.7rem;
+    min-height: 7rem;
+    /* height: 170px; */
+}
+
+.registertext {
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.mt40 {
+    margin-top: 40px;
+}
+
+.mt120 {
+    margin-top: 120px;
+}

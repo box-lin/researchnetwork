@@ -1,0 +1,12 @@
+{% extends "f_base.html" %} {% block content %}
+
+       <h1>Welcome to Research Network!</h1>
+<div class = "postlist"> 
+    {% for position in positions %}
+    <div class = "post-box">
+        {% include '_post.html' %}
+    </div>
+    {% endfor %}
+
+
+{% endblock %}
