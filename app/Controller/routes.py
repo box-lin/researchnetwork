@@ -14,6 +14,7 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 Faculty Home Page Route
 '''
 @bp_routes.route('/faculty_index', methods=['GET'])
+@login_required
 def faculty_index():
     positions = Position.query.order_by(Position.time_commitment.desc())
     return render_template('f_index.html', title="WSU Research Network",positions=positions.all())
@@ -22,6 +23,7 @@ def faculty_index():
 Student Home Page Route
 '''
 @bp_routes.route('/student_index', methods=['GET'])
+@login_required
 def student_index():
     positions = Position.query.order_by(Position.time_commitment.desc())
     return render_template('s_index.html', title = "WSU Research Network",positions=positions.all())
@@ -30,6 +32,7 @@ def student_index():
 Faculty's post new position route.
 '''
 @bp_routes.route('/newPost', methods=['GET', 'POST'])
+@login_required
 def postReasearch():
     postform = ResearchPositionForm()
     if postform.validate_on_submit():
@@ -53,6 +56,7 @@ def postReasearch():
 Faculty's delete position route.
 '''
 @bp_routes.route('/delete/<position_id>', methods=['POST','DELETE'])
+@login_required
 def delete(position_id):
     thePost = Position.query.filter_by(id=position_id).first()
     if thePost:

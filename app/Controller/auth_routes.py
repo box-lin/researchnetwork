@@ -20,7 +20,7 @@ bp_auth.template_folder = Config.TEMPLATE_FOLDER
 Generic Login Route
 '''
 @bp_auth.route('/', methods = ['GET','POST'])
-@bp_auth.route('/login', methods = ['GET','POST'])
+@bp_auth.route('/login/', methods = ['GET','POST'])
 def login():
     lform = LoginForm()
     if current_user.is_authenticated:
@@ -45,7 +45,7 @@ def login():
 '''
 Logout Route
 '''
-@bp_auth.route('/logout', methods = ['GET'])
+@bp_auth.route('/logout/', methods = ['GET'])
 @login_required
 def logout():
     logout_user()
@@ -54,12 +54,17 @@ def logout():
 '''
 Faculty Register Route
 '''
-@bp_auth.route('/faculty_register', methods = ['GET','POST'])
+@bp_auth.route('/faculty_register/', methods = ['GET','POST'])
 def faculty_register():
     fform = FacultyRegistrationForm()
     if fform.validate_on_submit():
-        faculty = User(username=fform.username.data, lastname=fform.lastname.data, firstname=fform.firstname.data, wsuid=fform.wsuid.data,
-                        email=fform.email.data, phone=fform.phone.data, role="Faculty")
+        faculty = User(username=fform.username.data, 
+                       lastname=fform.lastname.data, 
+                       firstname=fform.firstname.data, 
+                       wsuid=fform.wsuid.data,
+                       email=fform.email.data, 
+                       phone=fform.phone.data, 
+                       role="Faculty")
         faculty.set_password(fform.password.data)
         db.session.add(faculty)
         db.session.commit()
@@ -71,15 +76,23 @@ def faculty_register():
 '''
 Student Register Route
 '''
-@bp_auth.route('/student_register', methods = ['GET','POST'])
+@bp_auth.route('/student_register/', methods = ['GET','POST'])
 def student_register():
     sform = StudentRegistrationForm()
     if sform.validate_on_submit():
-        student = User(username=sform.username.data, lastname=sform.lastname.data, firstname=sform.firstname.data, wsuid=sform.wsuid.data,
-                        email=sform.email.data, phone=sform.phone.data, major=sform.major.data, GPA=sform.GPA.data, gradulation=sform.gradulation.data,
-                        elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
-                        experience=sform.experience.data, role="Student"
-                        )
+        student = User(username=sform.username.data, 
+                       lastname=sform.lastname.data, 
+                       firstname=sform.firstname.data, 
+                       wsuid=sform.wsuid.data,
+                       email=sform.email.data, 
+                       phone=sform.phone.data, 
+                       major=sform.major.data, 
+                       GPA=sform.GPA.data, 
+                       gradulation=sform.gradulation.data,
+                       elective=sform.elective.data, 
+                       researchtopic=sform.researchtopic.data, 
+                       programming=sform.programming.data, 
+                       experience=sform.experience.data, role="Student")
         student.set_password(sform.password.data)
         db.session.add(student)
         db.session.commit()
@@ -90,7 +103,7 @@ def student_register():
 '''
 Register Route
 '''
-@bp_auth.route('/register', methods = ['GET','POST'])
+@bp_auth.route('/register/', methods = ['GET','POST'])
 def register():
     fform = FacultyRegistrationForm()
     sform = StudentRegistrationForm()
@@ -98,20 +111,37 @@ def register():
     print(sform.data)
     if fform.validate_on_submit() or sform.validate_on_submit():
         if fform.validate_on_submit() and sform.GPA.data == "":
-            faculty = User(username=fform.username.data, lastname=fform.lastname.data, firstname=fform.firstname.data, wsuid=fform.wsuid.data,
-                        email=fform.email.data, phone=fform.phone.data, major="", GPA="", gradulation="", elective="", 
-                        researchtopic="", programming = "", experience="", role="Faculty")
+            faculty = User(username=fform.username.data, 
+                           lastname=fform.lastname.data, 
+                           firstname=fform.firstname.data, 
+                           wsuid=fform.wsuid.data,
+                           email=fform.email.data, 
+                           phone=fform.phone.data, 
+                           major="", 
+                           GPA="", 
+                           gradulation="", 
+                           elective="", 
+                           researchtopic="", 
+                           programming = "", 
+                           experience="", 
+                           role="Faculty")
             faculty.set_password(fform.password.data)
             db.session.add(faculty)
             db.session.commit()
             flash('Congratulations, ' + fform.username.data + ' you have successfully registered!')
             return redirect(url_for('auth.login'))
         if sform.validate_on_submit() and sform.GPA.data != "":
-            student = User(username=sform.username.data, lastname=sform.lastname.data, firstname=sform.firstname.data, wsuid=sform.wsuid.data,
-                        email=sform.email.data, phone=sform.phone.data, major=sform.major.data, GPA=sform.GPA.data, gradulation=sform.gradulation.data,
-                        elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
-                        experience=sform.experience.data, role="Student"
-                        )
+            student = User(username=sform.username.data, 
+                           lastname=sform.lastname.data, 
+                           firstname=sform.firstname.data, 
+                           wsuid=sform.wsuid.data,
+                           email=sform.email.data, 
+                           phone=sform.phone.data, 
+                           major=sform.major.data, 
+                           GPA=sform.GPA.data, 
+                           gradulation=sform.gradulation.data,
+                           elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
+                           experience=sform.experience.data, role="Student")
             student.set_password(sform.password.data)
             db.session.add(student)
             db.session.commit()

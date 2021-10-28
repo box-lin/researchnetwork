@@ -1,30 +1,35 @@
 <html>
 
 <head>
-    {% if title %}
-    <title>{{ title }} - Research Network </title>
-    {% else %}
-    <title> PERMISSION ONLY GRANTED WITH ACCOUNTS </title>
-    {% endif %}
+    <style>
+        body
+        {
+            background-image: url({{ url_for('static', filename = 'image//wsu.jpeg' )}})
+        }
+    </style>
+    <title>Research Network Platform @ Washington State University</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
 </head>
 
 <body>
     <div class="nav-container">
-        <table>
-            <tr>
-                <td><a href="" class="button">ABOUT US</a></td>
-                <td><a href="" class="button"> REPORT ISSUES </a></td>
-            </tr>
-        </table>
+        <ul>
+            <li><a class="active" href="login">Login</a></li>
+            <li><a href="#news">Contact Us</a></li>
+            <li><a href="#contact">About Us</a></li>
+            <li><a href="#about">News </a></li>
+        </ul>
+        
     </div>
     <div>
         {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
         <div class="flash-container"> {{ message }}</div>
-        {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+        {% endfor %} {% endif %} {% endwith %} 
+        {% block content %} {% endblock %}
     </div>
 
 </body>
 
 </html>
+

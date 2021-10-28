@@ -60,7 +60,7 @@ class StudentRegistrationForm(FlaskForm):
     elective = TextAreaField('Eletive Courses: ',validators=[DataRequired()])
     researchtopic = StringField('Research Topics', validators=[DataRequired()])
     programming = StringField('Programming Languages', validators=[DataRequired()])
-    experience = TextAreaField('Eletive Courses: ',validators=[DataRequired()])
+    experience = TextAreaField('Experience: ',validators=[DataRequired()])
     submit = SubmitField('Register As Student')
 
     def validate_username(self, username):
