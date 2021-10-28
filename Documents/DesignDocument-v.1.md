@@ -73,7 +73,7 @@ Overview of the document outlie: First, System Structure will talk about the maj
 
  * **Intention:** Cohesion represents the functional strength of modules and coupling represents the independence among modules. So our goal is to make the system have a strong functional strength and also make sure between each strong functional strength modules they have enough independence.
 
- * **Conclusion:**Hence a Controller component that contains FlaskForm and Flask Route is very cohesive, since they are highly related and being use interchangeably; Letting htmls in View component and db.Models in Models component bringing us a low coupling structure, so that changes in one component does not really gonna influences the other.
+ * **Conclusion:** Hence a Controller component that contains FlaskForm and Flask Route is very cohesive, since they are highly related and being use interchangeably; Letting htmls in View component and db.Models in Models component bringing us a low coupling structure, so that changes in one component does not really gonna influences the other.
 
 ## 2.2 Subsystem Design 
 
