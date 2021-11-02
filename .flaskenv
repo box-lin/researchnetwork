@@ -1,2 +1,0 @@
-FLASK_APP=researchnetwork.py
-FLASK_DEBUG=1
