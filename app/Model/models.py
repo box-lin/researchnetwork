@@ -92,22 +92,18 @@ class User(db.Model, UserMixin):
 
     def get_role(self, role):
         return role
-    
-    
-'''
-Application model.
-'''
-class Applications(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    position_id = db.Column(db.Integer)
-    timestamp = db.Column(db.DateTime)
-    status = db.Column(db.Integer)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
 
 '''
 Research position model.
 '''
+=======
+class Applications:
+    id = db.Column(db.Integer, primary_key = True)
+    position_id = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime)
+    status = db.Column(db.Integer)
+
+
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(2048))
