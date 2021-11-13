@@ -1,4 +1,5 @@
 from app import create_app, db
+from app.Model.models import ProgrammingLanguages, ResearchTopics
 # from app.Model.models import Post
 
 app = create_app()
@@ -11,6 +12,25 @@ def make_shell_context():
 @app.before_first_request
 def initDB(*args, **kwargs):
     db.create_all()
+    
+    # Hard coded contents for certain db model.
+    programminglanguage = ['Java', 'C#', 'C', 'C++', 'Python', 'R', 'Golang', 'Haskell', 'Swift', 'JavaScript', 'MATLAB', 'PHP',
+                           'Ruby', 'Delphi', 'SQL']
+    
+    # current available research area at WSU EECS
+    researchtopics = ['Electronic Design Automation', 'High Performance Computing (HPC) and Scalable Data Science', 'Artificial Intelligence and Machine Learning',
+                      'Bioinformatics', 'Distributed and Networked Systems', 'Power Engineering', 'Systems Engineering', 'Software Engineering']
+    
+    
+    if ProgrammingLanguages.query.count == 0:
+        for pl in programminglanguage:
+            db.session.add(ProgrammingLanguages(name=pl))
+        db.session.commit()
+    
+    if researchtopics.query.count == 0:
+        for rt in researchtopics:
+            db.session.add(ResearchTopics(tile=rt))
+        db.session.commit()
 
 if __name__ == "__main__":
     app.run(debug=True)

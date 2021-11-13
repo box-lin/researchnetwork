@@ -16,6 +16,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
+
+
+
+
 '''
 Faculty registration form component
 '''
@@ -83,6 +87,7 @@ class StudentRegistrationForm(FlaskForm):
         user = User.query.filter_by(wsuid = wsuid.data).first()
         if user is not None:
             raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
+
 
 '''
 Registration form component
