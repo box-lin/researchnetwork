@@ -96,7 +96,6 @@ class User(db.Model, UserMixin):
 '''
 Research position model.
 '''
-=======
 class Applications:
     id = db.Column(db.Integer, primary_key = True)
     position_id = db.Column(db.Integer)
