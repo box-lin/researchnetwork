@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, regexp
 
+
 '''
 Flaskform for faculty use - Research position post
 '''
