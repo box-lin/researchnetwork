@@ -51,54 +51,54 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-'''
-Faculty Register Route
-'''
-@bp_auth.route('/faculty_register', methods = ['GET','POST'])
-def faculty_register():
-    fform = FacultyRegistrationForm()
-    if fform.validate_on_submit():
-        faculty = User(username=fform.username.data, 
-                       lastname=fform.lastname.data, 
-                       firstname=fform.firstname.data, 
-                       wsuid=fform.wsuid.data,
-                       email=fform.email.data, 
-                       phone=fform.phone.data, 
-                       role="Faculty")
-        faculty.set_password(fform.password.data)
-        db.session.add(faculty)
-        db.session.commit()
-        flash('Congratulations, ' + fform.username.data + ' you have successfully registered!')
-        return redirect(url_for('auth.login'))
-    return render_template('f_register.html', title = 'Faculty Registration', form = fform)
+# '''
+# Faculty Register Route
+# '''
+# @bp_auth.route('/faculty_register', methods = ['GET','POST'])
+# def faculty_register():
+#     fform = FacultyRegistrationForm()
+#     if fform.validate_on_submit():
+#         faculty = User(username=fform.username.data, 
+#                        lastname=fform.lastname.data, 
+#                        firstname=fform.firstname.data, 
+#                        wsuid=fform.wsuid.data,
+#                        email=fform.email.data, 
+#                        phone=fform.phone.data, 
+#                        role="Faculty")
+#         faculty.set_password(fform.password.data)
+#         db.session.add(faculty)
+#         db.session.commit()
+#         flash('Congratulations, ' + fform.username.data + ' you have successfully registered!')
+#         return redirect(url_for('auth.login'))
+#     return render_template('f_register.html', title = 'Faculty Registration', form = fform)
 
 
-'''
-Student Register Route
-'''
-@bp_auth.route('/student_register', methods = ['GET','POST'])
-def student_register():
-    sform = StudentRegistrationForm()
-    if sform.validate_on_submit():
-        student = User(username=sform.username.data, 
-                       lastname=sform.lastname.data, 
-                       firstname=sform.firstname.data, 
-                       wsuid=sform.wsuid.data,
-                       email=sform.email.data, 
-                       phone=sform.phone.data, 
-                       major=sform.major.data, 
-                       GPA=sform.GPA.data, 
-                       gradulation=sform.gradulation.data,
-                       elective=sform.elective.data, 
-                       researchtopic=sform.researchtopic.data, 
-                       programming=sform.programming.data, 
-                       experience=sform.experience.data, role="Student")
-        student.set_password(sform.password.data)
-        db.session.add(student)
-        db.session.commit()
-        flash('Congratulations, ' + sform.username.data + ' you have successfully registered!')
-        return redirect(url_for('auth.login'))
-    return render_template('s_register.html', title = 'Student Registration', form = sform)
+# '''
+# Student Register Route
+# '''
+# @bp_auth.route('/student_register', methods = ['GET','POST'])
+# def student_register():
+#     sform = StudentRegistrationForm()
+#     if sform.validate_on_submit():
+#         student = User(username=sform.username.data, 
+#                        lastname=sform.lastname.data, 
+#                        firstname=sform.firstname.data, 
+#                        wsuid=sform.wsuid.data,
+#                        email=sform.email.data, 
+#                        phone=sform.phone.data, 
+#                        major=sform.major.data, 
+#                        GPA=sform.GPA.data, 
+#                        gradulation=sform.gradulation.data,
+#                        elective=sform.elective.data, 
+#                        researchtopic=sform.researchtopic.data, 
+#                        programming=sform.programming.data, 
+#                        experience=sform.experience.data, role="Student")
+#         student.set_password(sform.password.data)
+#         db.session.add(student)
+#         db.session.commit()
+#         flash('Congratulations, ' + sform.username.data + ' you have successfully registered!')
+#         return redirect(url_for('auth.login'))
+#     return render_template('s_register.html', title = 'Student Registration', form = sform)
 
 '''
 Register Route
@@ -140,9 +140,15 @@ def register():
                            major=sform.major.data, 
                            GPA=sform.GPA.data, 
                            gradulation=sform.gradulation.data,
-                           elective=sform.elective.data, researchtopic=sform.researchtopic.data, programming=sform.programming.data, 
+                           elective=sform.elective.data, 
                            experience=sform.experience.data, role="Student")
             student.set_password(sform.password.data)
+            # append programming languages
+            for p in sform.programming.data:
+                student.programming.append(p)
+            # append research topics
+            for r in sform.researchtopic.data:
+                student.researchtopic.append(r)
             db.session.add(student)
             db.session.commit()
             flash('Congratulations, ' + sform.username.data + ' you have successfully registered!')
