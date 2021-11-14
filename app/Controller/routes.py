@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User,Apply
-from app.Controller.forms import ResearchPositionForm
+from app.Controller.forms import ResearchPositionForm,StudentFilterForm
 from flask_login import current_user, login_required
 from app import db
 
@@ -92,7 +92,7 @@ Student Home Page Route
 @login_required
 def student_index():
     positions = Position.query.order_by(Position.time_commitment.desc())
-    s = Apply.query.filter_by(studentid=current_user.id).studentapplied
+    s = Apply.query.filter_by(studentid=current_user.id).first()
     flash(s)
     fForm = StudentFilterForm()
     if fForm.validate_on_submit():
@@ -129,5 +129,10 @@ def withdraw(position_id):
         db.session.commit()
         flash('You have withdraw from the ' + thePost.title +' !')
         return redirect(url_for('routes.student_index'))
+
+@bp_routes.route('/MyProfile/',methods = ['GET'])
+@login_required
+def My_Profile():
+        return render_template('s_profile.html', title = 'My Profile', student = current_user)
 
 #===============================================================================#

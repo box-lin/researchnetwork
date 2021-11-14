@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField,SelectField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, regexp
+from wtforms.fields.html5 import DateField
 
 
 '''
@@ -21,3 +22,12 @@ class StudentFilterForm(FlaskForm):
     checkbox = BooleanField('Display My Applied Applications')
     refresh = SubmitField('Refresh')
 
+class SrudentProfileForm(FlaskForm):
+    firstname = StringField('First Name',validators=[DataRequired()])
+    lastname = StringField('Last Name',validators=[DataRequired()])
+    email = StringField('Email',validators=[DataRequired(),Email()])
+    wsuid = StringField('WSU ID', validators=[DataRequired()])
+    phone = StringField('Phone Number', validators=[DataRequired()])
+    major = StringField('Major', validators=[DataRequired()])
+    GPA = StringField('GPA', validators=[DataRequired()])
+    gradulation = DateField('Gradulation Date', format='%Y-%m-%d')

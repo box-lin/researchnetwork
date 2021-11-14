@@ -108,4 +108,3 @@ class StudentRegistrationForm(FlaskForm):
         if gradulationdate.data is not None:
             if gradulationdate.data < date.today():
                 raise ValidationError("Graduation date must later than today!")
-
