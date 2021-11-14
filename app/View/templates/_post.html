@@ -50,6 +50,10 @@
                             <input type = 'submit' value = 'Withdraw' class = 'btn btn-warning'>
                         </form>
                     {% endif %}
+                {% else %}
+                    <form action = "{{ url_for('routes.applicants', position_id = position.id)}}">
+                        <input type = 'submit' value = 'Applicant List' class = 'btn btn-success'>
+                    <form>
                 {% endif %}
                 
             </td>
