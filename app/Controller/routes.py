@@ -10,6 +10,8 @@ from app import db
 bp_routes = Blueprint('routes', __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 
+
+#------------------------- Faculty Interfaces ---------------------------------------#
 '''
 Faculty Home Page Route
 '''
@@ -19,14 +21,6 @@ def faculty_index():
     positions = Position.query.order_by(Position.time_commitment.desc())
     return render_template('f_index.html', title="WSU Research Network",positions=positions.all())
 
-'''
-Student Home Page Route
-'''
-@bp_routes.route('/student_index', methods=['GET'])
-@login_required
-def student_index():
-    positions = Position.query.order_by(Position.time_commitment.desc())
-    return render_template('s_index.html', title = "WSU Research Network",positions=positions.all())
 
 '''
 Faculty's post new position route.
@@ -52,6 +46,7 @@ def postReasearch():
     return render_template('newPost.html', form = postform)
 
 
+
 '''
 Faculty's delete position route.
 '''
@@ -64,3 +59,57 @@ def delete(position_id):
         db.session.commit()
         flash("Your Research Position:  " + thePost.title + " has been deleted! ")
         return redirect(url_for('routes.faculty_index'))
+
+
+'''
+Faculty see all applicants for a paticular position
+'''
+@bp_routes.route('/applicants/<position_id>', methods = ['GET'])
+@login_required
+def applicants(position_id):
+    thePost = Position.query.filter_by(id=position_id).first()
+    title_str = "Applicants for " + thePost.title
+    return render_template('applicants.html', title = title_str , current_position = thePost)
+
+# ==================================================================================#
+
+
+# ----------------------------------- Student Interface ----------------------------#
+'''
+Student Home Page Route
+'''
+@bp_routes.route('/student_index', methods=['GET'])
+@login_required
+def student_index():
+    positions = Position.query.order_by(Position.time_commitment.desc())
+    return render_template('s_index.html', title = "WSU Research Network",positions=positions.all())
+
+    
+
+'''
+Student Apply Position route.
+'''
+@bp_routes.route('/apply/<position_id>', methods=['POST'])
+@login_required
+def apply(position_id):
+    thePost = Position.query.filter_by(id=position_id).first()
+    if thePost:
+        current_user.apply(thePost)
+        db.session.commit()
+        flash('You have applied ' + thePost.title +' !')
+        return redirect(url_for('routes.student_index'))
+
+'''
+Student withdraw application route.
+'''
+@bp_routes.route('/withdraw/<position_id>', methods=['POST'])
+@login_required
+def withdraw(position_id):
+    thePost = Position.query.filter_by(id=position_id).first()
+    if thePost:
+        current_user.withdraw(thePost)
+        db.session.commit()
+        flash('You have withdraw from the ' + thePost.title +' !')
+        return redirect(url_for('routes.student_index'))
+
+#===============================================================================#
