@@ -104,6 +104,8 @@ class StudentRegistrationForm(FlaskForm):
             raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
 
     def validate_gradulation(self, gradulationdate):
-        if gradulationdate.data < date.today():
-            raise ValidationError("Graduation date must later than today!")
+        print(type(gradulationdate.data))
+        if gradulationdate.data is not None:
+            if gradulationdate.data < date.today():
+                raise ValidationError("Graduation date must later than today!")
 
