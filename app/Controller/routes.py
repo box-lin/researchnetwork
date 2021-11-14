@@ -71,6 +71,16 @@ def applicants(position_id):
     title_str = "Applicants for " + thePost.title
     return render_template('applicants.html', title = title_str , current_position = thePost)
 
+
+'''
+Faculty review applicant list
+'''
+@bp_routes.route('/applicants_list', methods = ['GET'])
+@login_required
+def applicants_list():
+    position = Position.query.all()
+    return render_template('f_applicant_list.html', title = 'Applicant List', pform = position)
+
 # ==================================================================================#
 
 

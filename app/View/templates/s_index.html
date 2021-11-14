@@ -1,12 +1,13 @@
 {% extends "s_base.html" %} {% block content %}
+<script>
+    window.onload = clearStudentDisplay();
+    window.onload = s_home_page_active();
+</script>
 
-    <h1>Welcome to Research Network!</h1>
-<div class = "postlist">
+<h1>Welcome to Research Network!</h1>
+<div class="postlist">
     {% for position in positions %}
-    <div class = "post-box">
+    <div class="post-box">
         {% include '_post.html' %}
     </div>
-    {% endfor %}
-
-
-{% endblock %}
+    {% endfor %} {% endblock %}

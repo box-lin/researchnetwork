@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Blueprint
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session
 from werkzeug.wrappers import request
 from wtforms import validators
 from wtforms.validators import Email
@@ -9,6 +9,7 @@ from app.Controller.auth_forms import LoginForm, FacultyRegistrationForm, Studen
 from app import db
 from app.Model.models import User
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_session import Session
 
 
 bp_auth = Blueprint('auth', __name__)
