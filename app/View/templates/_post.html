@@ -40,6 +40,18 @@
             <td colspan="3" style = "text-align:center" valign="bottom">  
                 <br>
 
+                {% if current_user.usertype == 0 %}
+                    {% if current_user.is_applied(position) == False%}
+                        <form action = "{{ url_for('routes.apply', position_id = position.id)}}" method = "post" >
+                            <input type = 'submit' value = 'Apply' class = 'btn btn-success'>
+                        </form>
+                    {% else %}
+                        <form action = "{{ url_for('routes.withdraw', position_id = position.id)}}" method = "post">
+                            <input type = 'submit' value = 'Withdraw' class = 'btn btn-warning'>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                
             </td>
         </tr>
 

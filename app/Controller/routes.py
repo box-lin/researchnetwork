@@ -64,3 +64,30 @@ def delete(position_id):
         db.session.commit()
         flash("Your Research Position:  " + thePost.title + " has been deleted! ")
         return redirect(url_for('routes.faculty_index'))
+    
+
+'''
+Student Apply Position route.
+'''
+@bp_routes.route('/apply/<position_id>', methods=['POST'])
+@login_required
+def apply(position_id):
+    thePost = Position.query.filter_by(id=position_id).first()
+    if thePost:
+        current_user.apply(thePost)
+        db.session.commit()
+        flash('You have applied ' + thePost.title +' !')
+        return redirect(url_for('routes.student_index'))
+
+'''
+Student withdraw application route.
+'''
+@bp_routes.route('/withdraw/<position_id>', methods=['POST'])
+@login_required
+def withdraw(position_id):
+    thePost = Position.query.filter_by(id=position_id).first()
+    if thePost:
+        current_user.withdraw(thePost)
+        db.session.commit()
+        flash('You have withdraw from the ' + thePost.title +' !')
+        return redirect(url_for('routes.student_index'))

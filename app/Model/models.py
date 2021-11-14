@@ -8,6 +8,8 @@ from datetime import datetime
 def load_user(id):
     return User.query.get(int(id))
 
+
+#------------------------------- Association Table ---------------------------------#
 '''
 Student to topic association table.
 '''
@@ -32,7 +34,37 @@ StudentLanguages = db.Table('studentlanguages',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('language_id', db.Integer, db.ForeignKey('programminglanguages.id'))
 )
+#===================================================================================#
 
+
+#---------------------------- Associative models -----------------------------------#
+'''
+Research topics model.
+'''
+class ResearchTopics(db.Model):
+    __tablename__ = 'researchtopics'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(128))
+
+'''
+Technical Electives model.
+'''
+class TechnicalElectives(db.Model):
+    __tablename__ = 'technicalelectives'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(1024))
+
+'''
+Programming langugages model.
+'''
+class ProgrammingLanguages(db.Model):
+    __tablename__ = 'programminglanguages'
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(20))
+
+#=====================================================================================#
+
+#------------------------------------- Main models -----------------------------------#
 '''
 User model consists of <Student> and <Faculty> 
 '''
@@ -77,7 +109,7 @@ class User(db.Model, UserMixin):
     position = db.relationship('Position', backref='writer', lazy='dynamic')
     
     # for student use
-    # applications = db.relationship('Applications', backref='applicant', lazy='dynamic')
+    application = db.relationship('Apply', back_populates = 'studentapplied')
     
     
     def __repr__(self):
@@ -89,38 +121,38 @@ class User(db.Model, UserMixin):
     def get_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def get_role(self, role):
-        return role
+    def is_student(self):
+        return self.usertype == 0
+    
+    def is_faculty(self):
+        return self.usertype == 1
+    
+    def is_applied(self, newPosition):
+        return (Apply.query.filter_by(studentid=self.id).filter_by(positionid=newPosition.id).count() > 0)
+    
+    def apply(self, newPosition):
+        if not self.is_applied(newPosition):
+            newApplication = Apply(applicationapplied = newPosition)
+            self.application.append(newApplication)
+            db.session.commit()
 
-
-# class Applications:
-#     __tablename__ = 'Applications'
-#     id = db.Column(db.Integer, primary_key = True)
-#     position_id = db.Column(db.Integer)
-#     timestamp = db.Column(db.DateTime)
-#     status = db.Column(db.Integer)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    def withdraw(self, oldPosition):
+        if self.is_applied(oldPosition):
+            curApplication = Apply.query.filter_by(studentid=self.id).filter_by(positionid=oldPosition.id).first()
+            db.session.delete(curApplication)
+            db.session.commit()
 
 '''
-Application model
+Association object <Apply> position as <Student>.
 '''
-class Applicaionts:
-    id = db.Column(db.Integer, primary_key = True)
-    position_id = db.Column(db.Integer)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    timestamp = db.Column(db.DateTime)
+class Apply(db.Model):
+    studentid = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True) 
+    positionid = db.Column(db.Integer, db.ForeignKey('position.id'), primary_key=True)
+    applydate = db.Column(db.DateTime, default = datetime.utcnow)
     status = db.Column(db.Integer)
+    studentapplied = db.relationship('User')
+    applicationapplied = db.relationship('Position')
 
-'''
-Association object.
-'''
-# class Apply(db.Model):
-#     studentid = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True) 
-#     positionid = db.Column(db.Integer, db.ForeignKey('position.id'), primary_key=True)
-#     applydate = db.Column(db.DateTime, default = datetime.utcnow)
-#     studentapplied = db.relationship('User')
-#     status = status = db.Column(db.Integer)
-#     applicationstudents = db.relationship('Position')
 
 '''
 Research position model.
@@ -140,30 +172,4 @@ class Position(db.Model):
         'ResearchTopics', secondary = StudentResearchTopics,
         primaryjoin=(StudentResearchTopics.c.user_id == id),lazy='dynamic', overlaps='roster'
     )
-    
-    # applications  = db.relationship('Applications', backref='app', lazy='dynamic')
-
-
-'''
-Research topics model.
-'''
-class ResearchTopics(db.Model):
-    __tablename__ = 'researchtopics'
-    id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(128))
-
-'''
-Technical Electives model.
-'''
-class TechnicalElectives(db.Model):
-    __tablename__ = 'technicalelectives'
-    id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(1024))
-
-'''
-Programming langugages model.
-'''
-class ProgrammingLanguages(db.Model):
-    __tablename__ = 'programminglanguages'
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(20))
+    roster = db.relationship('Apply', back_populates = 'applicationapplied')
