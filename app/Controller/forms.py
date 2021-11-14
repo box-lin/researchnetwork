@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField, BooleanField,SelectField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, regexp
 
 
@@ -16,5 +16,8 @@ class ResearchPositionForm(FlaskForm):
     applicant_qualification = TextAreaField('Applicant Qualification', validators=[DataRequired(),Length(min=0, max=128)])
     submit = SubmitField('Post')
 
-
+class StudentFilterForm(FlaskForm):
+    sortchoice = SelectField('Filter By', choices= [])
+    checkbox = BooleanField('Display My Applied Applications')
+    refresh = SubmitField('Refresh')
 
