@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField,BooleanField
-from wtforms.fields.core import RadioField
+from wtforms.fields.core import DateField, RadioField
 from wtforms.fields.simple import TextAreaField 
 from wtforms.validators import DataRequired, Email, Length, ValidationError, equal_to
-from app.Model.models import ProgrammingLanguages, ResearchTopics, User
+from app.Model.models import ProgrammingLanguages, ResearchTopics, User, TechnicalElectives
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 '''
@@ -59,11 +59,17 @@ def get_programming():
 def get_researchtopic():
     return ResearchTopics.query.all()
 
+def get_TechnicalElectives():
+    return TechnicalElectives.query.all()
+
 def get_programmingLable(theProgramming):
     return theProgramming.name
 
 def get_researchtopicLabel(research):
     return research.title
+
+def get_TechnicalElectivesLabel(theElectives):
+    return theElectives.title
 
 '''
 Student registration form component
@@ -79,8 +85,8 @@ class StudentRegistrationForm(FlaskForm):
     password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
-    gradulation = StringField('Gradulation Date', validators=[DataRequired()])
-    elective = TextAreaField('Eletive Courses: ',validators=[DataRequired()] )
+    gradulation = DateField('Gradulation Date', format='%Y-%m-%d')
+    elective = QuerySelectField('Research Topics', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False)
     researchtopic = QuerySelectField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
     programming = QuerySelectField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False)
     experience = TextAreaField('Experience: ',validators=[DataRequired()])
