@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
 </head>
@@ -16,9 +17,9 @@
 <body>
     <div class="nav-container topbar">
         <ul>
-            <li><a href="{{ url_for('routes.faculty_index') }}" class="active">Home Page</a></li>
-            <li><a href="{{ url_for('routes.postReasearch')}}"> Post New Position </a></li>
-            <li><a href="{{ url_for('routes.applicants_list')}}"> Applicant List </a></li>
+            <li><a href="{{ url_for('routes.faculty_index') }}" class="active" id="f_home_page">Home Page</a></li>
+            <li><a href="{{ url_for('routes.postReasearch')}}" id="f_post_new_position"> Post New Position </a></li>
+            <li><a href="{{ url_for('routes.applicants_list')}}" id="f_applicant_list"> Applicant List </a></li>
             <li><a href=""> Profile </a></li>
             <li><a href="{{ url_for('auth.logout') }}"> Log Out </a></li>
         </ul>

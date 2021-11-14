@@ -1,4 +1,8 @@
 {% extends "f_base.html" %} {% block content %} {% for position in pform %}
+<script>
+    window.onload = clearFacultyDisplay();
+    window.onload = f_applicant_list_active();
+</script>
 <table class="table table-hover">
     <thead class="thead-light">
         <tr valign="bottom">

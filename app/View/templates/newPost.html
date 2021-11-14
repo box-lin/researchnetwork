@@ -1,4 +1,10 @@
 {% extends "f_base.html" %} {% block content %}
+
+<script>
+    window.onload = clearFacultyDisplay();
+    window.onload = f_post_new_position_active();
+</script>
+
 <div class="newpost">
     <form action="" method="POST">
         {{form.hidden_tag()}}
@@ -23,9 +29,7 @@
                 <p>{{ form.end_date(class="formtitle") }}</p>
 
                 {% for error in form.start_date.errors %}
-                <span style="color: red;">[{{error}}]</span> {% endfor %}
-
-                {% for error in form.end_date.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %} {% for error in form.end_date.errors %}
                 <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             </div>
@@ -46,9 +50,7 @@
                 <p>{{ form.applicant_qualification(class="formbody") }}</p>
 
                 {% for error in form.applicant_qualification.errors %}
-                <span style="color: red;">[{{error}}]</span> {% endfor %}
-
-                {{form.submit(class="button")}}
+                <span style="color: red;">[{{error}}]</span> {% endfor %} {{form.submit(class="button")}}
             </div>
         </div>
     </form>
