@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.Model.models import ProgrammingLanguages, ResearchTopics
+from app.Model.models import ProgrammingLanguages, ResearchTopics, TechnicalElectives
 # from app.Model.models import Post
 
 app = create_app()
@@ -28,6 +28,13 @@ def initDB(*args, **kwargs):
                       'Bioinformatics', 'Distributed and Networked Systems', 'Power Engineering', 'Systems Engineering', 'Software Engineering']
         for rt in researchtopics:
             db.session.add(ResearchTopics(title=rt))
+        db.session.commit()
+
+    if TechnicalElectives.query.count() == 0:
+        electives = ['Test1','Test2','Test3']
+
+        for te in electives:
+            db.session.add(TechnicalElectives(title=te))
         db.session.commit()
 
 if __name__ == "__main__":

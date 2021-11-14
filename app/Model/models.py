@@ -92,9 +92,7 @@ class User(db.Model, UserMixin):
     def get_role(self, role):
         return role
 
-'''
-Research position model.
-'''
+
 # class Applications:
 #     __tablename__ = 'Applications'
 #     id = db.Column(db.Integer, primary_key = True)
@@ -102,6 +100,16 @@ Research position model.
 #     timestamp = db.Column(db.DateTime)
 #     status = db.Column(db.Integer)
 #     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+'''
+Application model
+'''
+class Applicaionts:
+    id = db.Column(db.Integer, primary_key = True)
+    position_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime)
+    status = db.Column(db.Integer)
 
 '''
 Association object.
@@ -114,7 +122,9 @@ Association object.
 #     status = status = db.Column(db.Integer)
 #     applicationstudents = db.relationship('Position')
 
-
+'''
+Research position model.
+'''
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(2048))
