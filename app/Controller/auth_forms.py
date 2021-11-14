@@ -6,7 +6,7 @@ from wtforms.fields.html5 import DateField
 from wtforms.fields.simple import TextAreaField 
 from wtforms.validators import DataRequired, Email, Length, ValidationError, equal_to
 from app.Model.models import ProgrammingLanguages, ResearchTopics, User, TechnicalElectives
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
 '''
 User login form component
@@ -14,7 +14,6 @@ User login form component
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    role = RadioField('Role: ', choices=['Student','Faculty'], validators=[DataRequired()], default='Student')
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
@@ -82,9 +81,9 @@ class StudentRegistrationForm(FlaskForm):
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
     gradulation = DateField('Gradulation Date', format='%Y-%m-%d')
-    elective = QuerySelectField('Research Topics', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False)
-    researchtopic = QuerySelectField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
-    programming = QuerySelectField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False)
+    elective = QuerySelectMultipleField('Research Topics', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False)
+    researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
+    programming =  QuerySelectMultipleField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False)
     experience = TextAreaField('Experience: ',validators=[DataRequired()])
     submit = SubmitField('Register As Student')
 
