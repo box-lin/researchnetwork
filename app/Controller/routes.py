@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User,Apply
-from app.Controller.forms import ResearchPositionForm
+from app.Controller.forms import ResearchPositionForm, StudentFilterForm
 from flask_login import current_user, login_required
 from app import db
 
@@ -73,12 +73,12 @@ def applicants(position_id):
 
 
 '''
-Faculty review applicant list
+Faculty review applicant list for all position posted
 '''
 @bp_routes.route('/applicants_list', methods = ['GET'])
 @login_required
 def applicants_list():
-    position = Position.query.all()
+    position = current_user.get_faculty_posts()
     return render_template('f_applicant_list.html', title = 'Applicant List', pform = position)
 
 # ==================================================================================#
@@ -88,21 +88,14 @@ def applicants_list():
 '''
 Student Home Page Route
 '''
-@bp_routes.route('/student_index', methods=['GET'])
+@bp_routes.route('/student_index', methods=['GET','POST'])
 @login_required
 def student_index():
-    positions = Position.query.order_by(Position.time_commitment.desc())
-    s = Apply.query.filter_by(studentid=current_user.id).studentapplied
-    flash(s)
     fForm = StudentFilterForm()
+    positions = Position.query.order_by(Position.time_commitment.desc()).all()
     if fForm.validate_on_submit():
-        myapplication = fForm.checkbox.data
-        if myapplication:
-            positions = User.query.filter_by(id=current_user.id).application
-            flash(positions)
-    return render_template('s_index.html', title = "WSU Research Network",positions=positions.all(), form=fForm)
-
-    
+        flash("filter need to implement")
+    return render_template('s_index.html', title = "WSU Research Network", positions=positions, form=fForm)
 
 '''
 Student Apply Position route.

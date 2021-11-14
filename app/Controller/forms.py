@@ -17,7 +17,7 @@ class ResearchPositionForm(FlaskForm):
     submit = SubmitField('Post')
 
 class StudentFilterForm(FlaskForm):
-    sortchoice = SelectField('Filter By', choices= [])
-    checkbox = BooleanField('Display My Applied Applications')
+    filter = SelectField('Filter By', choices = ['Research areas']) 
+    checkbox = BooleanField('Display my applied position only')
     refresh = SubmitField('Refresh')
 
