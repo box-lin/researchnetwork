@@ -1,6 +1,8 @@
+from datetime import date, datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField,BooleanField
-from wtforms.fields.core import DateField, RadioField
+from wtforms.fields.core import  RadioField
+from wtforms.fields.html5 import DateField
 from wtforms.fields.simple import TextAreaField 
 from wtforms.validators import DataRequired, Email, Length, ValidationError, equal_to
 from app.Model.models import ProgrammingLanguages, ResearchTopics, User, TechnicalElectives
@@ -15,11 +17,6 @@ class LoginForm(FlaskForm):
     role = RadioField('Role: ', choices=['Student','Faculty'], validators=[DataRequired()], default='Student')
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
-
-
-
-
-
 
 '''
 Faculty registration form component
@@ -50,7 +47,6 @@ class FacultyRegistrationForm(FlaskForm):
         user = User.query.filter_by(wsuid = wsuid.data).first()
         if user is not None:
             raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
-
 
 
 def get_programming():
@@ -107,6 +103,10 @@ class StudentRegistrationForm(FlaskForm):
         user = User.query.filter_by(wsuid = wsuid.data).first()
         if user is not None:
             raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
+
+    def validate_gradulation(self, gradulationdate):
+        if gradulationdate.data < date.today():
+            raise ValidationError("Graduation date must later than today!")
 
 
 '''

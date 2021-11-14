@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for
 from werkzeug.wrappers import request
@@ -24,18 +25,18 @@ Generic Login Route
 def login():
     lform = LoginForm()
     if current_user.is_authenticated:
-        if current_user.role == "Faculty":
+        if current_user.usertype == "Faculty":
             return redirect(url_for('routes.faculty_index'))
         else:
             return redirect(url_for('routes.student_index'))
     lform = LoginForm()
     if lform.validate_on_submit():
         user = User.query.filter_by(username = lform.username.data).first()
-        if user is None or user.get_password(lform.password.data) == False or user.role != lform.role.data:
+        if user is None or user.get_password(lform.password.data) == False or user.usertype != lform.role.data:
             flash('Invalid username or password')
             return redirect(url_for('auth.login'))
         login_user(user, remember = lform.remember_me.data)
-        if user.role == "Faculty":
+        if user.usertype == "Faculty":
             return redirect(url_for('routes.faculty_index'))
         else:
             return redirect(url_for('routes.student_index'))
@@ -118,13 +119,13 @@ def register():
                            email=fform.email.data, 
                            phone=fform.phone.data, 
                            major="", 
-                           GPA="", 
-                           gradulation="", 
+                           GPA=0, 
+                           gradulationdate=datetime(1971,1,1), 
                            elective="", 
                            researchtopic="", 
                            programming = "", 
-                           experience="", 
-                           role="Faculty")
+                           research_experience="", 
+                           usertype=1)
             faculty.set_password(fform.password.data)
             db.session.add(faculty)
             db.session.commit()
@@ -139,16 +140,23 @@ def register():
                            phone=sform.phone.data, 
                            major=sform.major.data, 
                            GPA=sform.GPA.data, 
-                           gradulation=sform.gradulation.data,
-                           elective=sform.elective.data, 
-                           experience=sform.experience.data, role="Student")
+                           gradulationdate=sform.gradulation.data,
+                           research_experience=sform.experience.data, 
+                           usertype=0)
             student.set_password(sform.password.data)
+
             # append programming languages
             for p in sform.programming.data:
                 student.programming.append(p)
+
             # append research topics
             for r in sform.researchtopic.data:
                 student.researchtopic.append(r)
+
+            #append elective classes
+            for e in sform.elective.data:
+                student.elective.append(e)
+
             db.session.add(student)
             db.session.commit()
             flash('Congratulations, ' + sform.username.data + ' you have successfully registered!')
