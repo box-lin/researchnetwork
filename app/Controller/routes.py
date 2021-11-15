@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User,Apply
-from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm
+from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm
 from flask_login import current_user, login_required
 from app import db
 
@@ -81,6 +81,45 @@ def applicants_list():
     position = current_user.get_faculty_posts()
     return render_template('f_applicant_list.html', title = 'Applicant List', pform = position)
 
+
+'''
+Faculty display profile
+'''
+@bp_routes.route('/f_profile', methods = ['GET'])
+@login_required
+def f_profile():
+    return render_template('f_profile.html', title='Faculty Profile', faculty = current_user)
+
+'''
+Faculty edit profile
+'''
+@bp_routes.route('/f_profile_edit', methods = ['GET','POST'])
+@login_required
+def f_profile_edit():
+    eform = FacultyEditProfileForm()
+    if request.method == 'POST':
+        #handle the form submission
+        if eform.validate_on_submit():
+            current_user.firstname = eform.firstname.data
+            current_user.lastname = eform.lastname.data
+            current_user.wsuid = eform.wsuid.data
+            current_user.phone = eform.phone.data
+            current_user.email = eform.email.data
+            current_user.set_password(eform.password.data)
+            db.session.add(current_user)
+            db.session.commit()
+            flash("Your changes have been saved")
+            return redirect(url_for('routes.f_profile'))
+        pass
+    elif request.method == 'GET':
+        eform.firstname.data = current_user.firstname
+        eform.lastname.data = current_user.lastname
+        eform.wsuid.data = current_user.wsuid
+        eform.phone.data = current_user.phone
+        eform.email.data = current_user.email
+    else:
+        pass
+    return render_template('f_profile_edit.html', title = 'Edit Faculty Profile', form = eform)
 # ==================================================================================#
 
 

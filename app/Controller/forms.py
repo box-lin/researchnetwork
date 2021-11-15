@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField,SelectField
 from wtforms.fields.core import DateField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, equal_to, regexp
-
+from app.Model.models import User
+from wtforms.fields.simple import PasswordField
 
 '''
 Flaskform for faculty use - Research position post
@@ -22,3 +23,25 @@ class StudentFilterForm(FlaskForm):
     checkbox = BooleanField('Display my applied position only')
     refresh = SubmitField('Refresh')
 
+class FacultyEditProfileForm(FlaskForm):
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    wsuid = StringField('WSU ID', validators=[DataRequired()])
+    phone = StringField('Phone Number', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(),Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
+    submit = SubmitField('Register As Faculty')
+
+    # Check for the uniqueness for email
+    def validate_email(self, email):
+        faculty = User.query.filter_by(email = email.data).first()
+        if faculty is not None:
+            if faculty.email != email.data:
+                raise ValidationError('The email already existed! Please use a different email address.')
+
+    def validate_WSUID(self, wsuid):
+        user = User.query.filter_by(wsuid = wsuid.data).first()
+        if user is not None:
+            if user.wsuid != wsuid.data:
+                raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
