@@ -51,9 +51,11 @@
                         </form>
                     {% endif %}
                 {% else %}
-                    <form action = "{{ url_for('routes.applicants', position_id = position.id)}}">
-                        <input type = 'submit' value = 'Applicant List' class = 'btn btn-success'>
-                    <form>
+                    {% if position.writer == current_user %}
+                        <form action = "{{ url_for('routes.applicants', position_id = position.id)}}">
+                            <input type = 'submit' value = 'Applicant List' class = 'btn btn-success'>
+                        <form>
+                    {% endif %}
                 {% endif %}
                 
             </td>
@@ -62,8 +64,7 @@
         <tr>
             <td colspan="3" style = "text-align:center" valign="bottom">  
                 <br>
-                  <!-- (milestone3) TODO: include username who posted the post-->
-                Post By: <span class = "useritem"> {{ position.writer.username }} </span> 
+                    Post By: <span class = "useritem"> {{ position.writer.username }} </span> 
               </td>
             </tr>
         </tr>

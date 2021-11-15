@@ -1,8 +1,8 @@
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
-from app.Model.models import Position
-from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm
+from app.Model.models import Position,User,Apply
+from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm
 from flask_login import current_user, login_required
 from app import db
 
@@ -73,13 +73,14 @@ def applicants(position_id):
 
 
 '''
-Faculty review applicant list
+Faculty review applicant list for all position posted
 '''
 @bp_routes.route('/applicants_list', methods = ['GET'])
 @login_required
 def applicants_list():
-    position = Position.query.all()
+    position = current_user.get_faculty_posts()
     return render_template('f_applicant_list.html', title = 'Applicant List', pform = position)
+
 
 '''
 Faculty display profile
@@ -119,6 +120,13 @@ def f_profile_edit():
     else:
         pass
     return render_template('f_profile_edit.html', title = 'Edit Faculty Profile', form = eform)
+
+@bp_routes.route('/get_s_profile/<s_id>', methods=['GET'])
+@login_required
+def get_s_profile(s_id):
+    theStudent = User.query.filter_by(id=s_id).first()
+    titles = theStudent.firstname + ', ' + theStudent.lastname + " Profile"
+    return render_template('s_profile.html', title = titles, student = theStudent)
 # ==================================================================================#
 
 
@@ -126,13 +134,14 @@ def f_profile_edit():
 '''
 Student Home Page Route
 '''
-@bp_routes.route('/student_index', methods=['GET'])
+@bp_routes.route('/student_index', methods=['GET','POST'])
 @login_required
 def student_index():
-    positions = Position.query.order_by(Position.time_commitment.desc())
-    return render_template('s_index.html', title = "WSU Research Network",positions=positions.all())
-
-    
+    fForm = StudentFilterForm()
+    positions = Position.query.order_by(Position.time_commitment.desc()).all()
+    if fForm.validate_on_submit():
+        flash("filter need to implement")
+    return render_template('s_index.html', title = "WSU Research Network", positions=positions, form=fForm)
 
 '''
 Student Apply Position route.
@@ -159,5 +168,55 @@ def withdraw(position_id):
         db.session.commit()
         flash('You have withdraw from the ' + thePost.title +' !')
         return redirect(url_for('routes.student_index'))
+
+@bp_routes.route('/MyProfile/',methods = ['GET'])
+@login_required
+def My_Profile():
+        return render_template('s_profile.html', title = 'My Profile', student = current_user)
+
+
+'''
+Student edit profile
+'''
+@bp_routes.route('/s_profile_edit', methods = ['GET','POST'])
+@login_required
+def s_profile_edit():
+    eform = StudentEditProfileForm()
+    if request.method == 'POST':
+        #handle the form submission
+        if eform.validate_on_submit():
+            current_user.firstname = eform.firstname.data
+            current_user.lastname = eform.lastname.data
+            current_user.phone = eform.phone.data
+            current_user.email = eform.email.data
+            current_user.set_password(eform.password.data)
+            current_user.major = eform.major.data
+            current_user.GPA = eform.major.data
+            current_user.gradulationdate = eform.gradulation.data
+            current_user.elective.clear()
+            for e in eform.elective.data:
+                current_user.elective.append(e)
+            current_user.researchtopic.clear()
+            for r in eform.researchtopic.data:
+                current_user.researchtopic.append(r)
+            current_user.programming.clear()
+            for p in eform.programming.data:
+                current_user.programming.append(p)
+            current_user.research_experience = eform.experience.data
+            db.session.add(current_user)
+            db.session.commit()
+            flash("Your changes have been saved")
+            return redirect(url_for('routes.s_profile'))
+        pass
+    elif request.method == 'GET':
+        eform.firstname.data = current_user.firstname
+        eform.lastname.data = current_user.lastname
+        eform.phone.data = current_user.phone
+        eform.email.data = current_user.email
+        eform.major.data = current_user.major
+        eform.gradulation.data = current_user.gradulationdate
+    else:
+        pass
+    return render_template('s_profile_edit.html', title = 'Edit Student Profile', form = eform)
 
 #===============================================================================#

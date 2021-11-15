@@ -142,6 +142,8 @@ class User(db.Model, UserMixin):
             db.session.delete(curApplication)
             db.session.commit()
 
+    def get_faculty_posts(self):
+        return self.position
 '''
 Association object <Apply> position as <Student>.
 '''
@@ -168,8 +170,8 @@ class Position(db.Model):
     applicant_qualification = db.Column(db.String(1024))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    researchtopic = db.relationship(
-        'ResearchTopics', secondary = StudentResearchTopics,
-        primaryjoin=(StudentResearchTopics.c.user_id == id),lazy='dynamic', overlaps='roster'
-    )
+    # researchtopic = db.relationship(
+    #     'ResearchTopics', secondary = StudentResearchTopics,
+    #     primaryjoin=(StudentResearchTopics.c.user_id == id),lazy='dynamic', overlaps='roster'
+    # )
     roster = db.relationship('Apply', back_populates = 'applicationapplied')

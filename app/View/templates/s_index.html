@@ -5,6 +5,21 @@
 </script>
 
 <h1>Welcome to Research Network!</h1>
+
+{% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+            <div>
+                {{form.filter.label}}
+                {{form.filter(class="searchSelect")}}
+                {{form.checkbox }}
+                {{form.checkbox .label}}
+                {{form.refresh(class="searchBtn")}} 
+            </div>
+                
+    </form>
+{% endif %}
+
 <div class="postlist">
     {% for position in positions %}
     <div class="post-box">

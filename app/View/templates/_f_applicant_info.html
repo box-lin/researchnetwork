@@ -1,7 +1,8 @@
 <tr valign="middle" id="_f_applicant_info">
-    <td width="20%"> {{student.firstname}} {{student.lastname}} </td>
-    <td width="20%"> {{student.email}} </td>
-    <td width="20%"> {{student.GPA}} </td>
-    <td width="20%"> {{student.major}} </td>
-    <td width="20%"> {{student.gradulationdate}}</td>
+        <td width = "20%"> {{student.firstname}} {{student.lastname}} </td>
+        <td width = "20%"> {{student.email}} </td>
+        <td width = "15%"> {{student.GPA}} </td>
+        <td width = "15%"> {{student.major}} </td>
+        <td width = "15%"> {{student.gradulationdate}}</td>
+        <td width = "15%"> <a href ="{{url_for('routes.get_s_profile', s_id = student.id)}}"> View Student Profile <a> </td>
 </tr>

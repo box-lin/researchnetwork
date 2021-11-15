@@ -1,4 +1,4 @@
-{% extends "f_base.html" %} {% block content %}
+{% extends "s_base.html" %} {% block content %}
 <div class="row mt40" style="margin-top: 40px;">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -18,11 +18,6 @@
             {% for error in form.lastname.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.wsuid.label }}</p>
-            <p>{{ form.wsuid( class='textinput')}}</p>
-
-            {% for error in form.wsuid.errors %}
-            <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ form.phone.label }}</p>
             <p>{{ form.phone( class='textinput')}}</p>
@@ -47,6 +42,27 @@
 
             {% for error in form.password2.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            <p>{{ form.major.label }}</p>  
+            <p>{{ form.major(class ='formtitle') }} </p>
+
+            <p>{{ form.GPA.label }}</p>  
+            <p>{{ form.GPA(class ='formtitle') }} </p>
+
+            <p>{{ form.gradulation.label }}</p>  
+            <p>{{ form.gradulation(class ='formtitle') }} </p>
+
+            <p>{{ form.elective.label }}</p>  
+            <p>{{ form.elective(class ='formbody') }} </p>
+
+            <p>{{ form.researchtopic.label }}</p>  
+            <p>{{ form.researchtopic(class ='formtitle') }} </p>
+
+            <p>{{ form.programming.label }}</p>  
+            <p>{{ form.programming(class ='formtitle') }} </p>
+
+            <p>{{ form.experience.label }}</p>  
+            <p>{{ form.experience(class ='formbody') }} </p>
 
             <p>{{ form.submit(class='botton')}}</p>
 
