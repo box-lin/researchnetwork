@@ -1,0 +1,73 @@
+{% extends "s_base.html" %} {% block content %}
+<div class="row mt40" style="margin-top: 40px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1>Edit Profile</h1>
+        <form action="" method="POST">
+            {{ form.hidden_tag()}}
+
+            <p>{{ form.firstname.label }}</p>
+            <p>{{ form.firstname( class='textinput')}}</p>
+
+            {% for error in form.firstname.errors %}
+            <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            <p>{{ form.lastname.label }}</p>
+            <p>{{ form.lastname( class='textinput')}}</p>
+
+            {% for error in form.lastname.errors %}
+            <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+
+            <p>{{ form.phone.label }}</p>
+            <p>{{ form.phone( class='textinput')}}</p>
+
+            {% for error in form.phone.errors %}
+            <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            <p>{{ form.email.label }}</p>
+            <p>{{ form.email( class='textinput')}}</p>
+
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            <p>{{ form.password.label }}</p>
+            <p>{{ form.password( class='textinput')}}</p>
+
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            <p>{{ form.password2.label }}</p>
+            <p>{{ form.password2( class='textinput')}}</p>
+
+            {% for error in form.password2.errors %}
+            <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            <p>{{ form.major.label }}</p>  
+            <p>{{ form.major(class ='formtitle') }} </p>
+
+            <p>{{ form.GPA.label }}</p>  
+            <p>{{ form.GPA(class ='formtitle') }} </p>
+
+            <p>{{ form.gradulation.label }}</p>  
+            <p>{{ form.gradulation(class ='formtitle') }} </p>
+
+            <p>{{ form.elective.label }}</p>  
+            <p>{{ form.elective(class ='formbody') }} </p>
+
+            <p>{{ form.researchtopic.label }}</p>  
+            <p>{{ form.researchtopic(class ='formtitle') }} </p>
+
+            <p>{{ form.programming.label }}</p>  
+            <p>{{ form.programming(class ='formtitle') }} </p>
+
+            <p>{{ form.experience.label }}</p>  
+            <p>{{ form.experience(class ='formbody') }} </p>
+
+            <p>{{ form.submit(class='botton')}}</p>
+
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}

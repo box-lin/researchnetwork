@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User,Apply
-from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm
+from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm
 from flask_login import current_user, login_required
 from app import db
 
@@ -173,5 +173,50 @@ def withdraw(position_id):
 @login_required
 def My_Profile():
         return render_template('s_profile.html', title = 'My Profile', student = current_user)
-    
+
+
+'''
+Student edit profile
+'''
+@bp_routes.route('/s_profile_edit', methods = ['GET','POST'])
+@login_required
+def s_profile_edit():
+    eform = StudentEditProfileForm()
+    if request.method == 'POST':
+        #handle the form submission
+        if eform.validate_on_submit():
+            current_user.firstname = eform.firstname.data
+            current_user.lastname = eform.lastname.data
+            current_user.phone = eform.phone.data
+            current_user.email = eform.email.data
+            current_user.set_password(eform.password.data)
+            current_user.major = eform.major.data
+            current_user.GPA = eform.major.data
+            current_user.gradulationdate = eform.gradulation.data
+            current_user.elective.clear()
+            for e in eform.elective.data:
+                current_user.elective.append(e)
+            current_user.researchtopic.clear()
+            for r in eform.researchtopic.data:
+                current_user.researchtopic.append(r)
+            current_user.programming.clear()
+            for p in eform.programming.data:
+                current_user.programming.append(p)
+            current_user.research_experience = eform.experience.data
+            db.session.add(current_user)
+            db.session.commit()
+            flash("Your changes have been saved")
+            return redirect(url_for('routes.s_profile'))
+        pass
+    elif request.method == 'GET':
+        eform.firstname.data = current_user.firstname
+        eform.lastname.data = current_user.lastname
+        eform.phone.data = current_user.phone
+        eform.email.data = current_user.email
+        eform.major.data = current_user.major
+        eform.gradulation.data = current_user.gradulationdate
+    else:
+        pass
+    return render_template('s_profile_edit.html', title = 'Edit Student Profile', form = eform)
+
 #===============================================================================#

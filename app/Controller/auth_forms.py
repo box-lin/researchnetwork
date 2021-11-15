@@ -7,6 +7,7 @@ from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Email, Length, ValidationError, equal_to
 from app.Model.models import ProgrammingLanguages, ResearchTopics, User, TechnicalElectives
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms.widgets import ListWidget, CheckboxInput
 
 '''
 User login form component
@@ -81,9 +82,12 @@ class StudentRegistrationForm(FlaskForm):
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
     gradulation = DateField('Gradulation Date', format='%Y-%m-%d')
-    elective = QuerySelectMultipleField('Technical Electives', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False)
-    researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
-    programming =  QuerySelectMultipleField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False)
+    elective = QuerySelectMultipleField('Technical Electives', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False, 
+                                        widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
+    researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False, 
+                                             widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
+    programming =  QuerySelectMultipleField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False, 
+                                            widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
     experience = TextAreaField('Experience: ',validators=[DataRequired()])
     submit = SubmitField('Register As Student')
 
