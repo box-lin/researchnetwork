@@ -82,12 +82,9 @@ class StudentRegistrationForm(FlaskForm):
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
     gradulation = DateField('Gradulation Date', format='%Y-%m-%d')
-    elective = QuerySelectMultipleField('Technical Electives', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False, 
-                                        widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
-    researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False, 
-                                             widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
-    programming =  QuerySelectMultipleField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False, 
-                                            widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
+    elective = QuerySelectMultipleField('Technical Electives', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False)
+    researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
+    programming =  QuerySelectMultipleField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False)
     experience = TextAreaField('Experience: ',validators=[DataRequired()])
     submit = SubmitField('Register As Student')
 

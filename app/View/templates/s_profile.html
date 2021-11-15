@@ -1,15 +1,9 @@
-{% if current_user.id == student.id %}
-    {% extends 's_base.html' %}
-    <script>
-        window.onload = clearStudentDisplay();
-        window.onload = s_my_profile_active();
-    </script>
-{% else %}
-    {% extends 'f_base.html' %}
+{% if current_user.id == student.id %} {% extends 's_base.html' %} {% else %} {% extends 'f_base.html' %} {% endif %} {% block content %}
 
-{% endif %}
-
-{% block content %}
+<script>
+    window.onload = clearStudentDisplay();
+    window.onload = s_my_profile_active();
+</script>
 
 
 <div class="row mt40" style="margin-top: 40px;">
@@ -28,14 +22,14 @@
 
         {% if current_user.id == student.id %}
         <p>
-            <a href= " {{url_for('routes.s_profile_edit')}} " ">
+            <a href=" {{url_for('routes.s_profile_edit')}} " ">
                 <button>Edit your profile</button>
             </a>
         </p>
         {% endif %}
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2 "></div>
 </div>
 
 
-{% endblock %} 
+{% endblock %}
