@@ -94,7 +94,6 @@ def register():
                            research_experience=sform.experience.data, 
                            usertype=0)
             student.set_password(sform.password.data)
-
             # append programming languages
             for p in sform.programming.data:
                 student.programming.append(p)
@@ -106,7 +105,7 @@ def register():
             #append elective classes
             for e in sform.elective.data:
                 student.elective.append(e)
-
+                
             db.session.add(student)
             db.session.commit()
             flash('Congratulations, ' + sform.username.data + ' you have successfully registered!')

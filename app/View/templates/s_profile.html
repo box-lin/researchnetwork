@@ -28,7 +28,7 @@
 
         {% if current_user.id == student.id %}
         <p>
-            <a href="">
+            <a href= " {{url_for('routes.s_profile_edit')}} " ">
                 <button>Edit your profile</button>
             </a>
         </p>
