@@ -4,5 +4,5 @@
         <td width = "15%"> {{student.GPA}} </td>
         <td width = "15%"> {{student.major}} </td>
         <td width = "15%"> {{student.gradulationdate}}</td>
-        <td width = "15%"> <a href =""> View Student Profile <a> </td>
+        <td width = "15%"> <a href ="{{url_for('routes.get_s_profile', s_id = student.id)}}"> View Student Profile <a> </td>
 </tr>
