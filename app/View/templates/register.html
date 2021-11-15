@@ -20,28 +20,50 @@
                     <p>{{ sform.username.label }}</p>
                     <p>{{ sform.username(class ='formtitle') }}</p>
 
+                    {% for error in sform.username.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
 
                     <p>{{ sform.lastname.label }}</p>
                     <p>{{ sform.lastname(class ='formtitle') }}</p>
 
+                    {% for error in sform.lastname.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
                     <p>{{ sform.firstname.label }}</p>
                     <p>{{ sform.firstname(class ='formtitle') }}</p>
+
+                    {% for error in sform.firstname.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
 
                     <p>{{ sform.wsuid.label }}</p>
                     <p>{{ sform.wsuid(class ='formtitle') }}</p>
 
+                    {% for error in sform.wsuid.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
                     <p>{{ sform.phone.label }}</p>
                     <p>{{ sform.phone(class ='formtitle') }}</p>
+
+                    {% for error in sform.phone.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
 
                     <p>{{ sform.email.label }}</p>
                     <p>{{ sform.email(class ='formtitle')}} </p>
 
+                    {% for error in sform.email.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
                     <p>{{ sform.password.label }} </p>
                     <p>{{ sform.password(class ='formtitle') }}</p>
 
+                    {% for error in sform.password.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
 
                     <p>{{ sform.password2.label }}</p>
                     <p>{{ sform.password2(class ='formtitle') }} </p>
+
+                    {% for error in sform.password2.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
 
                 </div>
                 <div class="col-md-6">

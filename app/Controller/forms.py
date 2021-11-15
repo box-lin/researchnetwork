@@ -50,6 +50,7 @@ class FacultyEditProfileForm(FlaskForm):
             if faculty.email != email.data:
                 raise ValidationError('The email already existed! Please use a different email address.')
 
+    #Check for the uniqueness for WSUID
     def validate_WSUID(self, wsuid):
         user = User.query.filter_by(wsuid = wsuid.data).first()
         if user is not None:
