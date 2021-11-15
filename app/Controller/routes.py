@@ -123,4 +123,10 @@ def withdraw(position_id):
         flash('You have withdraw from the ' + thePost.title +' !')
         return redirect(url_for('routes.student_index'))
 
+@bp_routes.route('/MyProfile/',methods = ['GET'])
+@login_required
+def My_Profile():
+        return render_template('s_profile.html', title = 'My Profile', student = current_user)
+
+
 #===============================================================================#

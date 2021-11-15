@@ -1,0 +1,13 @@
+{% extends 's_base.html' %}
+
+{% block content %}
+    <h1>Display Student Profile</h1>
+    <h2>Student username: {{student.username}}</h2>
+    <p><b>Name:</b> {{student.firstname}} {{student.lastname}}</p>
+    <p><b>Email:</b> {{student.email}}</p>
+    <p><b>wsuid:</b> {{student.wsuid}}</p>
+    <p><b>phone:</b> {{student.phone}}</p>
+    <p><b>major:</b> {{student.major}}</p>
+    <p><b>GPA:</b> {{student.GPA}}</p>
+
+{% endblock %} 
