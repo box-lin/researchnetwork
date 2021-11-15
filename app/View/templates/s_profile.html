@@ -1,13 +1,41 @@
-{% extends 's_base.html' %}
+{% if current_user.id == student.id %}
+    {% extends 's_base.html' %}
+    <script>
+        window.onload = clearStudentDisplay();
+        window.onload = s_my_profile_active();
+    </script>
+{% else %}
+    {% extends 'f_base.html' %}
+
+{% endif %}
 
 {% block content %}
-    <h1>Display Student Profile</h1>
-    <h2>Student username: {{student.username}}</h2>
-    <p><b>Name:</b> {{student.firstname}} {{student.lastname}}</p>
-    <p><b>Email:</b> {{student.email}}</p>
-    <p><b>wsuid:</b> {{student.wsuid}}</p>
-    <p><b>phone:</b> {{student.phone}}</p>
-    <p><b>major:</b> {{student.major}}</p>
-    <p><b>GPA:</b> {{student.GPA}}</p>
+
+
+<div class="row mt40" style="margin-top: 40px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <h1>Display Student Profile</h1>
+        <h2>Student username: {{student.username}}</h2>
+        <p><b>Name:</b> {{student.firstname}} {{student.lastname}}</p>
+        <p><b>Name:</b> {{student.firstname}} {{student.lastname}}</p>
+        <p><b>Email:</b> {{student.email}}</p>
+        <p><b>wsuid:</b> {{student.wsuid}}</p>
+        <p><b>phone:</b> {{student.phone}}</p>
+        <p><b>major:</b> {{student.major}}</p>
+        <p><b>GPA:</b> {{student.GPA}}</p>
+
+        {% if current_user.id == student.id %}
+        <p>
+            <a href="">
+                <button>Edit your profile</button>
+            </a>
+        </p>
+        {% endif %}
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
 
 {% endblock %} 

@@ -18,11 +18,18 @@ class ResearchPositionForm(FlaskForm):
     applicant_qualification = TextAreaField('Applicant Qualification', validators=[DataRequired(),Length(min=0, max=128)])
     submit = SubmitField('Post')
 
+'''
+Stutdent Filter Postition form
+'''
 class StudentFilterForm(FlaskForm):
     filter = SelectField('Filter By', choices = ['Research areas']) 
     checkbox = BooleanField('Display my applied position only')
     refresh = SubmitField('Refresh')
 
+
+'''
+Faculty Edit Profile Form
+'''
 class FacultyEditProfileForm(FlaskForm):
     lastname = StringField('Last Name', validators=[DataRequired()])
     firstname = StringField('First Name', validators=[DataRequired()])

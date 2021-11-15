@@ -120,6 +120,13 @@ def f_profile_edit():
     else:
         pass
     return render_template('f_profile_edit.html', title = 'Edit Faculty Profile', form = eform)
+
+@bp_routes.route('/get_s_profile/<s_id>', methods=['GET'])
+@login_required
+def get_s_profile(s_id):
+    theStudent = User.query.filter_by(id=s_id).first()
+    titles = theStudent.firstname + ', ' + theStudent.lastname + " Profile"
+    return render_template('s_profile.html', title = titles, student = theStudent)
 # ==================================================================================#
 
 
@@ -166,6 +173,5 @@ def withdraw(position_id):
 @login_required
 def My_Profile():
         return render_template('s_profile.html', title = 'My Profile', student = current_user)
-
-
+    
 #===============================================================================#
