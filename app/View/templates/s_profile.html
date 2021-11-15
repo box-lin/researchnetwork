@@ -1,4 +1,13 @@
-{% extends 's_base.html' %}
+{% if current_user.id == student.id %}
+    {% extends 's_base.html' %}
+    <script>
+        window.onload = clearStudentDisplay();
+        window.onload = s_my_profile_active();
+    </script>
+{% else %}
+    {% extends 'f_base.html' %}
+
+{% endif %}
 
 {% block content %}
 
@@ -16,11 +25,14 @@
         <p><b>phone:</b> {{student.phone}}</p>
         <p><b>major:</b> {{student.major}}</p>
         <p><b>GPA:</b> {{student.GPA}}</p>
+
+        {% if current_user.id == student.id %}
         <p>
             <a href="">
                 <button>Edit your profile</button>
             </a>
         </p>
+        {% endif %}
     </div>
     <div class="col-md-2"></div>
 </div>
