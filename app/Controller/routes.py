@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User,Apply
-from app.Controller.forms import ResearchPositionForm, StudentFilterForm
+from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm
 from flask_login import current_user, login_required
 from app import db
 
