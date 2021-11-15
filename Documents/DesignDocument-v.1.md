@@ -182,10 +182,11 @@ In iteration 1, we implement the basic features of the platform: create an accou
 Don't include this section.
 
 (***in iteration 2***)
-In this section , provide a brief description of how you plan to test the system. Thought should be given to  mostly how automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. Consider the following kinds of testing:
   * *Unit Testing*: Explain for what modules you plan to write unit tests, and what framework you plan to use.  (Each team should write automated tests (at least) for testing the API routes)
   * *Functional Testing*: How will you test your system to verify that the use cases are implemented correctly? (Manual tests are OK)
   * *UI Testing*: How do you plan to test the user interface?  (Manual tests are OK)
+
+Iteration 2 testing plan, to test the project we will be implementing a mix of manual and automatic testing. For model.py we can write automated tests but it is optional, and we will also test API routes using automates testing except login and register routes. we will implement test cases that are fail and succeed to make sure the surve is responding correctly to the request. we will try to test login and register routes manually and we already finish testing login and register routes is working completely, we try plenty cases to make sure it actually work. For the rest of the routes we will write the tests and test it. we will test functionality manually, we will go through the use cases we write and check it one by one make sure it is operating as expected and do not crash the system when user have some extraordinary behavior. we will also test the user interface manually, to make sure it can display information correctly and trying to make it look more beautiful and simple because we do not want to misleading user. for the user interface we already finish testing so far and it displaying information correctly.
 
 
 
