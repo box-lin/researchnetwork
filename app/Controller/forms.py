@@ -1,25 +1,37 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField,SelectField
-from wtforms.fields.core import DateField
+from wtforms.fields.html5 import DateField
 from wtforms.validators import  DataRequired, Email, EqualTo, ValidationError, Length, DataRequired, equal_to, regexp
 from app.Model.models import User
 from wtforms.widgets import ListWidget, CheckboxInput
 from app.Model.models import ProgrammingLanguages, ResearchTopics, User, TechnicalElectives
 from wtforms.fields.simple import PasswordField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from datetime import date, datetime
 
 '''
 Flaskform for faculty use - Research position post
+
 '''
 class ResearchPositionForm(FlaskForm):
     research_title = StringField('Research Project Title', validators=[DataRequired(),Length(min=0, max=2048)])
     desc = TextAreaField('Project Brif Description', validators=[DataRequired(),Length(min=0, max=2048)])
-    start_date = StringField('Start date ', validators=[DataRequired(), Length(min=0, max=128)])
-    end_date = StringField('End date ', validators=[DataRequired(), Length(min=0, max=128)])
+    start_date = DateField('Start date ', format='%Y-%m-%d')
+    end_date = DateField('End date ', format='%Y-%m-%d')
     time_commitment = StringField('Required Time Commitment',validators=[DataRequired(),Length(min=0, max=128)] )
     research_field = StringField('Research Field', validators=[DataRequired(), Length(min=0, max=128)])
     applicant_qualification = TextAreaField('Applicant Qualification', validators=[DataRequired(),Length(min=0, max=128)])
     submit = SubmitField('Post')
+
+    def validate_start_date(self, start_date):
+        if start_date.data is not None:
+            if start_date.data < date.today():
+                raise ValidationError("start date must later than today!")
+
+    def validate_end_date(self, end_date):
+        if end_date.data is not None:
+            if end_date.data < self.start_date.data:
+                raise ValidationError("end date must later start date!")
 
 '''
 Stutdent Filter Postition form
