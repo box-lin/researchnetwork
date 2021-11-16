@@ -4,10 +4,32 @@
     window.onload = f_home_page_active();
 </script>
 
-<h1>Welcome to Research Network!</h1>
-<div class="postlist">
-    {% for position in positions %}
-    <div class="post-box">
-        {% include '_post.html' %}
+<h1>Dear Faculty, Welcome to Research Network!</h1>
+
+{% if form %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div>
+        {{form.filter.label}} {{form.filter(class="searchSelect")}} {{form.checkbox }} {{form.checkbox .label}} {{form.refresh(class="searchBtn")}}
     </div>
-    {% endfor %} {% endblock %}
+
+</form>
+{% endif %}
+
+
+<div class="postlist">
+    {% if onlymy %}
+        {% for position in faculty.position %}  
+            <div class="post-box">
+                {% include '_post.html' %}
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for position in positions %}
+        <div class="post-box">
+            {% include '_post.html' %}
+        </div>
+        {% endfor %}
+    {% endif %} 
+</div>
+{% endblock %}

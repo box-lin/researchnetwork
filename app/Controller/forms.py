@@ -43,6 +43,14 @@ class StudentFilterForm(FlaskForm):
 
 
 '''
+Faculty Filter Position form
+'''
+class FacultyFilterForm(FlaskForm):
+    filter = SelectField('Filter By', choices = ['Research areas']) 
+    checkbox = BooleanField('Display my posted position only')
+    refresh = SubmitField('Refresh')
+
+'''
 Faculty Edit Profile Form
 '''
 class FacultyEditProfileForm(FlaskForm):

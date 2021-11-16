@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User,Apply
-from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm
+from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
 from flask_login import current_user, login_required
 from app import db
 
@@ -15,11 +15,15 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 '''
 Faculty Home Page Route
 '''
-@bp_routes.route('/faculty_index', methods=['GET'])
+@bp_routes.route('/faculty_index', methods=['GET','POST'])
 @login_required
 def faculty_index():
     positions = Position.query.order_by(Position.time_commitment.desc())
-    return render_template('f_index.html', title="WSU Research Network",positions=positions.all())
+    fForm = FacultyFilterForm()
+    onlymy = False
+    if fForm.validate_on_submit():
+        onlymy = fForm.checkbox.data
+    return render_template('f_index.html', title="WSU Research Network",positions=positions.all(), onlymy = onlymy, faculty = current_user, form = fForm)
 
 
 '''
@@ -139,9 +143,10 @@ Student Home Page Route
 def student_index():
     fForm = StudentFilterForm()
     positions = Position.query.order_by(Position.time_commitment.desc()).all()
+    onlyapply = False
     if fForm.validate_on_submit():
-        flash("filter need to implement")
-    return render_template('s_index.html', title = "WSU Research Network", positions=positions, form=fForm)
+        onlyapply = fForm.checkbox.data
+    return render_template('s_index.html', title = "WSU Research Network", positions=positions, form=fForm, student = current_user, onlyapply = onlyapply)
 
 '''
 Student Apply Position route.
