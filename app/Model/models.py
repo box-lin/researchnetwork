@@ -144,6 +144,15 @@ class User(db.Model, UserMixin):
 
     def get_faculty_posts(self):
         return self.position
+    
+    def get_electives(self):
+        return self.elective
+    
+    def get_researchtopic(self):
+        return self.researchtopic
+    
+    def get_programming(self):
+        return self.programming
 '''
 Association object <Apply> position as <Student>.
 '''

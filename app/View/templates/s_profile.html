@@ -25,9 +25,35 @@
         <p><b>major:</b> {{student.major}}</p>
         <p><b>GPA:</b> {{student.GPA}}</p>
         <p><b>graduation date:</b> {{student.graduationdate}}</p>
-        <p><b>elective:</b> {{student.elective.id}}</p>
-        <p><b>research topic:</b> {{student.researchtopic.id}}</p>
-        <p><b>programming language:</b> {{student.getprogramming(student.wsuid)}}</p>
+        <p>
+            <b>elective:</b> 
+            [
+            {% for e in student.get_electives() %}
+                {{e.title}};
+            {% endfor %}
+            ]
+        </p>
+
+        <p>
+            <b>research topic:</b> 
+            [
+            {% for r in student.get_researchtopic() %}
+                {{r.title}}; 
+            {% endfor %}
+            ]
+            
+        </p>
+
+
+        <p>
+            <b>programming language:</b> 
+            [
+            {% for p in student.get_programming() %}
+                {{p.name}}; 
+            {% endfor %}
+            ]    
+        </p>
+
         <p><b>experience:</b> {{student.research_experience}}</p>
 
 
