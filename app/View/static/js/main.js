@@ -7,7 +7,7 @@ function clearFacultyDisplay() {
 
 function clearStudentDisplay() {
     document.getElementById('s_home_page').classList.remove("active");
-    document.getElementById('s_my_applications').classList.remove("active");
+    //document.getElementById('s_my_applications').classList.remove("active");
     document.getElementById('s_my_profile').classList.remove("active");
 }
 
@@ -31,9 +31,9 @@ function s_home_page_active() {
     document.getElementById('s_home_page').classList.add("active")
 }
 
-function s_my_applications_active() {
-    document.getElementById('s_my_applications').classList.add("active")
-}
+// function s_my_applications_active() {
+//     document.getElementById('s_my_applications').classList.add("active")
+// }
 
 function s_my_profile_active() {
     document.getElementById('s_my_profile').classList.add("active")
