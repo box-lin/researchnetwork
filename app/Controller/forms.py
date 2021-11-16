@@ -110,14 +110,16 @@ class StudentEditProfileForm(FlaskForm):
                                             widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
     experience = TextAreaField('Experience: ',validators=[DataRequired()])
     submit = SubmitField('Update Student Profile')
-    
-    def validate_username(self, username):
-        faculty = User.query.filter_by(username = username.data).first()
-        if faculty is not None:
-            raise ValidationError('The username already existed! Please use a different username.')
 
     # Check for the uniqueness for email
     def validate_email(self, email):
-        faculty = User.query.filter_by(email = email.data).first()
-        if faculty is not None:
-            raise ValidationError('The email already existed! Please use a different email address.')
+        student = User.query.filter_by(email = email.data).first()
+        if student is not None:
+            if student.email != email.data:
+                raise ValidationError('The email already existed! Please use a different email address.')
+    
+    # Check the gradulation date must later than today
+    def validate_gradulation(self, gradulationdate):
+        if gradulationdate.data is not None:
+            if gradulationdate.data < date.today():
+                raise ValidationError("Graduation date must later than today!")

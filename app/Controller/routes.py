@@ -220,6 +220,11 @@ def s_profile_edit():
         eform.wsuid.data = current_user.wsuid
         eform.major.data = current_user.major
         eform.graduation.data = current_user.graduationdate
+        eform.GPA.data = current_user.GPA
+        eform.elective.data = current_user.elective
+        eform.researchtopic.data = current_user.researchtopic
+        eform.programming.data = current_user.programming
+        eform.experience.data = current_user.research_experience
     else:
         pass
     return render_template('s_profile_edit.html', title = 'Edit Student Profile', form = eform)

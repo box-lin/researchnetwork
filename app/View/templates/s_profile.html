@@ -1,16 +1,8 @@
-{% if current_user.id == student.id %}
-    {% extends 's_base.html' %}
-    <script>
-        window.onload = clearStudentDisplay();
-        window.onload = s_my_profile_active();
-    </script>
-{% else %}
-    {% extends 'f_base.html' %}
-
-{% endif %}
-
-{% block content %}
-
+{% if current_user.id == student.id %} {% extends 's_base.html' %} {% else %} {% extends 'f_base.html' %} {% endif %} {% block content %}
+<script>
+    window.onload = clearStudentDisplay();
+    window.onload = s_my_profile_active();
+</script>
 
 <div class="row mt40" style="margin-top: 40px;">
     <div class="col-md-2"></div>
@@ -26,32 +18,17 @@
         <p><b>GPA:</b> {{student.GPA}}</p>
         <p><b>graduation date:</b> {{student.graduationdate}}</p>
         <p>
-            <b>elective:</b> 
-            [
-            {% for e in student.get_electives() %}
-                {{e.title}};
-            {% endfor %}
-            ]
+            <b>elective:</b> [ {% for e in student.get_electives() %} {{e.title}}; {% endfor %} ]
         </p>
 
         <p>
-            <b>research topic:</b> 
-            [
-            {% for r in student.get_researchtopic() %}
-                {{r.title}}; 
-            {% endfor %}
-            ]
-            
+            <b>research topic:</b> [ {% for r in student.get_researchtopic() %} {{r.title}}; {% endfor %} ]
+
         </p>
 
 
         <p>
-            <b>programming language:</b> 
-            [
-            {% for p in student.get_programming() %}
-                {{p.name}}; 
-            {% endfor %}
-            ]    
+            <b>programming language:</b> [ {% for p in student.get_programming() %} {{p.name}}; {% endfor %} ]
         </p>
 
         <p><b>experience:</b> {{student.research_experience}}</p>
@@ -59,7 +36,7 @@
 
         {% if current_user == student %}
         <p>
-            <a href= " {{url_for('routes.s_profile_edit')}} ">
+            <a href=" {{url_for('routes.s_profile_edit')}} ">
                 <button>Edit your profile</button>
             </a>
         </p>
@@ -69,4 +46,4 @@
 </div>
 
 
-{% endblock %} 
+{% endblock %}
