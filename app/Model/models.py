@@ -87,7 +87,7 @@ class User(db.Model, UserMixin):
     ## additional student ##
     major = db.Column(db.String(20))
     GPA = db.Column(db.Float(5))
-    gradulationdate = db.Column(db.DateTime)
+    graduationdate = db.Column(db.DateTime,default = datetime.utcnow)
     research_experience = db.Column(db.String(200))
 
     elective = db.relationship(
@@ -99,12 +99,12 @@ class User(db.Model, UserMixin):
         'ResearchTopics', secondary = StudentResearchTopics,
         primaryjoin=(StudentResearchTopics.c.user_id == id),lazy='dynamic', overlaps='roster'
     )
-
+        
     programming = db.relationship(
         'ProgrammingLanguages', secondary = StudentLanguages,
         primaryjoin=(StudentLanguages.c.user_id == id),lazy='dynamic', overlaps='roster'
     )
-    
+
     # for faculty use
     position = db.relationship('Position', backref='writer', lazy='dynamic')
     
@@ -144,6 +144,15 @@ class User(db.Model, UserMixin):
 
     def get_faculty_posts(self):
         return self.position
+    
+    def get_electives(self):
+        return self.elective
+    
+    def get_researchtopic(self):
+        return self.researchtopic
+    
+    def get_programming(self):
+        return self.programming
 '''
 Association object <Apply> position as <Student>.
 '''

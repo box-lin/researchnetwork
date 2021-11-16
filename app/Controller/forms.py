@@ -81,16 +81,15 @@ def get_TechnicalElectivesLabel(theElectives):
 Student Edit Profile Form
 '''
 class StudentEditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
     lastname = StringField('Last Name', validators=[DataRequired()])
     firstname = StringField('First Name', validators=[DataRequired()])
     phone = StringField('Phone Number', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(),Email()])
+    wsuid = StringField('WSU ID', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
-    gradulation = DateField('Gradulation Date', format='%Y-%m-%d')
+    graduation = DateField('Gradulation Date', format='%Y-%m-%d')
     elective = QuerySelectMultipleField('Technical Electives', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False, 
                                         widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
     researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False, 

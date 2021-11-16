@@ -70,7 +70,7 @@ def register():
                            phone=fform.phone.data, 
                            major="", 
                            GPA=0, 
-                           gradulationdate=datetime(1971,1,1), 
+                           graduationdate=datetime(1971,1,1), 
                            elective="", 
                            researchtopic="", 
                            programming = "", 
@@ -90,7 +90,7 @@ def register():
                            phone=sform.phone.data, 
                            major=sform.major.data, 
                            GPA=sform.GPA.data, 
-                           gradulationdate=sform.gradulation.data,
+                           graduationdate=sform.gradulation.data,
                            research_experience=sform.experience.data, 
                            usertype=0)
             student.set_password(sform.password.data)
