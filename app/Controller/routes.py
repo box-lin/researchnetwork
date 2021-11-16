@@ -85,7 +85,7 @@ def applicants_list():
 '''
 Faculty display profile
 '''
-@bp_routes.route('/f_profile', methods = ['GET'])
+@bp_routes.route('/f_profile/', methods = ['GET'])
 @login_required
 def f_profile():
     return render_template('f_profile.html', title='Faculty Profile', faculty = current_user)
@@ -182,39 +182,44 @@ Student edit profile
 @login_required
 def s_profile_edit():
     eform = StudentEditProfileForm()
+    print(current_user)
     if request.method == 'POST':
         #handle the form submission
         if eform.validate_on_submit():
+            print(current_user)
             current_user.firstname = eform.firstname.data
             current_user.lastname = eform.lastname.data
             current_user.phone = eform.phone.data
-            current_user.email = eform.email.data
+            current_user.wsuid = eform.wsuid.data
             current_user.set_password(eform.password.data)
             current_user.major = eform.major.data
-            current_user.GPA = eform.major.data
-            current_user.gradulationdate = eform.gradulation.data
-            current_user.elective.clear()
+            current_user.GPA = eform.GPA.data
+            # current_user.graduationdate = eform.graduation.data
+            for i in current_user.elective:
+                current_user.elective.remove(i)
             for e in eform.elective.data:
                 current_user.elective.append(e)
-            current_user.researchtopic.clear()
+            for z in current_user.researchtopic:
+                current_user.researchtopic.remove(z)
             for r in eform.researchtopic.data:
                 current_user.researchtopic.append(r)
-            current_user.programming.clear()
+            for q in current_user.programming:
+                current_user.programming.remove(q)
             for p in eform.programming.data:
                 current_user.programming.append(p)
             current_user.research_experience = eform.experience.data
             db.session.add(current_user)
             db.session.commit()
             flash("Your changes have been saved")
-            return redirect(url_for('routes.s_profile'))
+            return redirect(url_for('routes.My_Profile'))
         pass
     elif request.method == 'GET':
         eform.firstname.data = current_user.firstname
         eform.lastname.data = current_user.lastname
         eform.phone.data = current_user.phone
-        eform.email.data = current_user.email
+        eform.wsuid.data = current_user.wsuid
         eform.major.data = current_user.major
-        eform.gradulation.data = current_user.gradulationdate
+        eform.graduation.data = current_user.graduationdate
     else:
         pass
     return render_template('s_profile_edit.html', title = 'Edit Student Profile', form = eform)

@@ -19,16 +19,21 @@
         <h1>Display Student Profile</h1>
         <h2>Student username: {{student.username}}</h2>
         <p><b>Name:</b> {{student.firstname}} {{student.lastname}}</p>
-        <p><b>Name:</b> {{student.firstname}} {{student.lastname}}</p>
         <p><b>Email:</b> {{student.email}}</p>
         <p><b>wsuid:</b> {{student.wsuid}}</p>
         <p><b>phone:</b> {{student.phone}}</p>
         <p><b>major:</b> {{student.major}}</p>
         <p><b>GPA:</b> {{student.GPA}}</p>
+        <p><b>graduation date:</b> {{student.graduationdate}}</p>
+        <p><b>elective:</b> {{student.elective.id}}</p>
+        <p><b>research topic:</b> {{student.researchtopic.id}}</p>
+        <p><b>programming language:</b> {{student.getprogramming(student.wsuid)}}</p>
+        <p><b>experience:</b> {{student.research_experience}}</p>
 
-        {% if current_user.id == student.id %}
+
+        {% if current_user == student %}
         <p>
-            <a href= " {{url_for('routes.s_profile_edit')}} " ">
+            <a href= " {{url_for('routes.s_profile_edit')}} ">
                 <button>Edit your profile</button>
             </a>
         </p>
