@@ -81,27 +81,42 @@ Overview of the document outlie: First, System Structure will talk about the maj
 
 ### 2.2.1 Model
 
-|               | Table 1                                           |                                               |      |      |
-| ------------- | ------------------------------------------------- | --------------------------------------------- | ---- | ---- |
-| Name:         | User                                              |                                               |      |      |
-| Role:         | *Store user infomation, both student and faculty* |                                               |      |      |
-|               | *Table contain follow columns:*                   |                                               |      |      |
-| id            | Integer, primary_key                              | User ID                                       |      |      |
-| username      | String(64), unique, index                         | Username                                      |      |      |
-| password_hash | String(128)                                       | Hashed password                               |      |      |
-| lastname      | String(20)                                        | User lastname                                 |      |      |
-| firstname     | String(30)                                        | User firstname                                |      |      |
-| wsuid         | Integer, unique                                   | User WSUID                                    |      |      |
-| phone         | String(20)                                        | User phone number                             |      |      |
-| email         | String(120), unique, index                        | User email address                            |      |      |
-| major         | String(20)                                        | Student major                                 |      |      |
-| GPA           | String(5)                                         | Student GPA                                   |      |      |
-| gradulation   | String(10)                                        | Student graduate date                         |      |      |
-| elective      | String(300)                                       | Student elective class                        |      |      |
-| researchtopic | String(30)                                        | Student interested research topic             |      |      |
-| programming   | String(30)                                        | Student programming language                  |      |      |
-| experience    | String(200)                                       | Student experience and brief introduction     |      |      |
-| role          | String(20)                                        | Determine the user role is faculty or student |      |      |
+|                     | Table 1                                           |                                                   |      |      |
+| ------------------- | ------------------------------------------------- | ------------------------------------------------- | ---- | ---- |
+| Name:               | User                                              |                                                   |      |      |
+| Role:               | *Store user infomation, both student and faculty* |                                                   |      |      |
+|                     | *Table contain follow columns:*                   |                                                   |      |      |
+| id                  | Integer, primary_key                              | User ID                                           |      |      |
+| username            | String(64), unique, index                         | Username                                          |      |      |
+| password_hash       | String(128)                                       | Hashed password                                   |      |      |
+| lastname            | String(20)                                        | User lastname                                     |      |      |
+| firstname           | String(30)                                        | User firstname                                    |      |      |
+| wsuid               | Integer, unique                                   | User WSUID                                        |      |      |
+| phone               | String(20)                                        | User phone number                                 |      |      |
+| email               | String(120), unique, index                        | User email address                                |      |      |
+| major               | String(20)                                        | Student major                                     |      |      |
+| GPA                 | String(5)                                         | Student GPA                                       |      |      |
+| gradulationdate     | String(10)                                        | Student graduate date                             |      |      |
+| elective            | String(300)                                       | Student elective class                            |      |      |
+| researchtopic       | String(30)                                        | Student interested research topic                 |      |      |
+| office              | String(1024)                                      | Office Location                                   |      |      |
+| research_experience | String(200)                                       | Student Research Experience                       |      |      |
+| usertype            | Integer                                           | Determine User Type: 0 for student, 1 for faculty |      |      |
+| elective            | relationship                                      | Retrieve StudentElectives Associate Table         |      |      |
+| researchtopic       | relationship                                      | Retrieve ResearchTopics Associate Table           |      |      |
+| programming         | relationship                                      | Retrieve ProgrammingLanaguages Associate Table    |      |      |
+| repr                | method                                            | Use to Print Information                          |      |      |
+| set_password        | method                                            | Generate Password                                 |      |      |
+| get_password        | method                                            | Check Password                                    |      |      |
+| is_student          | method                                            | Check User Type                                   |      |      |
+| is_faculty          | method                                            | Check User Type                                   |      |      |
+| is_applied          | method                                            | Check Application Status                          |      |      |
+| apply               | method                                            | Use to Apply Application                          |      |      |
+| withdraw            | method                                            | User to Withdraw Application                      |      |      |
+| get_faculty_posts   | method                                            | Return Post Position                              |      |      |
+| get_electives       | method                                            | Return User Elective                              |      |      |
+| get_researchtopic   | method                                            | Return Research Topic                             |      |      |
+| get_programming     | method                                            | Return Programming Language                       |      |      |
 
 |                         | Table 2                               |                                      |      |      |
 | ----------------------- | ------------------------------------- | ------------------------------------ | ---- | ---- |
@@ -117,6 +132,31 @@ Overview of the document outlie: First, System Structure will talk about the maj
 | research_field          | String(128)                           | Research field this position related |      |      |
 | applicant_qualification | String(1024)                          | User email address                   |      |      |
 | user_id                 | Integer                               | User assigned to this position       |      |      |
+| roster                  | Relationship                          | User retrieved applied application   |      |      |
+
+|                    | Table 3                                        |                         |
+| :----------------- | ---------------------------------------------- | ----------------------- |
+| Name               | Apply                                          |                         |
+| Role               | *Association Object between User and Position* |                         |
+|                    | *Table contain follow columns:*                |                         |
+| studentid          | Integer                                        | User ID                 |
+| positionid         | Integer                                        | Position ID             |
+| applydate          | DateTime                                       | Apply Date              |
+| status             | Integer                                        | Application Status      |
+| studentapplied     | Relationship                                   | Retrieved User Data     |
+| applicationapplied | Relationship                                   | Retrieved Position Data |
+|                    |                                                |                         |
+
+|      | Table 4                                   |      |
+| ---- | ----------------------------------------- | ---- |
+| Name | ResearchTopics                            |      |
+| Role | Associate Table for Reasearch Topic       |      |
+| Name | TechnicalElectives                        |      |
+| Role | Associate Table for Technical Electives   |      |
+| Name | ProgrammingLanguages                      |      |
+| Role | Associate Table for Programming Languages |      |
+
+
 
 ### 2.2.2 Controller
 
@@ -143,16 +183,16 @@ In this iteration user interfaces of `1. login`, `2. student registration and 3.
   1. Use case #2 with additional use case #14 in iteration 2
   2. This is a generic login page, user types their username and password and selects the corresponding role they are to log in. If the role does not matches, will pop a message with an invalid username or password.
 
-  [![img](https://github.com/boxianglin/Storage/raw/main/ResearchNetworkImages/Login.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/Login.png?raw=true)
+  <img src="https://github.com/wantingw/Storage/blob/master/Screen%20Shot%202021-11-16%20at%2012.03.18%20AM.png?raw=true" style="zoom:67%;" />
 
 - **User interface for `2. student registration and 3. faculty registration`:**
 
   1. Use case #1 with additional use case #12 in iteration 2
   2. Both student and faculty registrations are shown in this route, we added a JavaScript function to dynamically show the corresponding student flaskform and faculty flaskform whenever the radio button get selected.
 
-  [![img](https://github.com/boxianglin/Storage/raw/main/ResearchNetworkImages/Registration.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/Registration.png?raw=true)
+  <img src="https://github.com/wantingw/Storage/blob/master/Screen%20Shot%202021-11-16%20at%2012.07.42%20AM.png?raw=true" alt="img" style="zoom: 87%;" />
 
-- **User Interface`4 Faculty Homepage and 5 Faculty Delete Post`**
+- **User Interface` 4 Faculty Homepage and 5 Faculty Delete Post`**
 
   1. Use case #5
   2. The home page will display all the research positions. Faculty can only delete their own post.
