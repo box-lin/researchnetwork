@@ -40,14 +40,31 @@
             <td colspan="3" style = "text-align:center" valign="bottom">  
                 <br>
 
+                {% if current_user.usertype == 0 %}
+                    {% if current_user.is_applied(position) == False%}
+                        <form action = "{{ url_for('routes.apply', position_id = position.id)}}" method = "post" >
+                            <input type = 'submit' value = 'Apply' class = 'btn btn-success'>
+                        </form>
+                    {% else %}
+                        <form action = "{{ url_for('routes.withdraw', position_id = position.id)}}" method = "post">
+                            <input type = 'submit' value = 'Withdraw' class = 'btn btn-warning'>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    {% if position.writer == current_user %}
+                        <form action = "{{ url_for('routes.applicants', position_id = position.id)}}">
+                            <input type = 'submit' value = 'Applicant List' class = 'btn btn-success'>
+                        <form>
+                    {% endif %}
+                {% endif %}
+                
             </td>
         </tr>
 
         <tr>
             <td colspan="3" style = "text-align:center" valign="bottom">  
                 <br>
-                  <!-- (milestone3) TODO: include username who posted the post-->
-                Post By: <span class = "useritem"> {{ position.writer.username }} </span> 
+                    Post By: <span class = "useritem"> {{ position.writer.username }} </span> 
               </td>
             </tr>
         </tr>
