@@ -32,6 +32,8 @@ Faculty's post new position route.
 @bp_routes.route('/newPost', methods=['GET', 'POST'])
 @login_required
 def postReasearch():
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     postform = ResearchPositionForm()
     if postform.validate_on_submit():
         newPost = Position(title=postform.research_title.data, 
