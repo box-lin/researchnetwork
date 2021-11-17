@@ -1,3 +1,5 @@
+
+
 # Design Document
 
 ## Research Network Platform 
@@ -41,12 +43,10 @@ Prepared by:
 | Name | Date | Changes | Version |
 | ------ | ------ | --------- | --------- |
 |Revision 1 |2021-10-27 |Initial draft | 1.0        |
-|      |      |         |         |
+| Revision 2 | 2021-11-16 | Updated draft | 2.0 |
 |      |      |         |         |
 
 # 1. Introduction
-
-**Iteration 1:**
 
 The purpose of the Software Design Document is to provide a description of the design of a system fully enough to allow for software development to proceed with an understanding of what is to be built and how it is expected to built. The Software Design Document provides information necessary to provide description of the details for the software and system to be built.
 
@@ -81,140 +81,217 @@ Overview of the document outlie: First, System Structure will talk about the maj
 
 ### 2.2.1 Model
 
-|                     | Table 1                                           |                                                   |      |      |
-| ------------------- | ------------------------------------------------- | ------------------------------------------------- | ---- | ---- |
-| Name:               | User                                              |                                                   |      |      |
-| Role:               | *Store user infomation, both student and faculty* |                                                   |      |      |
-|                     | *Table contain follow columns:*                   |                                                   |      |      |
-| id                  | Integer, primary_key                              | User ID                                           |      |      |
-| username            | String(64), unique, index                         | Username                                          |      |      |
-| password_hash       | String(128)                                       | Hashed password                                   |      |      |
-| lastname            | String(20)                                        | User lastname                                     |      |      |
-| firstname           | String(30)                                        | User firstname                                    |      |      |
-| wsuid               | Integer, unique                                   | User WSUID                                        |      |      |
-| phone               | String(20)                                        | User phone number                                 |      |      |
-| email               | String(120), unique, index                        | User email address                                |      |      |
-| major               | String(20)                                        | Student major                                     |      |      |
-| GPA                 | String(5)                                         | Student GPA                                       |      |      |
-| gradulationdate     | String(10)                                        | Student graduate date                             |      |      |
-| elective            | String(300)                                       | Student elective class                            |      |      |
-| researchtopic       | String(30)                                        | Student interested research topic                 |      |      |
-| office              | String(1024)                                      | Office Location                                   |      |      |
-| research_experience | String(200)                                       | Student Research Experience                       |      |      |
-| usertype            | Integer                                           | Determine User Type: 0 for student, 1 for faculty |      |      |
-| elective            | relationship                                      | Retrieve StudentElectives Associate Table         |      |      |
-| researchtopic       | relationship                                      | Retrieve ResearchTopics Associate Table           |      |      |
-| programming         | relationship                                      | Retrieve ProgrammingLanaguages Associate Table    |      |      |
-| repr                | method                                            | Use to Print Information                          |      |      |
-| set_password        | method                                            | Generate Password                                 |      |      |
-| get_password        | method                                            | Check Password                                    |      |      |
-| is_student          | method                                            | Check User Type                                   |      |      |
-| is_faculty          | method                                            | Check User Type                                   |      |      |
-| is_applied          | method                                            | Check Application Status                          |      |      |
-| apply               | method                                            | Use to Apply Application                          |      |      |
-| withdraw            | method                                            | User to Withdraw Application                      |      |      |
-| get_faculty_posts   | method                                            | Return Post Position                              |      |      |
-| get_electives       | method                                            | Return User Elective                              |      |      |
-| get_researchtopic   | method                                            | Return Research Topic                             |      |      |
-| get_programming     | method                                            | Return Programming Language                       |      |      |
+| TABLE 1 - USER      | TYPE                       | USAGE                                             |
+| ------------------- | -------------------------- | ------------------------------------------------- |
+| id                  | Integer, primary_key       | User ID                                           |
+| username            | String(64), unique, index  | Username                                          |
+| password_hash       | String(128)                | Hashed password                                   |
+| lastname            | String(20)                 | User lastname                                     |
+| firstname           | String(30)                 | User firstname                                    |
+| wsuid               | Integer, unique            | User WSUID                                        |
+| phone               | String(20)                 | User phone number                                 |
+| email               | String(120), unique, index | User email address                                |
+| major               | String(20)                 | Student major                                     |
+| GPA                 | String(5)                  | Student GPA                                       |
+| gradulationdate     | String(10)                 | Student graduate date                             |
+| elective            | String(300)                | Student elective class                            |
+| researchtopic       | String(30)                 | Student interested research topic                 |
+| office              | String(1024)               | Office Location                                   |
+| research_experience | String(200)                | Student Research Experience                       |
+| usertype            | Integer                    | Determine User Type: 0 for student, 1 for faculty |
+| elective            | relationship               | Retrieve StudentElectives Associate Table         |
+| researchtopic       | relationship               | Retrieve ResearchTopics Associate Table           |
+| programming         | relationship               | Retrieve ProgrammingLanaguages Associate Table    |
+| repr                | method                     | Use to Print Information                          |
+| set_password        | method                     | Generate Password                                 |
+| get_password        | method                     | Check Password                                    |
+| is_student          | method                     | Check User Type                                   |
+| is_faculty          | method                     | Check User Type                                   |
+| is_applied          | method                     | Check Application Status                          |
+| apply               | method                     | Use to Apply Application                          |
+| withdraw            | method                     | User to Withdraw Application                      |
+| get_faculty_posts   | method                     | Return Post Position                              |
+| get_electives       | method                     | Return User Elective                              |
+| get_researchtopic   | method                     | Return Research Topic                             |
+| get_programming     | method                     | Return Programming Language                       |
 
-|                         | Table 2                               |                                      |      |      |
-| ----------------------- | ------------------------------------- | ------------------------------------ | ---- | ---- |
-| Name:                   | Position                              |                                      |      |      |
-| Role:                   | *Store Research Position Information* |                                      |      |      |
-|                         | *Table contain follow columns:*       |                                      |      |      |
-| id                      | Integer, primary_key                  | Position ID                          |      |      |
-| title                   | String(2048)                          | Position title                       |      |      |
-| desc                    | String(2048)                          | Position description                 |      |      |
-| start_date              | String(128)                           | Position start date                  |      |      |
-| end_date                | String(128)                           | Position end date                    |      |      |
-| time_commitment         | String(128)                           | Time commitment                      |      |      |
-| research_field          | String(128)                           | Research field this position related |      |      |
-| applicant_qualification | String(1024)                          | User email address                   |      |      |
-| user_id                 | Integer                               | User assigned to this position       |      |      |
-| roster                  | Relationship                          | User retrieved applied application   |      |      |
 
-|                    | Table 3                                        |                         |
-| :----------------- | ---------------------------------------------- | ----------------------- |
-| Name               | Apply                                          |                         |
-| Role               | *Association Object between User and Position* |                         |
-|                    | *Table contain follow columns:*                |                         |
-| studentid          | Integer                                        | User ID                 |
-| positionid         | Integer                                        | Position ID             |
-| applydate          | DateTime                                       | Apply Date              |
-| status             | Integer                                        | Application Status      |
-| studentapplied     | Relationship                                   | Retrieved User Data     |
-| applicationapplied | Relationship                                   | Retrieved Position Data |
-|                    |                                                |                         |
 
-|      | Table 4                                   |      |
-| ---- | ----------------------------------------- | ---- |
-| Name | ResearchTopics                            |      |
-| Role | Associate Table for Reasearch Topic       |      |
-| Name | TechnicalElectives                        |      |
-| Role | Associate Table for Technical Electives   |      |
-| Name | ProgrammingLanguages                      |      |
-| Role | Associate Table for Programming Languages |      |
+| TABLE 2 - POSITION      | TYPE                 | USAGE                                |
+| ----------------------- | -------------------- | ------------------------------------ |
+| id                      | Integer, primary_key | Position ID                          |
+| title                   | String(2048)         | Position title                       |
+| desc                    | String(2048)         | Position description                 |
+| start_date              | String(128)          | Position start date                  |
+| end_date                | String(128)          | Position end date                    |
+| time_commitment         | String(128)          | Time commitment                      |
+| research_field          | String(128)          | Research field this position related |
+| applicant_qualification | String(1024)         | User email address                   |
+| user_id                 | Integer, Foreign Key | User assigned to this position       |
+| roster                  | Relationship         | Retrieved applied application        |
+| researchtopic           | Relationship         | Retrieve research topic              |
+
+| TABLE 3 - APPLY    | TYPE                 | USAGE                              |
+| :----------------- | -------------------- | ---------------------------------- |
+| studentid          | Integer, Foreign Key | Reference User ID                  |
+| positionid         | Integer, Foreign Key | Reference Position ID              |
+| applydate          | DateTime             | Apply Date                         |
+| status             | Integer              | Application Status                 |
+| studentapplied     | Relationship         | Retrieved User Applied Application |
+| applicationapplied | Relationship         | Retrieved Position Applied         |
+
+| TABLE 4 - ResearchTopics | TYPE                 | USAGE                |
+| ------------------------ | -------------------- | -------------------- |
+| id                       | Integer, Primary Key | Research Topic ID    |
+| title                    | String               | Research Topic Title |
+
+| TABLE 5 - TechnicalElectives | TYPE                 | USAGE                      |
+| ---------------------------- | -------------------- | -------------------------- |
+| id                           | Integer, Primary Key | Technical Electives ID     |
+| title                        | String               | Technical Electives  Title |
+
+| TABLE 6 - ProgrammingLanguages | TYPE                 | USAGE                       |
+| ------------------------------ | -------------------- | --------------------------- |
+| id                             | Integer, Primary Key | Programming Languages ID    |
+| name                           | String               | Programming Languages  Name |
+
+| TABLE 7- StudentResearchTopics | TYPE                 | USAGE                       |
+| ------------------------------ | -------------------- | --------------------------- |
+| user_id                        | Integer, Foreign Key | Reference to user           |
+| topic_id                       | Integer, Foreign Key | Reference to Research Topic |
+
+| TABLE 8- StudentElectives | TYPE                 | USAGE                           |
+| ------------------------- | -------------------- | ------------------------------- |
+| user_id                   | Integer, Foreign Key | Reference to user               |
+| topic_id                  | Integer, Foreign Key | Reference to TechnicalElectives |
+
+| TABLE 9- StudentLanguages | TYPE                 | USAGE                             |
+| ------------------------- | -------------------- | --------------------------------- |
+| user_id                   | Integer, Foreign Key | Reference to user                 |
+| topic_id                  | Integer, Foreign Key | Reference to ProgrammingLanguages |
+
+
+
+***(MODEL DIAGRAM)***
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/researchappClass.drawio.png?raw=true)
 
 
 
 ### 2.2.2 Controller
 
-|      | Methods   | URL Path             | Description                                          |
-| :--- | :-------- | :------------------- | :--------------------------------------------------- |
-| 1.   | GET       | faculty_index        | Retrieve all research position for faculty to manage |
-| 2.   | GET       | student_index        | Retrieve all research position for student to apply  |
-| 3.   | GET, POST | newPost              | Faculty create new position                          |
-| 4.   | GET, POST | delete/<position_id> | Faculty delete created position                      |
-| 5.   | GET, POST | login                | Let user login the system                            |
-| 6.   | GET       | logout               | Let user logout the system                           |
-| 7.   | GET, POST | faculty_register     | Let faculty register into the system                 |
-| 8.   | GET, POST | student_register     | Let student register into the system                 |
-| 9.   | GET, POST | register             | Let user register into the system                    |
+|      | Methods      | URL Path                 | Description                                           |
+| :--- | :----------- | :----------------------- | :---------------------------------------------------- |
+| 1.   | GET          | faculty_index            | Faculty home page                                     |
+| 2.   | GET          | student_index            | Student home page                                     |
+| 3.   | GET, POST    | newPost                  | Faculty post new position                             |
+| 4.   | DELETE, POST | delete/<position_id>     | Faculty delete created position                       |
+| 5.   | GET          | applicants/<position_id> | Faculty view all applicants for a particular position |
+| 6.   | GET          | applicants_list          | Faculty review applicant list for all position posted |
+| 7.   | GET, POST    | f_profile                | Display faculty's profile                             |
+| 8.   | GET, POST    | f_profile_edit           | Edit faculty's profile                                |
+| 9.   | GET          | get_s_profile/<s_id>     | Get a paticular student's profile                     |
+| 10.  | POST         | apply/<position_id>      | Student apply position                                |
+| 11.  | POST         | withdraw/<position_id>   | Student withdraw applied application                  |
+| 12.  | GET          | s_profile                | Display student profile                               |
+| 13.  | GET, POST    | s_profile_edit           | Edit student profile                                  |
+| 14.  | POST         | p_approve_student        | Faculty approve student's application                 |
+| 15.  | POST         | p_hire_student           | Faculty hire student's application                    |
+| 16.  | GET, POST    | login                    | Let user login the system                             |
+| 17.  | GET          | logout                   | Let user logout the system                            |
+| 18.  | GET, POST    | register                 | Let user register into the system                     |
+
+
 
 ### 2.2.3 View and User Interface Design
 
-**Iteration 1:**
+(***in iteration 1***): user interfaces for `1. login`, `2. student registration and 3. faculty registration`,`4 Faculty Homepage and 5 Faculty Delete Post`, `6. Faculty Post Position`, and `7. Student homepage` have been implemented.
 
-In this iteration user interfaces of `1. login`, `2. student registration and 3. faculty registration`,`4 Faculty Homepage and 5 Faculty Delete Post`, `6. Faculty Post Position`, and `7. Student homepage` have been implemented. We use generic HTML CSS to custom the style and layout for the Flaskform element generated by the Jinjia Template engine.
+(***in iteration 2***) user interfaces for `1. student to apply for position`, `2. student to withdraw from application 3. faculty profile display`,`4 Faculty profile edit, `   `5 Student profile display`, `6. Student profile edit`, `7. Faculty see applicant list` , `8. Faculty view applicant profile` have been implemented.
 
-- **User interface for `1. Login`:**
+(***in iteration 3***) user interfaces for `1. faculty set application status` , `2.student view application status with restriction apply to withdraw only status is pending`, `3. display the position detail information`, `4.faculty application information modify`, `5. positions sorting `  will be implement.
+
+
+
+***<< Below the images are from interfaces of iteration 1and iteration 2>>***
+
+- **User interface for** `:Login`:
 
   1. Use case #2 with additional use case #14 in iteration 2
   2. This is a generic login page, user types their username and password and selects the corresponding role they are to log in. If the role does not matches, will pop a message with an invalid username or password.
 
   <img src="https://github.com/wantingw/Storage/blob/master/Screen%20Shot%202021-11-16%20at%2012.03.18%20AM.png?raw=true" style="zoom:67%;" />
 
-- **User interface for `2. student registration and 3. faculty registration`:**
+- **User interface for **`2. student registration and 3. faculty registration`:
 
   1. Use case #1 with additional use case #12 in iteration 2
   2. Both student and faculty registrations are shown in this route, we added a JavaScript function to dynamically show the corresponding student flaskform and faculty flaskform whenever the radio button get selected.
 
   <img src="https://github.com/wantingw/Storage/blob/master/Screen%20Shot%202021-11-16%20at%2012.07.42%20AM.png?raw=true" alt="img" style="zoom: 87%;" />
 
-- **User Interface` 4 Faculty Homepage and 5 Faculty Delete Post`**
+- **User Interface**`  :Faculty Homepage and 5 Faculty Delete Post`
 
   1. Use case #5
   2. The home page will display all the research positions. Faculty can only delete their own post.
 
-  [![img](https://github.com/boxianglin/Storage/raw/main/ResearchNetworkImages/faculty_homepage.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/faculty_homepage.png?raw=true)
+  [![img](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/FacultyIndex.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/faculty_homepage.png?raw=true)
 
-- **User interface `6. Faculty Post Position`:**
+- **User interface **`: Faculty Post Position`
 
   1. Use case #4
   2. This route will be called when faculty click the "Post New Position". Faculty can fill the research position formation. These information will add into the database and display in the Homepage.
 
   [![img](https://github.com/boxianglin/Storage/raw/main/ResearchNetworkImages/faculty_post.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/faculty_post.png?raw=true)
 
-- **User interface `7.student homepage`**
+- **User interface** `: student homepage and include student withdraw from application`
 
   1. Student Homepage corresponding to the `Use Case #7` in **Iteration 2**, we structure it in advance but more styling work will be perform in Iteration 2.
 
-  [![img](https://github.com/boxianglin/Storage/raw/main/ResearchNetworkImages/student_homepage.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/student_homepage.png?raw=true)
+  [![img](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/studentwithdraw.png?raw=true)](https://github.com/boxianglin/Storage/blob/main/ResearchNetworkImages/student_homepage.png?raw=true)
+
+- **User interface** `: student display applied application`
+
+![](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/studentdisplayonlyapply.png?raw=true)
+
+
+
+
+
+- **User interface **`: student display profile and edit profile`
+
+![](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/studentProfile.png?raw=true)
+
+
+
+- **User interface** `:Faculty sees applicants`
+
+![](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/applicantlist.png?raw=true)
+
+**User interface** `: Faculty profile edit and change`
+
+
+
+![](https://github.com/boxianglin/Storage/blob/main/researchappmilestone2/facultyprofile.png?raw=true)
+
+
+
+
+
+
 
 # 3. Progress Report
 
-In iteration 1, we implement the basic features of the platform: create an account, log in, log out, post the research position, and delete the position post. The Users can create an account and assign it as Faculty or Student. The Student User can log into the student page and view all the posted research positions. The Faculty Users can log into the faculty page and post the research position by entering detailed descriptions. The research position posts can be deleted by the poster faculty user. 
+(***in iteration 1***)
+
+We implement the basic features of the platform: create an account, log in, log out, post the research position, and delete the position post. The Users can create an account and assign it as Faculty or Student. The Student User can log into the student page and view all the posted research positions. The Faculty Users can log into the faculty page and post the research position by entering detailed descriptions. The research position posts can be deleted by the poster faculty user. 
+
+
+
+(***in iteration 2***)
+
+In iteration 2, student are able to apply and withdraw for the position posted by faculty. Faculty able to see how many students applied for the position and able to see the applicant's profile. Students and faculty are review and edit their own profile. Students are able to only see the application that they applied. Faculty are able to only see the position that they posted.
 
 # 4. Testing Plan
 
