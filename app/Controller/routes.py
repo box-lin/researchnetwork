@@ -49,8 +49,8 @@ def recommandation(student, allpositions):
         order_pos_level = sorted(list(result.items()), key = lambda x:x[1], reverse=True)
         order_pos = list(map(lambda x: x[0], order_pos_level))
         return order_pos
-    # if no such match found just return allpositions.
-    return allpositions
+    # if no such match found then none post show.
+    return []
 
 '''
 Filter by corresponding research topics.
