@@ -1,3 +1,5 @@
+from operator import pos
+from collections import defaultdict
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
@@ -5,11 +7,64 @@ from app.Model.models import Position,User,Apply
 from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
 from flask_login import current_user, login_required
 from app import db
+from Constant import researchtopics
 
 
 bp_routes = Blueprint('routes', __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 
+
+#--------------------------------- Helper Method -----------------------------------------#
+
+'''
+@param <student user> <all positions from db>
+@return <ordered list of position from high matched research areas to low matched research areas>
+'''
+def recommandation(student, allpositions):
+    # all the position {position:set(topics)} stored in a dictionary.
+    postion_topic_pair = defaultdict(set)
+    for position in allpositions:
+        p_topics = set()
+        for topic in position.positiontopics:
+            p_topics.add(topic.title)
+        postion_topic_pair[position] = p_topics
+    
+    # student's research topics in a list
+    s_topics = list()
+    for topic in student.researchtopic:
+        s_topics.append(topic.title)
+    
+    # {position:recomm_level}
+    result = {}
+    for pos in postion_topic_pair.keys():
+        recomm_level = 0
+        for s_t in s_topics:
+            if s_t in postion_topic_pair[pos]:
+                recomm_level += 1
+        if recomm_level > 0:
+            result[pos] = recomm_level
+            
+    # rank the positions by recomm level
+    if len(result) > 0:
+        order_pos_level = sorted(list(result.items()), key = lambda x:x[1], reverse=True)
+        order_pos = list(map(lambda x: x[0], order_pos_level))
+        return order_pos
+    # if no such match found just return allpositions.
+    return allpositions
+
+'''
+Filter by corresponding research topics.
+'''
+def filter_by(sortway, allpositions):
+    if sortway == 'Please choose below options:':
+        return allpositions
+    res = set()  
+    for position in allpositions:
+        for topic in position.positiontopics:
+            if topic.title == sortway: # one position might in multi topic use a set to avoid duplicates
+                res.add(position) 
+    return list(res)
+#====================================================================================#
 
 #------------------------- Faculty Interfaces ---------------------------------------#
 '''
@@ -18,12 +73,14 @@ Faculty Home Page Route
 @bp_routes.route('/faculty_index', methods=['GET','POST'])
 @login_required
 def faculty_index():
-    positions = Position.query.order_by(Position.time_commitment.desc())
+    positions = Position.query.order_by(Position.time_commitment.desc()).all()
     fForm = FacultyFilterForm()
     onlymy = False
     if fForm.validate_on_submit():
         onlymy = fForm.checkbox.data
-    return render_template('f_index.html', title="WSU Research Network",positions=positions.all(), onlymy = onlymy, faculty = current_user, form = fForm)
+        sortway = fForm.filter.data
+        positions = filter_by(sortway, positions)
+    return render_template('f_index.html', title="WSU Research Network",positions=positions, onlymy = onlymy, faculty = current_user, form = fForm)
 
 
 '''
@@ -144,6 +201,7 @@ def get_position_info(position_id):
 
 
 # ----------------------------------- Student Interface ----------------------------#
+
 '''
 Student Home Page Route
 '''
@@ -155,6 +213,11 @@ def student_index():
     onlyapply = False
     if fForm.validate_on_submit():
         onlyapply = fForm.checkbox.data
+        sortway = fForm.filter.data
+        if sortway == "Recommended Research Opportunities":
+            positions = recommandation(current_user, positions)
+        else:
+            positions = filter_by(sortway, positions)
     return render_template('s_index.html', title = "WSU Research Network", positions=positions, form=fForm, student = current_user, onlyapply = onlyapply)
 
 '''
