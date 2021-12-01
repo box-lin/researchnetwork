@@ -1,0 +1,25 @@
+{% if current_user.id == position.user_id %} {% extends 'f_base.html' %} {% else %} {% extends 's_base.html' %} {% endif %} {% block content %}
+
+
+<div class="row mt40" style="margin-top: 40px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <h1>Display The Research Position Information</h1>
+        <p>
+        <h2>Research Title: {{position.title}}</h2>
+        <p><b>Research Description:</b> {{position.desc}}</p>
+        <p><b>Time Commitement:</b> {{position.time_commitment}}</p>
+        <p><b>Research Start Date:</b> {{position.start_date}}</p>
+        <p><b>Research End Date:</b> {{position.end_date}}</p>
+        
+        <p>
+            <b>research field:</b> [ {% for p in position.positiontopics %} {{p.title}}; {% endfor %} ]
+        </p>
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+{% endblock %}

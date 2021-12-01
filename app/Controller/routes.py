@@ -41,10 +41,10 @@ def postReasearch():
                            start_date=postform.start_date.data,
                            end_date=postform.end_date.data, 
                            time_commitment=postform.time_commitment.data, 
-                           research_field=postform.research_field.data, 
                            applicant_qualification=postform.applicant_qualification.data,
                            user_id=current_user.id)
-        
+        for topic in postform.research_field.data:
+            newPost.positiontopics.append(topic)
         db.session.add(newPost)
         db.session.commit()
         flash("Your research position:  " + newPost.title + " is created! ")
@@ -133,6 +133,13 @@ def get_s_profile(s_id):
     theStudent = User.query.filter_by(id=s_id).first()
     titles = theStudent.firstname + ', ' + theStudent.lastname + " Profile"
     return render_template('s_profile.html', title = titles, student = theStudent)
+
+@bp_routes.route('/get_position_info/<position_id>', methods=['GET'])
+@login_required
+def get_position_info(position_id):
+    thePosition = Position.query.filter_by(id=position_id).first()
+    return render_template('position_info.html', position = thePosition)
+
 # ==================================================================================#
 
 

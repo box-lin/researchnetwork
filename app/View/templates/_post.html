@@ -2,7 +2,7 @@
        
         <tr> 
             <td colspan="3">
-                <div class="posttitle"> {{position.title}} </div>
+                <div class="posttitle"> <a href = "{{url_for('routes.get_position_info', position_id = position.id) }}" > {{position.title}} </a> </div>
             </td>
         </tr>
 
