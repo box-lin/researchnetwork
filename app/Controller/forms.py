@@ -1,3 +1,4 @@
+import re
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField,SelectField
 from wtforms.fields.html5 import DateField
@@ -8,7 +9,14 @@ from app.Model.models import ProgrammingLanguages, ResearchTopics, User, Technic
 from wtforms.fields.simple import PasswordField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from datetime import date, datetime
+from Constant import researchtopics, electives, languages
 
+
+def get_researchtopic():
+    return ResearchTopics.query.all()
+
+def get_researchtopicLabel(research):
+    return research.title
 '''
 Flaskform for faculty use - Research position post
 
@@ -19,7 +27,7 @@ class ResearchPositionForm(FlaskForm):
     start_date = DateField('Start date ', format='%Y-%m-%d')
     end_date = DateField('End date ', format='%Y-%m-%d')
     time_commitment = StringField('Required Time Commitment',validators=[DataRequired(),Length(min=0, max=128)] )
-    research_field = StringField('Research Field', validators=[DataRequired(), Length(min=0, max=128)])
+    research_field = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
     applicant_qualification = TextAreaField('Applicant Qualification', validators=[DataRequired(),Length(min=0, max=128)])
     submit = SubmitField('Post')
 
@@ -33,20 +41,21 @@ class ResearchPositionForm(FlaskForm):
             if end_date.data < self.start_date.data:
                 raise ValidationError("end date must later start date!")
 
+
+
 '''
 Stutdent Filter Postition form
 '''
 class StudentFilterForm(FlaskForm):
-    filter = SelectField('Filter By', choices = ['Research areas']) 
+    filter = SelectField('Filter By', choices= ['Please choose below options:', 'Recommended Research Opportunities'] + researchtopics) 
     checkbox = BooleanField('Display my applied position only')
     refresh = SubmitField('Refresh')
-
 
 '''
 Faculty Filter Position form
 '''
 class FacultyFilterForm(FlaskForm):
-    filter = SelectField('Filter By', choices = ['Research areas']) 
+    filter = SelectField('Filter By', choices = ['Please choose below options:'] + researchtopics) 
     checkbox = BooleanField('Display my posted position only')
     refresh = SubmitField('Refresh')
 
