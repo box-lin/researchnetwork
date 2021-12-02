@@ -169,7 +169,7 @@ class Apply(db.Model):
     studentid = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True) 
     positionid = db.Column(db.Integer, db.ForeignKey('position.id'), primary_key=True)
     applydate = db.Column(db.DateTime, default = datetime.utcnow)
-    status = db.Column(db.Integer)
+    status = db.Column(db.Integer, default = 1) #1--applied, wait for faculty; 2--approved for interview; 3--Hired; 4--Unhired
     studentapplied = db.relationship('User')
     applicationapplied = db.relationship('Position')
 

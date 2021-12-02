@@ -130,44 +130,52 @@
 
             <p>{{ fform.username.label }}</p>
             <p>{{ fform.username(class ='formtitle') }}</p>
+
             {% for error in fform.username.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
 
             <p>{{ fform.lastname.label }}</p>
             <p>{{ fform.lastname(class ='formtitle') }}</p>
+
             {% for error in fform.lastname.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.firstname.label }}</p>
             <p>{{ fform.firstname(class ='formtitle') }}</p>
+
             {% for error in fform.firstname.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.wsuid.label }}</p>
             <p>{{ fform.wsuid(class ='formtitle') }}</p>
+
             {% for error in fform.wsuid.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.phone.label }}</p>
             <p>{{ fform.phone(class ='formtitle') }}</p>
+
             {% for error in fform.phone.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.email.label }}</p>
             <p>{{ fform.email(class ='formtitle')}} </p>
+
             {% for error in fform.email.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
 
             <p>{{ fform.password.label }} </p>
             <p>{{ fform.password(class ='formtitle') }}</p>
+
             {% for error in fform.password.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
 
             <p>{{ fform.password2.label }}</p>
             <p>{{ fform.password2(class ='formtitle') }} </p>
+            
             {% for error in fform.password2.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
