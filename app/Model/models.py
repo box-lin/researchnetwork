@@ -11,6 +11,15 @@ def load_user(id):
 
 #------------------------------- Association Table ---------------------------------#
 '''
+faculty position research topic table.
+'''
+FacultyPositionTopics = db.Table('facultypositiontopics',
+    db.Column('position_id', db.Integer, db.ForeignKey('position.id')),
+    db.Column('topic_id', db.Integer, db.ForeignKey('researchtopics.id'))
+)
+
+
+'''
 Student to topic association table.
 '''
 StudentResearchTopics = db.Table('studentresearchtopics',
@@ -175,12 +184,14 @@ class Position(db.Model):
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     time_commitment = db.Column(db.String(128))
-    research_field = db.Column(db.String(128))
+    #research_field = db.Column(db.String(128))
     applicant_qualification = db.Column(db.String(1024))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    # researchtopic = db.relationship(
-    #     'ResearchTopics', secondary = StudentResearchTopics,
-    #     primaryjoin=(StudentResearchTopics.c.user_id == id),lazy='dynamic', overlaps='roster'
-    # )
+    
+    positiontopics = db.relationship(
+        'ResearchTopics', secondary = FacultyPositionTopics,
+        primaryjoin=(FacultyPositionTopics.c.position_id == id),lazy='dynamic', overlaps='roster'
+    )
+    #topics = db.relationship('ResearchTopics', backref='positiontopics', lazy='dynamic')
     roster = db.relationship('Apply', back_populates = 'applicationapplied')

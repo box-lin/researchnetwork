@@ -4,7 +4,7 @@
     window.onload = s_home_page_active();
 </script>
 
-<h1>Welcome to Research Network!</h1>
+<h1>Dear Student, Welcome to Research Network!</h1>
 
 {% if form %}
 <form action="" method="post">
@@ -16,9 +16,21 @@
 </form>
 {% endif %}
 
+
 <div class="postlist">
-    {% for position in positions %}
-    <div class="post-box">
-        {% include '_post.html' %}
-    </div>
-    {% endfor %} {% endblock %}
+    {% if onlyapply %}
+        {% for apply in student.application %} {% set position = apply.applicationapplied %}
+            <div class="post-box">
+                {% include '_post.html' %}
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for position in positions %}
+            <div class="post-box">
+                {% include '_post.html' %}
+            </div>
+        {% endfor %} 
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,4 +1,8 @@
 {% extends "s_base.html" %} {% block content %}
+<script>
+    window.onload = clearStudentDisplay();
+    window.onload = s_my_profile_active();
+</script>
 <div class="row mt40" style="margin-top: 40px;">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -43,43 +47,43 @@
             {% for error in form.password2.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.major.label }}</p>  
+            <p>{{ form.major.label }}</p>
             <p>{{ form.major(class ='formtitle') }} </p>
 
             {% for error in form.major.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.GPA.label }}</p>  
+            <p>{{ form.GPA.label }}</p>
             <p>{{ form.GPA(class ='formtitle') }} </p>
 
             {% for error in form.GPA.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.graduation.label }}</p>  
+            <p>{{ form.graduation.label }}</p>
             <p>{{ form.graduation(class ='formtitle') }} </p>
 
             {% for error in form.graduation.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.elective.label }}</p>  
+            <p>{{ form.elective.label }}</p>
             <p>{{ form.elective(class ='formbody') }} </p>
 
             {% for error in form.elective.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.researchtopic.label }}</p>  
+            <p>{{ form.researchtopic.label }}</p>
             <p>{{ form.researchtopic(class ='formtitle') }} </p>
 
             {% for error in form.researchtopic.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.programming.label }}</p>  
+            <p>{{ form.programming.label }}</p>
             <p>{{ form.programming(class ='formtitle') }} </p>
 
             {% for error in form.programming.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
-            <p>{{ form.experience.label }}</p>  
+            <p>{{ form.experience.label }}</p>
             <p>{{ form.experience(class ='formbody') }} </p>
 
             {% for error in form.experience.errors %}

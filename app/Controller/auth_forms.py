@@ -11,7 +11,7 @@ from wtforms.widgets import ListWidget, CheckboxInput
 
 '''
 User login form component
-'''
+''' 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
