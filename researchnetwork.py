@@ -1,6 +1,6 @@
 import os
 from app import create_app, db
-from app.Model.models import ProgrammingLanguages, ResearchTopics, TechnicalElectives
+from app.Model.models import ProgrammingLanguages, ResearchTopics, TechnicalElectives, User
 from Constant import researchtopics, electives, languages
 # from app.Model.models import Post
 

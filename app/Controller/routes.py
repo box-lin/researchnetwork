@@ -3,7 +3,7 @@ from collections import defaultdict
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
-from app.Model.models import Position,User,Apply
+from app.Model.models import Position,User, Apply
 from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
 from flask_login import current_user, login_required
 from app import db
@@ -130,7 +130,7 @@ Faculty see all applicants for a paticular position
 @bp_routes.route('/applicants/<position_id>', methods = ['GET'])
 @login_required
 def applicants(position_id):
-    thePost = Position.query.filter_by(id=position_id).first()
+    thePost = Position.query.filter_by(id=position_id).first() 
     title_str = "Applicants for " + thePost.title
     return render_template('applicants.html', title = title_str , current_position = thePost)
 
@@ -144,6 +144,53 @@ def applicants_list():
     position = current_user.get_faculty_posts()
     return render_template('f_applicant_list.html', title = 'Applicant List', pform = position)
 
+'''
+Faculty approve student application for interview
+'''
+@bp_routes.route('/approve/', methods=["POST","GET"])
+@login_required
+def approve():
+    position_id = request.args.get('position_id')
+    student_id = request.args.get('student_id')
+    application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
+    if application:
+        application.status = 2
+        db.session.commit()
+        flash("Student approved for interview!")
+        return redirect(url_for('routes.applicants_list'))
+    return redirect(url_for('routes.applicants_list'))
+    
+'''
+Faculty decide to hire student
+'''
+@bp_routes.route('/hire/', methods=["POST","GET"])
+@login_required
+def hire():
+    position_id = request.args.get('position_id')
+    student_id = request.args.get('student_id')
+    application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
+    if application:
+        application.status = 3
+        db.session.commit()
+        flash("Student Hire Successfully!")
+        return redirect(url_for('routes.applicants_list'))
+    return redirect(url_for('routes.applicants_list'))
+
+'''
+Faculty decide to reject student
+'''
+@bp_routes.route('/reject/', methods=["POST","GET"])
+@login_required
+def reject():
+    position_id = request.args.get('position_id')
+    student_id = request.args.get('student_id')
+    application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
+    if application:
+        application.status = 4
+        db.session.commit()
+        flash("Student Rejected!")
+        return redirect(url_for('routes.applicants_list'))
+    return redirect(url_for('routes.applicants_list'))
 
 '''
 Faculty display profile
@@ -184,6 +231,9 @@ def f_profile_edit():
         pass
     return render_template('f_profile_edit.html', title = 'Edit Faculty Profile', form = eform)
 
+'''
+Faculty get student profile
+'''
 @bp_routes.route('/get_s_profile/<s_id>', methods=['GET'])
 @login_required
 def get_s_profile(s_id):
@@ -196,6 +246,7 @@ def get_s_profile(s_id):
 def get_position_info(position_id):
     thePosition = Position.query.filter_by(id=position_id).first()
     return render_template('position_info.html', position = thePosition)
+
 
 # ==================================================================================#
 
