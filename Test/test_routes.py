@@ -166,11 +166,11 @@ def test_new_position_post(test_client,init_database):
 
 def test_student_apply_withdraw_position(request,test_client,init_database):
     response = test_client.post('/login',
-                                data=dict(username='luuis',password='123',remember_me=False),
+                                data=dict(username='louis',password='123',remember_me=False),
                                 follow_redirects = True)
     assert response.status_code == 200
     assert b"Hi, Luuis!" in response.data
-    
+
     response = test_client.post('/newPost',
                             data=dict(title='title',desc='decription',start_date='2021-12-22',end_date='2021-12-31',time_commitment='12days',research_field='test',applicant_qualification='test'),
                             follow_redirects=True)
@@ -180,6 +180,19 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     assert b"new position post" in response.data
     c = db.session.query(Position).filter(Position.title == 'title')
     assert c.count() >= 1
+
+    response = test_client.get('/logout',
+                                follow_redirects = True)
+    assert response.status_code == 200
+    assert b"Sign in" in response.data
+    assert b"Please log in to access this page." in response.data
+
+    response = test_client.post('/login',
+                                data=dict(username='luuis',password='123',remember_me=False),
+                                follow_redirects = True)
+    assert response.status_code == 200
+    assert b"Hi, Luuis!" in response.data
+    
 
     response = test_client.post('/apply/'+str(c.first().id),
                                 data=dict(),follow_redirects=True)
@@ -218,9 +231,33 @@ def test_faculty_approve_hire_reject(request,test_client,init_database):
     c = db.session.query(Position).filter(Position.title == 'title')
     assert c.count() >= 1
 
+    response = test_client.get('/logout',
+                                follow_redirects = True)
+    assert response.status_code == 200
+    assert b"Sign in" in response.data
+    assert b"Please log in to access this page." in response.data
+
+    response = test_client.post('/login',
+                                data=dict(username='luuis',password='123',remember_me=False),
+                                follow_redirects = True)
+    assert response.status_code == 200
+    assert b"Hi, Luuis!" in response.data
+
     response = test_client.post('/apply/'+str(c.first().id),
                                 data=dict(),follow_redirects=True)
     assert response.status_code == 200
+
+    response = test_client.get('/logout',
+                                follow_redirects = True)
+    assert response.status_code == 200
+    assert b"Sign in" in response.data
+    assert b"Please log in to access this page." in response.data
+
+    response = test_client.post('/login',
+                                data=dict(username='louis',password='123',remember_me=False),
+                                follow_redirects = True)
+    assert response.status_code == 200
+    assert b"Hi, Luuis!" in response.data
     
     response = test_client.post('/approve/',data = dict(),follow_redirects = True)
     assert response.status_code == 200
