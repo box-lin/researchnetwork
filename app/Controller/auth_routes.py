@@ -58,8 +58,8 @@ Register Route
 def register():
     fform = FacultyRegistrationForm()
     sform = StudentRegistrationForm()
-    print(fform.data)
-    print(sform.data)
+    # print(fform.data)
+    # print(sform.data)
     if fform.validate_on_submit() or sform.validate_on_submit():
         if fform.validate_on_submit() and sform.GPA.data == "":
             faculty = User(username=fform.username.data, 
