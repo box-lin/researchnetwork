@@ -1,0 +1,32 @@
+<tr valign="middle" id="_f_applicant_info">
+    <td width="15%"> {{student.firstname}} {{student.lastname}} </td>
+    <td width="20%"> {{student.email}} </td>
+    <td width="5%"> {{student.GPA}} </td>
+    <td width="10%"> {{student.major}} </td>
+    <td width="15%"> {{student.gradulationdate}}</td>
+    <td width="15%"> <a href="{{url_for('routes.get_s_profile', s_id = student.id)}}"> View Student Profile </a> </td>
+    {% if apply.status == 1 %}
+    <td width="20%"><a href="{{url_for('routes.approve', position_id = apply.positionid, student_id = apply.studentid)}}"><button>Approve</button></a></td>
+    {% elif apply.status == 2 %}
+    <td>
+        <a href="{{url_for('routes.hire', position_id = apply.positionid, student_id = apply.studentid)}}"><button>Hire</button></a>
+    </td>
+    <td width="10%">
+        <a href="{{url_for('routes.reject', position_id = apply.positionid, student_id = apply.studentid)}}"><button>Reject</button></a>
+    </td>
+    {% elif apply.status == 3 %}
+    <td width="20%">
+        Student Hired
+    </td>
+    {% elif apply.status == 4 %}
+    <td width="20%">
+        Application rejected
+    </td>
+    {% endif %}
+    <!-- <td width = "7.5%">
+            <button>test</button>   
+    </td>       
+    <td width = "7.5%">
+            <button>test</button>   
+    </td>  -->
+</tr>

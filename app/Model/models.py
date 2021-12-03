@@ -1,3 +1,4 @@
+from enum import unique
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -166,6 +167,7 @@ class User(db.Model, UserMixin):
 Association object <Apply> position as <Student>.
 '''
 class Apply(db.Model):
+    id = db.Column(db.Integer, autoincrement=True)
     studentid = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True) 
     positionid = db.Column(db.Integer, db.ForeignKey('position.id'), primary_key=True)
     applydate = db.Column(db.DateTime, default = datetime.utcnow)
