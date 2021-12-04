@@ -41,6 +41,26 @@
             </a>
         </p>
         {% endif %}
+
+        
+        <p>
+        <b> Applied Applications: </b>
+        </p>
+
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr valign="bottom">
+                    <th width="50%">Research Name</th>
+                    <th width="50%"> Status </th>
+                </tr>
+            </thead>
+            {% for app in student.application %}  {% set position = app.applicationapplied %}
+                <tr valign="middle">
+                    <td width="50%"> <a href = "{{url_for('routes.get_position_info', position_id = position.id) }}" > {{position.title}} </a> </td>
+                    <td width="50%"> {{app.status}} </td>    
+                </tr>
+            {% endfor %}
+        </table>
     </div>
     <div class="col-md-2"></div>
 </div>

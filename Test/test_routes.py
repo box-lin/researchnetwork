@@ -102,13 +102,12 @@ def test_student_register(test_client,init_database):
 
     response = test_client.post('/register',
                             data = dict(username='test1',email='test1@gmail.com',phone='1234567890',firstname='Yi',lastname='Chou',
-                                        wsuid='1234567890',major='CS',GPA='3.0',gradulation=datetime(2021,12,22),experience='test',
+                                        wsuid='1234567890',major='CS',GPA='3.0',gradulation=datetime(2021,12,22).strftime('%Y-%m-%d'),experience='test',
                                         elective=elective1,researchtopic=researchtopic1,programming=programming1,password="goodgood",password2="goodgood"),
                             follow_redirects=True)
     
     assert response.status_code == 200
     s = db.session.query(User).filter(User.username=='test1')
-    print(elective1, s.first().elective)
     assert s.first().email == 'test1@gmail.com'
     assert s.first().usertype == 0
     assert s.first().phone == '1234567890'
