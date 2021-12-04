@@ -81,7 +81,7 @@ class StudentRegistrationForm(FlaskForm):
     password2 = PasswordField('Repeat Paswword', validators=[DataRequired(), equal_to('password')]) 
     major = StringField('Major', validators=[DataRequired()])
     GPA = StringField('GPA', validators=[DataRequired()])
-    gradulation = DateField('Gradulation Date', format='%Y-%m-%d')
+    gradulation = DateField('Gradulation Date', format='%Y-%m-%d %H:%M:%S')
     elective = QuerySelectMultipleField('Technical Electives', query_factory = get_TechnicalElectives, get_label = get_TechnicalElectivesLabel, allow_blank=False)
     researchtopic = QuerySelectMultipleField('Research Topics', query_factory = get_researchtopic, get_label = get_researchtopicLabel, allow_blank=False)
     programming =  QuerySelectMultipleField('Programming Languages', query_factory = get_programming, get_label = get_programmingLable, allow_blank=False)
@@ -104,8 +104,8 @@ class StudentRegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('The WSUID already existed! Please use a differen WSUID!')
 
-    def validate_gradulation(self, gradulationdate):
-        print(type(gradulationdate.data))
-        if gradulationdate.data is not None:
-            if gradulationdate.data < date.today():
+    def validate_gradulation(self, gradulation):
+
+        if gradulation.data is not None:
+            if gradulation.data < date.today():
                 raise ValidationError("Graduation date must later than today!")
