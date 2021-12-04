@@ -97,7 +97,8 @@ class User(db.Model, UserMixin):
     ## additional student ##
     major = db.Column(db.String(20))
     GPA = db.Column(db.Float(5))
-    graduationdate = db.Column(db.DateTime,default = datetime.utcnow)
+    # graduationdate = db.Column(db.DateTime,default = datetime.utcnow)
+    graduationdate = db.Column(db.DateTime)
     research_experience = db.Column(db.String(200))
 
     elective = db.relationship(
