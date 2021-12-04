@@ -156,8 +156,15 @@ def test_new_position_post(test_client,init_database):
     assert response.status_code == 200
     # assert b"Post New Research position" in response.data
 
+    faculty = db.session.query(User).filter(User.username=='louis').first()
+
+    research_field1 = db.session.query(ResearchTopics).filter_by(title='Bioinformatics')
+    
+    # response = test_client.post('/newPost',
+    #                             data=dict(title='title',desc='decription',start_date=datetime(2021, 12, 22),end_date=datetime(2021, 12, 31),time_commitment='12days',research_field=research_field1, applicant_qualification='test', user_id = faculty.id),
+    #                             follow_redirects=True)
     response = test_client.post('/newPost',
-                                data=dict(title='title',desc='decription',start_date='2021-12-22',end_date='2021-12-31',time_commitment='12days',research_field='test',applicant_qualification='test'),
+                                data=dict(research_title='title',desc='decription',start_date='2021-12-21',end_date='2021-12-31',time_commitment='12days',research_field=research_field1, applicant_qualification='test', user_id = faculty.id),
                                 follow_redirects=True)
     assert response.status_code == 200
     # assert b"Welcome to Research Position" in response.data
@@ -177,8 +184,12 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     assert response.status_code == 200
     # assert b"Hi, Luuis!" in response.data
 
+    faculty = db.session.query(User).filter(User.username=='louis').first()
+
+    research_field1 = db.session.query(ResearchTopics).filter_by(title='Bioinformatics')
+
     response = test_client.post('/newPost',
-                            data=dict(title='title',desc='decription',start_date='2021-12-22',end_date='2021-12-31',time_commitment='12days',research_field='test',applicant_qualification='test'),
+                            data=dict(research_title='title',desc='decription',start_date='2021-12-22',end_date='2021-12-31',time_commitment='12days',research_field=research_field1 ,applicant_qualification='test', user_id = faculty.id),
                             follow_redirects=True)
     assert response.status_code == 200
     # assert b"Welcome to Research Position" in response.data
@@ -205,14 +216,15 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     assert response.status_code == 200
     # assert b"You are apply for a new research position!" in response.data
     c = db.session.query(Position).filter(Position.title == 'title' and Position.research_field == 'test')
-    assert c.first().roster[0].username == 'luuis'
+    assert c.first().roster[0].studentid == db.session.query(User).filter(User.username=='luuis').first().id
 
     response = test_client.post('/withdraw/'+str(c.first().id),
-                                data=dict(),follow_redirect = True)
+                                data=dict(),follow_redirects = True)
     assert response.status_code == 200
     # assert b"You are successfully withdraw a research position!" in response.data
     c = db.session.query(Position).filter(Position.title=='title' and Position.research_field == 'test')
-    assert c.first().roster[0].username == None
+    print(type(c.first().roster))
+    assert c.first().roster == []
 
     response = test_client.get('/logout',
                                 follow_redirects = True)
@@ -227,8 +239,12 @@ def test_faculty_approve_hire_reject(request,test_client,init_database):
     assert response.status_code == 200
     # assert b"Hi, Luuis!" in response.data
     
+    faculty = db.session.query(User).filter(User.username=='louis').first()
+
+    research_field1 = db.session.query(ResearchTopics).filter_by(title='Bioinformatics')
+
     response = test_client.post('/newPost',
-                            data=dict(title='title',desc='decription',start_date='2021-12-22',end_date='2021-12-31',time_commitment='12days',research_field='test',applicant_qualification='test'),
+                            data=dict(research_title='title',desc='decription',start_date='2021-12-22',end_date='2021-12-31',time_commitment='12days',research_field=research_field1,applicant_qualification='test', user_id = faculty.id),
                             follow_redirects=True)
     assert response.status_code == 200
     # assert b"Welcome to Research Position" in response.data
@@ -264,9 +280,10 @@ def test_faculty_approve_hire_reject(request,test_client,init_database):
                                 follow_redirects = True)
     assert response.status_code == 200
     # assert b"Hi, Luuis!" in response.data
-    
-    response = test_client.post('/approve/',data = dict(),follow_redirects = True)
+    student = db.session.query(User).filter(User.username=='luuis').first()
+    response = test_client.post('/approve/',data = dict(position_id = c.first().id, studentid = student.id),follow_redirects = True)
     assert response.status_code == 200
+
     c = db.session.query(Position).filter(Position.title=='title' and Position.research_field == 'test')
     assert c.first().roster[0].status == 2
     # assert b"You approve this student apply" in response.data

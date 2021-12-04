@@ -296,6 +296,8 @@ def withdraw(position_id):
         db.session.commit()
         flash('You have withdraw from the ' + thePost.title +' !')
         return redirect(url_for('routes.student_index'))
+    #TODO: if position is not exist, return error
+    return redirect(url_for('routes.student_index'))
 
 @bp_routes.route('/MyProfile/',methods = ['GET'])
 @login_required
