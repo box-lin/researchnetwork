@@ -241,7 +241,42 @@ def get_position_info(position_id):
     thePosition = Position.query.filter_by(id=position_id).first()
     return render_template('position_info.html', position = thePosition)
 
-
+'''
+Faculty modify existing position info
+'''
+@bp_routes.route('/f_modify_position<position_id>', methods = ['GET','POST'])
+@login_required
+def f_modify_position(position_id):
+    thePosition = Position.query.filter_by(id=position_id).first()
+    pform = ResearchPositionForm()
+    if request.method == 'POST':
+        if pform .validate_on_submit():
+            thePosition.title = pform.research_title.data
+            thePosition.desc = pform.desc.data
+            thePosition.start_date = pform.start_date.data
+            thePosition.end_date = pform.end_date.data
+            thePosition.time_commitment = pform.time_commitment.data
+            thePosition.applicant_qualification = pform.applicant_qualification.data
+            for r in thePosition.positiontopics:
+                thePosition.positiontopics.remove(r)
+            for r in pform.research_field.data:
+                thePosition.positiontopics.append(r)
+            db.session.add(thePosition)
+            db.session.commit()
+            flash("Your Position Has Been Updated!")
+            return redirect(url_for('routes.faculty_index'))
+        pass
+    elif request.method == 'GET':
+        pform.research_title.data = thePosition.title
+        pform.desc.data = thePosition.desc
+        pform.start_date.data = thePosition.start_date
+        pform.end_date.data = thePosition.end_date
+        pform.time_commitment.data = thePosition.time_commitment
+        pform.applicant_qualification.data = thePosition.applicant_qualification
+        pform.research_field.data = thePosition.positiontopics
+    else:
+        pass
+    return render_template('f_modify_position.html', position = thePosition, form = pform)
 # ==================================================================================#
 
 
