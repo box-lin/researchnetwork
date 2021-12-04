@@ -147,11 +147,9 @@ def applicants_list():
 '''
 Faculty approve student application for interview
 '''
-@bp_routes.route('/approve/', methods=["POST","GET"])
+@bp_routes.route('/approve/<position_id>/<student_id>', methods=["POST","GET"])
 @login_required
-def approve():
-    position_id = request.args.get('position_id')
-    student_id = request.args.get('student_id')
+def approve(position_id,student_id):
     application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
     if application:
         application.status = 2
@@ -163,11 +161,9 @@ def approve():
 '''
 Faculty decide to hire student
 '''
-@bp_routes.route('/hire/', methods=["POST","GET"])
+@bp_routes.route('/hire/<position_id>/<student_id>', methods=["POST","GET"])
 @login_required
-def hire():
-    position_id = request.args.get('position_id')
-    student_id = request.args.get('student_id')
+def hire(position_id, student_id):
     application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
     if application:
         application.status = 3
@@ -179,11 +175,9 @@ def hire():
 '''
 Faculty decide to reject student
 '''
-@bp_routes.route('/reject/', methods=["POST","GET"])
+@bp_routes.route('/reject/<position_id>/<student_id>', methods=["POST","GET"])
 @login_required
-def reject():
-    position_id = request.args.get('position_id')
-    student_id = request.args.get('student_id')
+def reject(position_id, student_id):
     application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
     if application:
         application.status = 4

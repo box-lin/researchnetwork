@@ -281,22 +281,27 @@ def test_faculty_approve_hire_reject(request,test_client,init_database):
     assert response.status_code == 200
     # assert b"Hi, Luuis!" in response.data
     student = db.session.query(User).filter(User.username=='luuis').first()
-    response = test_client.post('/approve/',data = dict(position_id = c.first().id, studentid = student.id),follow_redirects = True)
+    student_id = student.id
+    position_id = c.first().id
+    print(c.first())
+    response = test_client.get('/approve/' + str(position_id) + '/' + str(student_id), data = dict(),follow_redirects = True)
+    print('/approve/' + str(position_id) + '/' + str(student_id))
     assert response.status_code == 200
-
-    c = db.session.query(Position).filter(Position.title=='title' and Position.research_field == 'test')
+    
+    c = db.session.query(Position).filter(Position.id == position_id)
+    print(c.first().roster[0].status)
     assert c.first().roster[0].status == 2
     # assert b"You approve this student apply" in response.data
 
-    response = test_client.post('/hire/',data = dict(),follow_redirects = True)
+    response = test_client.post('/hire/' + str(position_id) + '/' + str(student_id), data = dict(),follow_redirects = True)
     assert response.status_code == 200
-    c = db.session.query(Position).filter(Position.title=='title' and Position.research_field == 'test')
+    c = db.session.query(Position).filter(Position.id == position_id)
     assert c.first().roster[0].status == 3
     # assert b"You hire this student" in response.data
 
-    response = test_client.post('/reject/',data = dict(),follow_redirects = True)
+    response = test_client.post('/reject/'  + str(position_id) + '/' + str(student_id),data = dict(),follow_redirects = True)
     assert response.status_code == 200
-    c = db.session.query(Position).filter(Position.title=='title' and Position.research_field == 'test')
+    c = db.session.query(Position).filter(Position.id == position_id)
     assert c.first().roster[0].status == 4
     # assert b"You reject this student" in response.data
 
