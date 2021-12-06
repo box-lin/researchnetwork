@@ -57,7 +57,17 @@
             {% for app in student.application %}  {% set position = app.applicationapplied %}
                 <tr valign="middle">
                     <td width="50%"> <a href = "{{url_for('routes.get_position_info', position_id = position.id) }}" > {{position.title}} </a> </td>
-                    <td width="50%"> {{app.status}} </td>    
+                    <td width="50%"> 
+                        {% if app.status == 1%}
+                            Pending
+                        {% elif app.status == 2 %}
+                            Approved for Interview (Please reach out to the research provider for an appointment!)
+                        {% elif app.status == 3 %}
+                            Hired (Congradulations!)
+                        {% elif app.status == 4%}
+                            Not Hired :(
+                        {% endif %}
+                    </td>    
                 </tr>
             {% endfor %}
         </table>
