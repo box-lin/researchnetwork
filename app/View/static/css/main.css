@@ -92,6 +92,16 @@ a:hover {
     border-radius: 4px;
     box-sizing: border-box;
 }
+.appbody {
+    width: 100%;
+    height: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
 .postButton {
     width: 25%;

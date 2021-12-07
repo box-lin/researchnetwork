@@ -4,7 +4,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User, Apply
-from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
+from app.Controller.forms import ApplicationForm, FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
 from flask_login import current_user, login_required
 from app import db
 from Constant import researchtopics
@@ -294,6 +294,15 @@ def f_modify_position(position_id):
     else:
         pass
     return render_template('f_modify_position.html', position = thePosition, form = pform)
+
+@bp_routes.route('/view_submission/<position_id>/<student_id>', methods = ['GET'])
+@login_required
+def view_submission(position_id,student_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
+    position = Position.query.filter_by(id=position_id).first()
+    application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
+    return render_template('submission_info.html', application = application, position = position)
 # ==================================================================================#
 
 
@@ -339,11 +348,16 @@ def apply(position_id):
     if current_user.is_faculty():
         return render_template('404error.html', user = current_user)
     thePost = Position.query.filter_by(id=position_id).first()
-    if thePost:
-        current_user.apply(thePost)
+    aform = ApplicationForm()
+    if aform.validate_on_submit():
+        fullname = aform.fullname.data 
+        contact_email = aform.email.data 
+        statement = aform.statement.data
+        current_user.apply(thePost, fullname, contact_email, statement)
         db.session.commit()
         flash('You have applied ' + thePost.title +' !')
         return redirect(url_for('routes.student_index'))
+    return render_template('s_application.html', form = aform, position = thePost)
 
 '''
 Student withdraw application route.
