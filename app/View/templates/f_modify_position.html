@@ -1,0 +1,58 @@
+{% extends "f_base.html" %} {% block content %}
+<script>
+    window.onload = clearFacultyDisplay();
+    window.onload = f_home_page_active();
+</script>
+
+<div class="newpost">
+    <form action="" method="POST">
+        {{form.hidden_tag()}}
+        <div class="row">
+            <div class="col-md-6">
+                <p>{{ form.research_title.label }}</p>
+                <p>{{ form.research_title(class="formtitle") }}</p>
+
+                {% for error in form.research_title.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.desc.label }}</p>
+                <p>{{ form.desc(class="formbody")}}</p>
+
+                {% for error in form.desc.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.start_date.label }}</p>
+                <p>{{ form.start_date(class="formtitle datepicker") }}</p>
+
+                <p>{{ form.end_date.label }}</p>
+                <p>{{ form.end_date(class="formtitle") }}</p>
+
+                {% for error in form.start_date.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %} {% for error in form.end_date.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+            </div>
+            <div class="col-md-6">
+                <p>{{ form.time_commitment.label }}</p>
+                <p>{{ form.time_commitment(class="formtitle") }}</p>
+
+                {% for error in form.time_commitment.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.research_field.label }}</p>
+                <p>{{ form.research_field(class="formtitle") }}</p>
+
+                {% for error in form.research_field.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+                <p>{{ form.applicant_qualification.label }}</p>
+                <p>{{ form.applicant_qualification(class="formbody") }}</p>
+
+                {% for error in form.applicant_qualification.errors %}
+                <span style="color: red;">[{{error}}]</span> {% endfor %} {{form.submit(class="button")}}
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

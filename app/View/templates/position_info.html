@@ -17,6 +17,25 @@
             <b>research field:</b> [ {% for p in position.positiontopics %} {{p.title}}; {% endfor %} ]
         </p>
 
+        {% if current_user.id == position.user_id %}
+        <p>
+            <a href="{{url_for('routes.f_modify_position', position_id = position.id)}}">
+                <button>Modify Research Post</button>
+            </a>
+        </p>
+ 
+        {% elif current_user.usertype == 0 %}
+            {% if current_user.is_applied(position) == False%}
+                <form action = "{{ url_for('routes.apply', position_id = position.id)}}" method = "post" >
+                    <input type = 'submit' value = 'Apply' class = 'btn btn-success'>
+                </form>
+            {% else %}
+                <form action = "{{ url_for('routes.withdraw', position_id = position.id)}}" method = "post">
+                    <input type = 'submit' value = 'Withdraw' class = 'btn btn-warning'>
+                </form>
+            {% endif %}
+        {% endif %}
+
     </div>
     <div class="col-md-2"></div>
 </div>
