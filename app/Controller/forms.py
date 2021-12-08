@@ -140,3 +140,9 @@ class StudentEditProfileForm(FlaskForm):
         if gradulationdate.data is not None:
             if gradulationdate.data < date.today():
                 raise ValidationError("Graduation date must later than today!")
+
+class ApplicationForm(FlaskForm):
+    fullname = StringField('Enter Your Full Name', validators=[DataRequired()])
+    email = StringField('Enter Your Email', validators=[DataRequired(),Email()])
+    statement = TextAreaField('Brief Statement (describe your interest and what you hope to gain by participating this project)', validators=[DataRequired()])
+    submit = SubmitField('Submit Application')

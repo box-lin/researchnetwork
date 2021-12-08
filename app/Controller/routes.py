@@ -4,7 +4,7 @@ from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
 from app.Model.models import Position,User, Apply
-from app.Controller.forms import FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
+from app.Controller.forms import ApplicationForm, FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
 from flask_login import current_user, login_required
 from app import db
 from Constant import researchtopics
@@ -73,6 +73,8 @@ Faculty Home Page Route
 @bp_routes.route('/faculty_index', methods=['GET','POST'])
 @login_required
 def faculty_index():
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     positions = Position.query.order_by(Position.time_commitment.desc()).all()
     fForm = FacultyFilterForm()
     onlymy = False
@@ -116,6 +118,8 @@ Faculty's delete position route.
 @bp_routes.route('/delete/<position_id>', methods=['POST','DELETE'])
 @login_required
 def delete(position_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     thePost = Position.query.filter_by(id=position_id).first()
     if thePost:
         db.session.delete(thePost)
@@ -130,9 +134,11 @@ Faculty see all applicants for a paticular position
 @bp_routes.route('/applicants/<position_id>', methods = ['GET'])
 @login_required
 def applicants(position_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     thePost = Position.query.filter_by(id=position_id).first() 
     title_str = "Applicants for " + thePost.title
-    return render_template('applicants.html', title = title_str , current_position = thePost)
+    return render_template('applicants.html', title = title_str , current_position = thePost) 
 
 
 '''
@@ -141,6 +147,8 @@ Faculty review applicant list for all position posted
 @bp_routes.route('/applicants_list', methods = ['GET'])
 @login_required
 def applicants_list():
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     position = current_user.get_faculty_posts()
     return render_template('f_applicant_list.html', title = 'Applicant List', pform = position)
 
@@ -150,6 +158,8 @@ Faculty approve student application for interview
 @bp_routes.route('/approve/<position_id>/<student_id>', methods=["POST","GET"])
 @login_required
 def approve(position_id,student_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
     if application:
         application.status = 2
@@ -164,6 +174,8 @@ Faculty decide to hire student
 @bp_routes.route('/hire/<position_id>/<student_id>', methods=["POST","GET"])
 @login_required
 def hire(position_id, student_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
     if application:
         application.status = 3
@@ -178,6 +190,8 @@ Faculty decide to reject student
 @bp_routes.route('/reject/<position_id>/<student_id>', methods=["POST","GET"])
 @login_required
 def reject(position_id, student_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
     if application:
         application.status = 4
@@ -192,6 +206,8 @@ Faculty display profile
 @bp_routes.route('/f_profile/', methods = ['GET'])
 @login_required
 def f_profile():
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     return render_template('f_profile.html', title='Faculty Profile', faculty = current_user)
 
 '''
@@ -200,6 +216,8 @@ Faculty edit profile
 @bp_routes.route('/f_profile_edit', methods = ['GET','POST'])
 @login_required
 def f_profile_edit():
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     eform = FacultyEditProfileForm()
     if request.method == 'POST':
         #handle the form submission
@@ -231,15 +249,12 @@ Faculty get student profile
 @bp_routes.route('/get_s_profile/<s_id>', methods=['GET'])
 @login_required
 def get_s_profile(s_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     theStudent = User.query.filter_by(id=s_id).first()
     titles = theStudent.firstname + ', ' + theStudent.lastname + " Profile"
     return render_template('s_profile.html', title = titles, student = theStudent)
 
-@bp_routes.route('/get_position_info/<position_id>', methods=['GET'])
-@login_required
-def get_position_info(position_id):
-    thePosition = Position.query.filter_by(id=position_id).first()
-    return render_template('position_info.html', position = thePosition)
 
 '''
 Faculty modify existing position info
@@ -247,6 +262,8 @@ Faculty modify existing position info
 @bp_routes.route('/f_modify_position<position_id>', methods = ['GET','POST'])
 @login_required
 def f_modify_position(position_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
     thePosition = Position.query.filter_by(id=position_id).first()
     pform = ResearchPositionForm()
     if request.method == 'POST':
@@ -277,8 +294,28 @@ def f_modify_position(position_id):
     else:
         pass
     return render_template('f_modify_position.html', position = thePosition, form = pform)
+
+@bp_routes.route('/view_submission/<position_id>/<student_id>', methods = ['GET'])
+@login_required
+def view_submission(position_id,student_id):
+    if current_user.is_student():
+        return render_template('404error.html', user = current_user)
+    position = Position.query.filter_by(id=position_id).first()
+    application = Apply.query.filter_by(positionid=position_id, studentid = student_id).first()
+    return render_template('submission_info.html', application = application, position = position)
 # ==================================================================================#
 
+
+#------------------------------------ Use for both accounts -------------------------------
+@bp_routes.route('/get_position_info/<position_id>', methods=['GET'])
+@login_required
+def get_position_info(position_id):
+    thePosition = Position.query.filter_by(id=position_id).first()
+    application = None
+    if current_user.usertype == 0:
+        application = Apply.query.filter_by(positionid=thePosition.id, studentid = current_user.id).first()
+    return render_template('position_info.html', position = thePosition, application = application)
+# ==================================================================================#
 
 # ----------------------------------- Student Interface ----------------------------#
 
@@ -288,6 +325,8 @@ Student Home Page Route
 @bp_routes.route('/student_index', methods=['GET','POST'])
 @login_required
 def student_index():
+    if current_user.is_faculty():
+        return render_template('404error.html', user = current_user)
     fForm = StudentFilterForm()
     positions = Position.query.order_by(Position.time_commitment.desc()).all()
     onlyapply = False
@@ -306,13 +345,19 @@ Student Apply Position route.
 @bp_routes.route('/apply/<position_id>', methods=['POST'])
 @login_required
 def apply(position_id):
-    print("xxxx")
+    if current_user.is_faculty():
+        return render_template('404error.html', user = current_user)
     thePost = Position.query.filter_by(id=position_id).first()
-    if thePost:
-        current_user.apply(thePost)
+    aform = ApplicationForm()
+    if aform.validate_on_submit():
+        fullname = aform.fullname.data 
+        contact_email = aform.email.data 
+        statement = aform.statement.data
+        current_user.apply(thePost, fullname, contact_email, statement)
         db.session.commit()
         flash('You have applied ' + thePost.title +' !')
         return redirect(url_for('routes.student_index'))
+    return render_template('s_application.html', form = aform, position = thePost)
 
 '''
 Student withdraw application route.
@@ -320,6 +365,8 @@ Student withdraw application route.
 @bp_routes.route('/withdraw/<position_id>', methods=['POST'])
 @login_required
 def withdraw(position_id):
+    if current_user.is_faculty():
+        return render_template('404error.html', user = current_user)
     thePost = Position.query.filter_by(id=position_id).first()
     if thePost:
         current_user.withdraw(thePost)
@@ -332,7 +379,9 @@ def withdraw(position_id):
 @bp_routes.route('/MyProfile/',methods = ['GET'])
 @login_required
 def My_Profile():
-        return render_template('s_profile.html', title = 'My Profile', student = current_user)
+    if current_user.is_faculty():
+        return render_template('404error.html', user = current_user)
+    return render_template('s_profile.html', title = 'My Profile', student = current_user)
 
 
 '''
@@ -341,6 +390,8 @@ Student edit profile
 @bp_routes.route('/s_profile_edit', methods = ['GET','POST'])
 @login_required
 def s_profile_edit():
+    if current_user.is_faculty():
+        return render_template('404error.html', user = current_user)
     eform = StudentEditProfileForm()
     print(current_user)
     if request.method == 'POST':
