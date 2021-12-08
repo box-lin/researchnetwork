@@ -118,16 +118,10 @@ class TestModels(unittest.TestCase):
         student = User(username = "Wanting", email = "wantingw@wsu.edu", usertype = 0)
         self.assertEqual(len(student.application), 0)
         position1 = Position(title = "reserch1")
-        position2 = Position(title = "reserch2")
-        position3 = Position(title = "reserch3")
-        position4 = Position(title = "reserch4")
-        student.apply(position1)
-        student.apply(position2)
-        student.apply(position3)
-        student.apply(position4)
-        self.assertEqual(len(student.application), 4)
+        student.apply(position1, "wanting", "12@wsu.edu", "i love research")
+        self.assertEqual(len(student.application), 1)
         self.assertEqual(list(map(lambda x: x.applicationapplied.title, student.application)), 
-                        ["reserch1", "reserch2", "reserch3", "reserch4"])
+                        ["reserch1"])
         
     
     def test_student_withdraw_position(self):
@@ -142,7 +136,7 @@ class TestModels(unittest.TestCase):
         db.session.add(position1)
         db.session.commit()
         
-        student.apply(position1)
+        student.apply(position1, "wanting", "12@wsu.edu", "i love research")
         db.session.commit()
         self.assertEqual(len(student.application), 1)
         
