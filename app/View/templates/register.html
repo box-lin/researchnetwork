@@ -4,8 +4,8 @@
 <div class="register">
     <h1>Register</h1>
     <form name="studentFacultyReg">
-        <input type="radio" name="studentFaculty" id="studentRegister" value="1" onclick="showStudent()" checked style="width: auto;"> Student</input>
-        <input type="radio" name="studentFaculty" id="facultyRegister" value="2" onclick="showFaculty()" style="width: auto;"> Faculty</input>
+        <input type="radio" name="studentFaculty" id="studentRegister" value="1" onclick="showStudent(); set_reg_student()" checked style="width: auto;"> Student</input>
+        <input type="radio" name="studentFaculty" id="facultyRegister" value="2" onclick="showFaculty(); set_reg_faculty()" style="width: auto;"> Faculty</input>
     </form>
     <div id="studentForm" style="display: block;">
 
@@ -175,7 +175,7 @@
 
             <p>{{ fform.password2.label }}</p>
             <p>{{ fform.password2(class ='formtitle') }} </p>
-            
+
             {% for error in fform.password2.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
