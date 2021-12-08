@@ -3,7 +3,7 @@ from collections import defaultdict
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
-from app.Model.models import Position,User, Apply
+from app.Model.models import Position,User, Apply, ClosedPosition
 from app.Controller.forms import ApplicationForm, FacultyEditProfileForm, ResearchPositionForm, StudentFilterForm, StudentEditProfileForm, FacultyFilterForm
 from flask_login import current_user, login_required
 from app import db
@@ -15,6 +15,7 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 
 
 #--------------------------------- Helper Method -----------------------------------------#
+
 
 '''
 @param <student user> <all positions from db>
@@ -64,6 +65,22 @@ def filter_by(sortway, allpositions):
             if topic.title == sortway: # one position might in multi topic use a set to avoid duplicates
                 res.add(position) 
     return list(res)
+
+def closed_pos(pos, application):
+    closepos = ClosedPosition(
+        title = pos.title,
+        desc = pos.desc,
+        start_date = pos.start_date,
+        end_date = pos.end_date,
+        time_commitment = pos.time_commitment,
+        applicant_qualification = pos.applicant_qualification,
+        student_id = application.studentid,
+        appstatus = application.status
+    )
+        
+    db.session.add(closepos)
+    db.session.commit()
+    
 #====================================================================================#
 
 #------------------------- Faculty Interfaces ---------------------------------------#
@@ -122,6 +139,13 @@ def delete(position_id):
         return render_template('404error.html', user = current_user)
     thePost = Position.query.filter_by(id=position_id).first()
     if thePost:
+        for app in thePost.roster:
+            closed_pos(thePost, app)
+            db.session.delete(app)
+            db.session.commit()
+        for r in thePost.positiontopics:
+            thePost.positiontopics.remove(r)
+            db.session.commit()
         db.session.delete(thePost)
         db.session.commit()
         flash("Your Research Position:  " + thePost.title + " has been deleted! ")
@@ -167,7 +191,7 @@ def approve(position_id,student_id):
         flash("Student approved for interview!")
         return redirect(url_for('routes.applicants_list'))
     return redirect(url_for('routes.applicants_list'))
-    
+
 '''
 Faculty decide to hire student
 '''
@@ -183,6 +207,7 @@ def hire(position_id, student_id):
         flash("Student Hire Successfully!")
         return redirect(url_for('routes.applicants_list'))
     return redirect(url_for('routes.applicants_list'))
+
 
 '''
 Faculty decide to reject student
@@ -315,6 +340,7 @@ def get_position_info(position_id):
     if current_user.usertype == 0:
         application = Apply.query.filter_by(positionid=thePosition.id, studentid = current_user.id).first()
     return render_template('position_info.html', position = thePosition, application = application)
+
 # ==================================================================================#
 
 # ----------------------------------- Student Interface ----------------------------#

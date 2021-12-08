@@ -41,10 +41,9 @@
             </a>
         </p>
         {% endif %}
-
-        
+        <hr>
         <p>
-        <b> Applied Applications: </b>
+        <b> Current Active Applied Applications: </b>
         </p>
 
         <table class="table table-hover">
@@ -66,6 +65,37 @@
                             Hired (Congradulations!)
                         {% elif app.status == 4%}
                             Not Hired :(
+                        {% endif %}
+                    </td>    
+                </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <br>
+        <p>
+        <b> Historic Closed Applications: </b>
+        </p>
+
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr valign="bottom">
+                    <th width="50%">Research Name</th>
+                    <th width="50%"> Status </th>
+                </tr>
+            </thead>
+            {% for app in student.closedposition%} 
+                <tr valign="middle">
+                    <td width="50%"> {{app.title}}  </td>
+                    <td width="50%"> 
+                        {% if app.appstatus == 1%}
+                            Application Not Available!
+                        {% elif app.appstatus == 2 %}
+                            Application Not Available!
+                        {% elif app.appstatus == 3 %}
+                            Hired (Application No Longer Available)
+                        {% elif app.appstatus == 4%}
+                            Not Hired (Application No Longer Available)
                         {% endif %}
                     </td>    
                 </tr>
