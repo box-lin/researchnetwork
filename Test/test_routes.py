@@ -216,6 +216,7 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     # assert b"position post" in response.data
     # assert b"new position post" in response.data
     c = db.session.query(Position).filter(Position.title == 'title')
+    
     assert c.count() >= 1
 
     response = test_client.get('/logout',
@@ -232,10 +233,11 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     
 
     response = test_client.post('/apply/'+str(c.first().id),
-                                data=dict(),follow_redirects=True)
+                                data=dict(fullname='Chou Yi', email='test@gmail.com', statement='test'),follow_redirects=True)
     assert response.status_code == 200
     # assert b"You are apply for a new research position!" in response.data
     c = db.session.query(Position).filter(Position.title == 'title')
+    print(response.data)
     assert c.first().roster[0].studentid == db.session.query(User).filter(User.username=='luuis').first().id
 
     response = test_client.post('/withdraw/'+str(c.first().id),
@@ -281,12 +283,12 @@ def test_faculty_approve_hire_reject(request,test_client,init_database):
 
     response = test_client.post('/login',
                                 data=dict(username='luuis',password='123',remember_me=False),
-                                follow_redirects = True)
+                                follow_redirects = True)    
     assert response.status_code == 200
     # assert b"Hi, Luuis!" in response.data
 
     response = test_client.post('/apply/'+str(c.first().id),
-                                data=dict(),follow_redirects=True)
+                                data=dict(fullname='Chou Yi', email='test@gmail.com', statement='test'),follow_redirects=True)  #TODO
     assert response.status_code == 200
 
     response = test_client.get('/logout',
@@ -303,13 +305,13 @@ def test_faculty_approve_hire_reject(request,test_client,init_database):
     student = db.session.query(User).filter(User.username=='luuis').first()
     student_id = student.id
     position_id = c.first().id
-    print(c.first())
+    # print(c.first())
     response = test_client.get('/approve/' + str(position_id) + '/' + str(student_id), data = dict(),follow_redirects = True)
     print('/approve/' + str(position_id) + '/' + str(student_id))
     assert response.status_code == 200
     
     c = db.session.query(Position).filter(Position.id == position_id)
-    print(c.first().roster[0].status)
+    print(c.first())
     assert c.first().roster[0].status == 2
     # assert b"You approve this student apply" in response.data
 
