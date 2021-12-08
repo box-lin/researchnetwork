@@ -216,6 +216,7 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     # assert b"position post" in response.data
     # assert b"new position post" in response.data
     c = db.session.query(Position).filter(Position.title == 'title')
+    
     assert c.count() >= 1
 
     response = test_client.get('/logout',
@@ -232,10 +233,12 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
     
 
     response = test_client.post('/apply/'+str(c.first().id),
-                                data=dict(),follow_redirects=True)
+                                data=dict(fullname='Chou Yi', email='test@gmail.com', statement='test'),follow_redirects=True)
     assert response.status_code == 200
     # assert b"You are apply for a new research position!" in response.data
     c = db.session.query(Position).filter(Position.title == 'title')
+    print(response.data)
+    # print(c.first().roster)#TODO
     assert c.first().roster[0].studentid == db.session.query(User).filter(User.username=='luuis').first().id
 
     response = test_client.post('/withdraw/'+str(c.first().id),
