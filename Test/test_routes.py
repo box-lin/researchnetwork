@@ -100,6 +100,7 @@ def test_student_register(test_client,init_database):
                             )
                         )
 
+    response = test_client.post('/set_student',data=dict())
     response = test_client.post('/register',
                             data = dict(username='test1',email='test1@gmail.com',phone='1234567890',firstname='Yi',lastname='Chou',
                                         wsuid='1234567890',major='CS',GPA='3.0',gradulation=datetime(2021,12,22).strftime('%Y-%m-%d'),experience='test',
@@ -131,6 +132,7 @@ def test_student_register(test_client,init_database):
     # assert b"Sign In" in response.data
 
 def test_faculty_register(test_client,init_database):
+    response = test_client.post('/set_faculty',data=dict())
     response = test_client.post('/register',
                         data=dict(username='test2',email='test2@gmail.com',usertype=1,firstname='Yi',lastname='Chou',wsuid='2345678901',phone='4253260387',password='123',password2='123'),
                         follow_redirects=True)
