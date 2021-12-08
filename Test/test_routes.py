@@ -235,14 +235,14 @@ def test_student_apply_withdraw_position(request,test_client,init_database):
                                 data=dict(),follow_redirects=True)
     assert response.status_code == 200
     # assert b"You are apply for a new research position!" in response.data
-    c = db.session.query(Position).filter(Position.title == 'title' and Position.research_field == 'test')
+    c = db.session.query(Position).filter(Position.title == 'title')
     assert c.first().roster[0].studentid == db.session.query(User).filter(User.username=='luuis').first().id
 
     response = test_client.post('/withdraw/'+str(c.first().id),
                                 data=dict(),follow_redirects = True)
     assert response.status_code == 200
     # assert b"You are successfully withdraw a research position!" in response.data
-    c = db.session.query(Position).filter(Position.title=='title' and Position.research_field == 'test')
+    c = db.session.query(Position).filter(Position.title=='title')
     print(type(c.first().roster))
     assert c.first().roster == []
 
