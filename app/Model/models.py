@@ -11,6 +11,8 @@ def load_user(id):
 
 
 #------------------------------- Association Table ---------------------------------#
+
+
 '''
 faculty position research topic table.
 '''
@@ -122,6 +124,9 @@ class User(db.Model, UserMixin):
     # for student use
     application = db.relationship('Apply', back_populates = 'studentapplied')
     
+    closedposition = db.relationship('ClosedPosition', backref='writer', lazy='dynamic')
+    
+    
     
     def __repr__(self):
         return '<User {}, {}>'.format(self.id,self.username)
@@ -179,6 +184,19 @@ class Apply(db.Model):
     studentapplied = db.relationship('User')
     applicationapplied = db.relationship('Position')
 
+
+class ClosedPosition(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(2048))
+    desc = db.Column(db.String(2048))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
+    time_commitment = db.Column(db.String(128))
+    
+    applicant_qualification = db.Column(db.String(1024))
+    student_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+    appstatus = db.Column(db.Integer, default = 1) 
 
 '''
 Research position model.
