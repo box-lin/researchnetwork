@@ -177,9 +177,9 @@ class Apply(db.Model):
     studentid = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True) 
     positionid = db.Column(db.Integer, db.ForeignKey('position.id'), primary_key=True)
     applydate = db.Column(db.DateTime, default = datetime.utcnow)
-    briefstatement = db.Column(db.String(500))
-    contactEmail = db.Column(db.String(120))
-    fullname = db.Column(db.String(20))
+    briefstatement = db.Column(db.String(500)) 
+    contactEmail = db.Column(db.String(120))  # reference faculty contact email
+    fullname = db.Column(db.String(20)) # reference faculty fullname
     status = db.Column(db.Integer, default = 1) #1--applied, wait for faculty; 2--approved for interview; 3--Hired; 4--Unhired
     studentapplied = db.relationship('User')
     applicationapplied = db.relationship('Position')

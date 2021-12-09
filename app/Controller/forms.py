@@ -142,7 +142,7 @@ class StudentEditProfileForm(FlaskForm):
                 raise ValidationError("Graduation date must later than today!")
 
 class ApplicationForm(FlaskForm):
-    fullname = StringField('Enter Your Full Name', validators=[DataRequired()])
-    email = StringField('Enter Your Email', validators=[DataRequired(),Email()])
+    fullname = StringField('Enter Full Name of the Faculty That Can Provide the Reference for You', validators=[DataRequired()])
+    email = StringField('Enter The Email of That Faculty', validators=[DataRequired(),Email()])
     statement = TextAreaField('Brief Statement (describe your interest and what you hope to gain by participating this project)', validators=[DataRequired()])
     submit = SubmitField('Submit Application')
