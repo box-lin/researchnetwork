@@ -1,0 +1,27 @@
+{% extends "f_base.html" %} {% block content %}
+<script>
+    window.onload = clearFacultyDisplay();
+    window.onload = f_home_page_active();
+</script>
+
+<div class="row mt40" style="margin-top: 40px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1> The Application of {{position.title}} </h1>
+        <hr>
+
+        <p> <b>Applicant Name: </b><p>
+        {{application.fullname}}
+
+        <p> <b>Applicant Contact Email: </b> <p>
+        {{application.contactEmail}}
+
+        <p> <b> Applicant Brief Statement: </b><p>
+        {{application.briefstatement}}
+
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock %}

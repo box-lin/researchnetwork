@@ -1,4 +1,5 @@
 <html>
+
 <head>
     {% if title %}
     <title>{{ title }} - Research Network </title>
@@ -7,10 +8,11 @@
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/register.js')}}"></script>
+
 </head>
 
 <body>

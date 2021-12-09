@@ -1,3 +1,4 @@
+from enum import unique
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -10,6 +11,17 @@ def load_user(id):
 
 
 #------------------------------- Association Table ---------------------------------#
+
+
+'''
+faculty position research topic table.
+'''
+FacultyPositionTopics = db.Table('facultypositiontopics',
+    db.Column('position_id', db.Integer, db.ForeignKey('position.id')),
+    db.Column('topic_id', db.Integer, db.ForeignKey('researchtopics.id'))
+)
+
+
 '''
 Student to topic association table.
 '''
@@ -87,7 +99,8 @@ class User(db.Model, UserMixin):
     ## additional student ##
     major = db.Column(db.String(20))
     GPA = db.Column(db.Float(5))
-    graduationdate = db.Column(db.DateTime,default = datetime.utcnow)
+    # graduationdate = db.Column(db.DateTime,default = datetime.utcnow)
+    graduationdate = db.Column(db.DateTime)
     research_experience = db.Column(db.String(200))
 
     elective = db.relationship(
@@ -111,6 +124,9 @@ class User(db.Model, UserMixin):
     # for student use
     application = db.relationship('Apply', back_populates = 'studentapplied')
     
+    closedposition = db.relationship('ClosedPosition', backref='writer', lazy='dynamic')
+    
+    
     
     def __repr__(self):
         return '<User {}, {}>'.format(self.id,self.username)
@@ -130,9 +146,9 @@ class User(db.Model, UserMixin):
     def is_applied(self, newPosition):
         return (Apply.query.filter_by(studentid=self.id).filter_by(positionid=newPosition.id).count() > 0)
     
-    def apply(self, newPosition):
+    def apply(self, newPosition, fullname, email, statement):
         if not self.is_applied(newPosition):
-            newApplication = Apply(applicationapplied = newPosition)
+            newApplication = Apply(applicationapplied = newPosition, fullname = fullname, contactEmail = email, briefstatement=statement)
             self.application.append(newApplication)
             db.session.commit()
 
@@ -157,13 +173,30 @@ class User(db.Model, UserMixin):
 Association object <Apply> position as <Student>.
 '''
 class Apply(db.Model):
+    id = db.Column(db.Integer, autoincrement=True)
     studentid = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True) 
     positionid = db.Column(db.Integer, db.ForeignKey('position.id'), primary_key=True)
     applydate = db.Column(db.DateTime, default = datetime.utcnow)
-    status = db.Column(db.Integer)
+    briefstatement = db.Column(db.String(500)) 
+    contactEmail = db.Column(db.String(120))  # reference faculty contact email
+    fullname = db.Column(db.String(20)) # reference faculty fullname
+    status = db.Column(db.Integer, default = 1) #1--applied, wait for faculty; 2--approved for interview; 3--Hired; 4--Unhired
     studentapplied = db.relationship('User')
     applicationapplied = db.relationship('Position')
 
+
+class ClosedPosition(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(2048))
+    desc = db.Column(db.String(2048))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
+    time_commitment = db.Column(db.String(128))
+    
+    applicant_qualification = db.Column(db.String(1024))
+    student_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+    appstatus = db.Column(db.Integer, default = 1) 
 
 '''
 Research position model.
@@ -175,12 +208,14 @@ class Position(db.Model):
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     time_commitment = db.Column(db.String(128))
-    research_field = db.Column(db.String(128))
+    #research_field = db.Column(db.String(128))
     applicant_qualification = db.Column(db.String(1024))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    # researchtopic = db.relationship(
-    #     'ResearchTopics', secondary = StudentResearchTopics,
-    #     primaryjoin=(StudentResearchTopics.c.user_id == id),lazy='dynamic', overlaps='roster'
-    # )
+    
+    positiontopics = db.relationship(
+        'ResearchTopics', secondary = FacultyPositionTopics,
+        primaryjoin=(FacultyPositionTopics.c.position_id == id),lazy='dynamic', overlaps='roster'
+    )
+    #topics = db.relationship('ResearchTopics', backref='positiontopics', lazy='dynamic')
     roster = db.relationship('Apply', back_populates = 'applicationapplied')

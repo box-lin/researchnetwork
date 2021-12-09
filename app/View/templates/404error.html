@@ -1,9 +1,11 @@
-
 {% if user.is_student() %}
-    {% extends "s_base.html" %}
 
-    {% block content %}
-        <h1>File Not Found</h1>
-        <p><a href="{{ url_for('routes.student_index') }}">Back</a></p>
-    {% endblock %}
+<h1>Route Not Found</h1>
+<p><a href="{{ url_for('routes.student_index') }}">Back To Student Page</a></p>
+
+{% elif user.is_faculty() %}
+
+<h1>Route Not Found</h1>
+<p><a href="{{ url_for('routes.faculty_index') }}">Back To Faculty Page</a></p>
+
 {% endif %}

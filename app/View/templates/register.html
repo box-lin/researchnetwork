@@ -4,8 +4,8 @@
 <div class="register">
     <h1>Register</h1>
     <form name="studentFacultyReg">
-        <input type="radio" name="studentFaculty" id="studentRegister" value="1" onclick="showStudent()" checked style="width: auto;"> Student</input>
-        <input type="radio" name="studentFaculty" id="facultyRegister" value="2" onclick="showFaculty()" style="width: auto;"> Faculty</input>
+        <input type="radio" name="studentFaculty" id="studentRegister" value="1" onclick="showStudent(); set_reg_student()" checked style="width: auto;"> Student</input>
+        <input type="radio" name="studentFaculty" id="facultyRegister" value="2" onclick="showFaculty(); set_reg_faculty()" style="width: auto;"> Faculty</input>
     </form>
     <div id="studentForm" style="display: block;">
 
@@ -70,23 +70,49 @@
                     <p>{{ sform.major.label }}</p>
                     <p>{{ sform.major(class ='formtitle') }} </p>
 
+                    {% for error in sform.major.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
                     <p>{{ sform.GPA.label }}</p>
                     <p>{{ sform.GPA(class ='formtitle') }} </p>
+
+                    {% for error in sform.GPA.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
 
                     <p>{{ sform.gradulation.label }}</p>
                     <p>{{ sform.gradulation(class ='datepicker, formtitle ') }} </p>
 
+                    {% for error in sform.gradulation.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+
                     <p>{{ sform.elective.label }}</p>
                     <p>{{ sform.elective(style='width:inherit',class ='formtitle') }} </p>
+
+                    {% for error in sform.elective.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
 
                     <p>{{ sform.researchtopic.label }}</p>
                     <p>{{ sform.researchtopic(style='width:inherit', class ='formtitle') }} </p>
 
+                    {% for error in sform.researchtopic.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
+
                     <p>{{ sform.programming.label }}</p>
                     <p>{{ sform.programming(style='width:inherit', class ='formtitle') }} </p>
 
+                    {% for error in sform.programming.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
                     <p>{{ sform.experience.label }}</p>
                     <p>{{ sform.experience() }} </p>
+
+                    {% for error in sform.experience.errors %}
+                    <span style="color: red;">[{{error}}]</span> {% endfor %}
+
 
                     <p>{{ sform.submit(class = 'postButton') }}</p>
                 </div>
@@ -104,44 +130,52 @@
 
             <p>{{ fform.username.label }}</p>
             <p>{{ fform.username(class ='formtitle') }}</p>
+
             {% for error in fform.username.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
 
             <p>{{ fform.lastname.label }}</p>
             <p>{{ fform.lastname(class ='formtitle') }}</p>
+
             {% for error in fform.lastname.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.firstname.label }}</p>
             <p>{{ fform.firstname(class ='formtitle') }}</p>
+
             {% for error in fform.firstname.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.wsuid.label }}</p>
             <p>{{ fform.wsuid(class ='formtitle') }}</p>
+
             {% for error in fform.wsuid.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.phone.label }}</p>
             <p>{{ fform.phone(class ='formtitle') }}</p>
+
             {% for error in fform.phone.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
             <p>{{ fform.email.label }}</p>
             <p>{{ fform.email(class ='formtitle')}} </p>
+
             {% for error in fform.email.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
 
             <p>{{ fform.password.label }} </p>
             <p>{{ fform.password(class ='formtitle') }}</p>
+
             {% for error in fform.password.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 
 
             <p>{{ fform.password2.label }}</p>
             <p>{{ fform.password2(class ='formtitle') }} </p>
+
             {% for error in fform.password2.errors %}
             <span style="color: red;">[{{error}}]</span> {% endfor %}
 

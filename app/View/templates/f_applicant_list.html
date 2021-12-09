@@ -4,27 +4,27 @@
     window.onload = f_applicant_list_active();
 </script>
 
-{% if pform.count() == 0  %}
-    <h3> You have no research position post yet! </h3>
-{% else %}
-
-{% for position in pform %}
-    <br>
-    <table class="table table-hover">
-        <thead class="thead-light">
-            <tr valign="bottom">
-                <h4> Research Topic: {{position.title}} </h4>
-            </tr>
-            <tr valign = "bottom">
-                <th width = "20%"> Name </th>
-                <th width = "20%"> Email </th>
-                <th width = "15%"> GPA </td>
-                <th width = "15%"> Major </td>
-                <th width = "15%"> Graduation Date </th>
-                <th width = "15%">  </th>
-            </tr>
-        </thead>
-        {% for application in position.roster %} {% set student = application.studentapplied %} {% include '_f_applicant_info.html' %} {% endfor %}
-    </table>
+{% if pform.count() == 0 %}
+<h3> You have no research position post yet! </h3>
+{% else %} {% for position in pform %}
+<br>
+<table class="table table-hover">
+    <thead class="thead-light">
+        <tr valign="bottom">
+            <h4> Research Topic: {{position.title}} </h4>
+        </tr>
+        <tr valign="bottom">
+            <th width="10%"> Name </th>
+            <th width="15%"> Email </th>
+            <th width="5%"> GPA </td>
+            <th width="10%"> Major </td>
+            <th width="15%"> Graduation Date </th>
+            <th width="10%"> View Application</th>
+            <th width="10%"> View Info</th>
+            <th width="10%"> Decision </th>
+        </tr>
+    </thead>
+    {% for application in position.roster %} {% set student = application.studentapplied %} {% set apply = application %} {% include '_f_applicant_info_approve_hire.html' %} {% endfor %}
+</table>
 {% endfor %}
 <a href="{{url_for('routes.faculty_index')}}" class='button'>Return to main page</a> {% endif %} {% endblock %}

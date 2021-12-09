@@ -51,6 +51,23 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
+#I just want to try session and jQuery
+'''
+Set Reg Student
+'''
+@bp_auth.route('/set_student', methods = ['POST'])
+def set_student():
+    session['reg_user_role'] = 'student'
+    return session['reg_user_role']
+
+'''
+Set Reg Faculty
+'''
+@bp_auth.route('/set_faculty', methods = ['POST'])
+def set_faculty():
+    session['reg_user_role'] = 'faculty'
+    return session['reg_user_role']
+
 '''
 Register Route
 '''
@@ -58,10 +75,12 @@ Register Route
 def register():
     fform = FacultyRegistrationForm()
     sform = StudentRegistrationForm()
-    print(fform.data)
-    print(sform.data)
+
+    if "reg_user_role" not in session:
+        session['reg_user_role'] = 'student'
+    print(session['reg_user_role'])
     if fform.validate_on_submit() or sform.validate_on_submit():
-        if fform.validate_on_submit() and sform.GPA.data == "":
+        if fform.validate_on_submit() and session['reg_user_role'] == 'faculty':
             faculty = User(username=fform.username.data, 
                            lastname=fform.lastname.data, 
                            firstname=fform.firstname.data, 
@@ -80,8 +99,9 @@ def register():
             db.session.add(faculty)
             db.session.commit()
             flash('Congratulations, ' + fform.username.data + ' you have successfully registered!')
+            session.pop('reg_user_role', None)
             return redirect(url_for('auth.login'))
-        if sform.validate_on_submit() and sform.GPA.data != "":
+        if sform.validate_on_submit() and session['reg_user_role'] == 'student':
             student = User(username=sform.username.data, 
                            lastname=sform.lastname.data, 
                            firstname=sform.firstname.data, 
@@ -109,6 +129,7 @@ def register():
             db.session.add(student)
             db.session.commit()
             flash('Congratulations, ' + sform.username.data + ' you have successfully registered!')
+            session.pop('reg_user_role', None)
             return redirect(url_for('auth.login'))
 
     return render_template('register.html', title = 'Registration', fform = fform, sform = sform)

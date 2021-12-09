@@ -2,7 +2,7 @@
        
         <tr> 
             <td colspan="3">
-                <div class="posttitle"> {{position.title}} </div>
+                <div class="posttitle"> <a href = "{{url_for('routes.get_position_info', position_id = position.id) }}" > {{position.title}} </a> </div>
             </td>
         </tr>
 
@@ -25,11 +25,11 @@
             <td width = "5%"> 
                 <div>
                     {% if position.writer == current_user %}
-                    <form action = "{{ url_for('routes.delete', position_id = position.id)}}" method ="post">
-                            <input type="submit" value="Delete" class="button" >
-                    </form>
+                        <form action = "{{ url_for('routes.delete', position_id = position.id)}}" method ="post">
+                                <input type="submit" value="Delete" class="button" >
+                        </form>
                     {% endif %}
-                    <br>
+                    
                 </div>
                 <br> 
 
@@ -43,18 +43,17 @@
                 {% if current_user.usertype == 0 %}
                     {% if current_user.is_applied(position) == False%}
                         <form action = "{{ url_for('routes.apply', position_id = position.id)}}" method = "post" >
-                            <input type = 'submit' value = 'Apply' class = 'btn btn-success'>
+                            <input type = 'submit' value = 'Apply' class = "btn btn-primary">
                         </form>
                     {% else %}
-                        <form action = "{{ url_for('routes.withdraw', position_id = position.id)}}" method = "post">
-                            <input type = 'submit' value = 'Withdraw' class = 'btn btn-warning'>
-                        </form>
+                            <input type = 'submit' value = 'Applied' class = "btn btn-success">
+                
                     {% endif %}
                 {% else %}
                     {% if position.writer == current_user %}
-                        <form action = "{{ url_for('routes.applicants', position_id = position.id)}}">
-                            <input type = 'submit' value = 'Applicant List' class = 'btn btn-success'>
-                        <form>
+                            <form action = "{{url_for('routes.applicants', position_id = position.id)}}">
+                                <input type = 'submit' value = 'Applicants' class = "btn btn-danger">
+                            <form>
                     {% endif %}
                 {% endif %}
                 

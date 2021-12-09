@@ -41,6 +41,66 @@
             </a>
         </p>
         {% endif %}
+        <hr>
+        <p>
+        <b> Current Active Applied Applications: </b>
+        </p>
+
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr valign="bottom">
+                    <th width="50%">Research Name</th>
+                    <th width="50%"> Status </th>
+                </tr>
+            </thead>
+            {% for app in student.application %}  {% set position = app.applicationapplied %}
+                <tr valign="middle">
+                    <td width="50%"> <a href = "{{url_for('routes.get_position_info', position_id = position.id) }}" > {{position.title}} </a> </td>
+                    <td width="50%"> 
+                        {% if app.status == 1%}
+                            Pending
+                        {% elif app.status == 2 %}
+                            Approved for Interview (Please reach out to the research provider for an appointment!)
+                        {% elif app.status == 3 %}
+                            Hired (Congradulations!)
+                        {% elif app.status == 4%}
+                            Not Hired :(
+                        {% endif %}
+                    </td>    
+                </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <br>
+        <p>
+        <b> Historic Closed Applications: </b>
+        </p>
+
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr valign="bottom">
+                    <th width="50%">Research Name</th>
+                    <th width="50%"> Status </th>
+                </tr>
+            </thead>
+            {% for app in student.closedposition%} 
+                <tr valign="middle">
+                    <td width="50%"> {{app.title}}  </td>
+                    <td width="50%"> 
+                        {% if app.appstatus == 1%}
+                            Application Not Available!
+                        {% elif app.appstatus == 2 %}
+                            Application Not Available!
+                        {% elif app.appstatus == 3 %}
+                            Hired (Application No Longer Available)
+                        {% elif app.appstatus == 4%}
+                            Not Hired (Application No Longer Available)
+                        {% endif %}
+                    </td>    
+                </tr>
+            {% endfor %}
+        </table>
     </div>
     <div class="col-md-2"></div>
 </div>

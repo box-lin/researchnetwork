@@ -1,0 +1,68 @@
+{% if current_user.id == position.user_id %} {% extends 'f_base.html' %} {% else %} {% extends 's_base.html' %} {% endif %} {% block content %}
+
+
+<div class="row mt40" style="margin-top: 40px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <h1>Display The Research Position Information</h1>
+        <p>
+        <h2>Research Title: {{position.title}}</h2>
+        <hr>
+        <p><b>Research Description:</b> {{position.desc}}</p>
+        <p><b>Time Commitement:</b> {{position.time_commitment}}</p>
+        <p><b>Research Start Date:</b> {{position.start_date}}</p>
+        <p><b>Research End Date:</b> {{position.end_date}}</p>
+        
+        <p>
+            <b>research field:</b> [ {% for p in position.positiontopics %} {{p.title}}; {% endfor %} ]
+        </p>
+
+        <p> 
+            {% if application %}
+                <b>Application Status:</b> 
+                {% if application.status == 1%}
+                    Pending
+                {% elif application.status == 2 %}
+                    Approved for Interview (Please reach out to the research provider for an appointment!)
+                {% elif application.status == 3 %}
+                    Hired (Congradulations!)
+                {% elif application.status == 4%}
+                    Not Hired :(
+                {% endif %}
+            {% endif %}
+        </p>
+
+        {% if current_user.id == position.user_id %}
+        <p>
+            <a href="{{url_for('routes.f_modify_position', position_id = position.id)}}">
+                <button>Modify Research Post</button>
+            </a>
+        </p>
+ 
+        {% elif current_user.usertype == 0 %}
+            {% if current_user.is_applied(position) == False%}
+                <form action = "{{ url_for('routes.apply', position_id = position.id)}}" method = "post" >
+                    <input type = 'submit' value = 'Apply' class = "btn btn-primary">
+                </form>
+            {% else %}
+                {% if application.status == 1 %}
+                <form action = "{{ url_for('routes.withdraw', position_id = position.id)}}" method = "post">
+                    <input type = 'submit' value = 'Withdraw' class = 'btn btn-warning'>
+                </form>
+                {% else %}
+                <p> <b>Notice:</b></p>
+                <p>Your application has been reviewed, for withdraw please made through a new system request.</p>
+                <button type="button" class="btn btn-secondary">Withdraw</button>
+     
+                {% endif %}
+
+            {% endif %}
+        {% endif %}
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+{% endblock %}

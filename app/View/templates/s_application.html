@@ -1,0 +1,48 @@
+{% extends "s_base.html" %} {% block content %}
+<script>
+    window.onload = clearStudentDisplay();
+    window.onload = s_home_page_active();
+</script>
+
+<div class="row mt40" style="margin-top: 40px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1> The Application of {{position.title}} </h1>
+        <hr>
+        <form action="" method="POST">
+            {{ form.hidden_tag()}}
+
+            <p>{{ form.fullname.label }}</p>
+            <p>{{ form.fullname(class ='formtitle')}}</p>
+            <p>
+            {% for error in form.fullname.errors %}
+            <span style="color: red;">{{error}}</span> {% endfor %}
+            </p>
+
+            <p>{{ form.email.label }}</p>
+            <p>{{ form.email(class ='formtitle')}}</p>
+
+            <p>
+            {% for error in form.email.errors %}
+            <span style="color: red;">{{error}}</span> {% endfor %}
+            </p>
+
+
+            <p>{{ form.statement.label }}</p>
+            <p>{{ form.statement( class='appbody')}}</p>
+
+            <p>
+            {% for error in form.statement.errors %}
+            <span style="color: red;">{{error}}</span> {% endfor %}
+            </p>
+
+
+            <p>{{ form.submit(class = 'loginButton')}}</p>
+
+        </form>
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock %}
