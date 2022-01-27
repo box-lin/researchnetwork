@@ -306,53 +306,6 @@ The student may delete the pending applications (i.e., whose status is still “
 
 **Web Model Drawings**
 
-![webpage](https://github.com/boxianglin/Storage/blob/main/model%20drawings/WebPage.drawio.png?raw=true)
-
-
-
-
-
-![studentlogin](https://github.com/boxianglin/Storage/blob/main/model%20drawings/StudentLogin.png?raw=true)
-
-
-
-
-
-![facultylogin](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Login.drawio.png?raw=true)
-
-
-
-![studenregister](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Student%20Registration.drawio.png?raw=true)
-
-
-
-
-
-![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Registration.drawio.png?raw=true)
-
-
-
-
-
-![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Student%20Home%20Page.drawio.png?raw=true)
-
-
-
-
-
-![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20HomePage.drawio.png?raw=true)
-
-
-
-
-
-![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty%20Post.drawio.png?raw=true)
-
-
-
-
-
-![](https://github.com/boxianglin/Storage/blob/main/model%20drawings/Faculty-Response-Applicant.drawio.png?raw=true)
 
 ----
 # 4. References
