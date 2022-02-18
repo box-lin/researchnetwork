@@ -5,18 +5,27 @@
 **Environment Setup**
 
 1. In case you want all dependencies installed in the virtual environment
+     
+     Establish the virtual enviorment:
 
-   ​	Windows/Mac/Linux: `python3 -m venv venv`
+   ​	Windows: `py -3 -m venv venv`
+     Mac/Linux: `python3 -m venv venv`
+
+     Activate the virtual enviorment:
+
+     Windows: `venv\Scripts\activate`
+     Mac/Linux: `. venv/bin/activate`
 
 2. Install the required library dependencies by this command:
 
    `pip install -r requirements.txt`
+   `pip install python-dotenv`
 
 
 
 **Run Application**
 
-`Flask run` OR `python researchnetwork.py` 
+`flask run` OR `python researchnetwork.py` 
 
 
 
