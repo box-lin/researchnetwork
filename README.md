@@ -10,7 +10,7 @@
 
 2. Install the required library dependencies by this command:
 
-   		`pip install -r requirements.txt`
+   `pip install -r requirements.txt`
 
 
 
