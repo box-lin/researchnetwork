@@ -4,6 +4,19 @@
     window.onload = f_profile_active();
 </script>
 
+<style>
+    .postButton {
+        width: 15%;
+        background-color: #4C222;
+        color: white;
+        padding: 10px 10px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
 <div class="row mt40" style="margin-top: 40px;">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -16,7 +29,7 @@
         <p><b>WSU ID</b>: {{faculty.wsuid}}</p>
         <p>
             <a href="{{url_for('routes.f_profile_edit')}}">
-                <button>Edit your profile</button>
+                <button class="postButton">Edit your profile</button>
             </a>
         </p>
     </div>
